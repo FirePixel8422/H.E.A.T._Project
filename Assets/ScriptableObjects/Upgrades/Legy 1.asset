@@ -15,6 +15,6 @@ MonoBehaviour:
   rarity: 5
   stackable: 0
   upgradeSprite: {fileID: 0}
+  rarityColor: {r: 1, g: 0.7092399, b: 0, a: 1}
   upgradeName: Legy 1
-  upgradeId: 0
-  upgradesLeftId: 0
+  upgradeId: 8

@@ -530,6 +530,7 @@ MonoBehaviour:
     mainCamTransform: {fileID: 6012974010948853806}
     gunCamera: {fileID: 4245517809260214837}
     baseFOV: 75
+    currentFOV: 0
     mainCamMaxTiltAngle: 75
   adsHandler:
     fovMultiplierCurve:
@@ -579,6 +580,7 @@ MonoBehaviour:
       sampleCount: 125
     stats:
       zoomMultiplier: 0
+      scopeCamZoomMultiplier: 0
       adsSensitivityMultiplier: 0
       zoomInTime: 0
       zoomOutTime: 0
@@ -639,6 +641,7 @@ MonoBehaviour:
       eulerSwayMove:
         x: 0.001
         y: 0.001
+      swayMultiplier: 1
       ignoreYForSwayMove: 0
       offsetSmooth: 12
       swayRecoverSmooth: 15
@@ -2896,6 +2899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8116700478484987294, guid: c0eb4b36e7e97f24b8ef673c374d8424, type: 3}
+    - {fileID: 795178507919566232, guid: c0eb4b36e7e97f24b8ef673c374d8424, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

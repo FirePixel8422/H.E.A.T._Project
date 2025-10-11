@@ -15,6 +15,6 @@ MonoBehaviour:
   rarity: 30
   stackable: 0
   upgradeSprite: {fileID: 0}
+  rarityColor: {r: 0.704685, g: 0.3789035, b: 0.9169811, a: 1}
   upgradeName: Epic 2
-  upgradeId: 0
-  upgradesLeftId: 0
+  upgradeId: 7

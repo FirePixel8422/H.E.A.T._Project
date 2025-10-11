@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: _ 4
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSO
   rarity: 50
-  stackable: 1
+  stackable: 0
   upgradeSprite: {fileID: 0}
+  rarityColor: {r: 0.5696902, g: 0.6754716, b: 0.6480199, a: 1}
   upgradeName: 4
   upgradeId: 3
-  upgradesLeftId: 3

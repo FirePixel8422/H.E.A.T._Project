@@ -12,11 +12,11 @@ public class UpgradeSO : ScriptableObject
     public bool stackable;
 
     public Sprite upgradeSprite;
+    public Color rarityColor;
     public string upgradeName;
 
 
     [HideInInspector] public int upgradeId;
-    [HideInInspector] public int upgradesLeftId;
 
 
     public virtual void ApplyUpgrade(GunManager gunManager, PlayerDataLibrary playerDataLibrary)

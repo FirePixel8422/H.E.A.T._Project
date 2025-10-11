@@ -8,6 +8,7 @@ public class UpgradeUISlot
 {
     [SerializeField] private GameObject parentObj;
     [SerializeField] private Image image;
+    [SerializeField] private Image rarity;
     [SerializeField] private TextMeshProUGUI name;
     [SerializeField] private Button confirmButton;
     public Button ConfirmButton => confirmButton;
@@ -25,11 +26,12 @@ public class UpgradeUISlot
     /// <summary>
     /// Calls <see cref="SetActive(bool)"/> and Updates UI Image and name
     /// </summary>
-    public void SetActiveAndUpdateUI(Sprite upgradeSprite, string upgradeName)
+    public void SetActiveAndUpdateUI(Sprite upgradeSprite, string upgradeName, Color rarityColor)
     {
         SetActive(true);
 
         image.sprite = upgradeSprite;
+        rarity.color = rarityColor;
         name.text = upgradeName;
     }
 }

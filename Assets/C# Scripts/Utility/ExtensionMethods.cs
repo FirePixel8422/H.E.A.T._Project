@@ -337,4 +337,15 @@ public static class ExtensionMethods
             (targetArray[i], targetArray[j]) = (targetArray[j], targetArray[i]);
         }
     }
+
+    /// <summary>
+    /// Replaces the element at <paramref name="targetId"/> with the element at <paramref name="backId"/>, 
+    /// then clears the element at <paramref name="backId"/> by assigning <paramref name="nullValue"/>.
+    /// Useful for implementing a swap-back removal in fixed-size arrays.
+    /// </summary>
+    public static void RemoveAtSwapBack<T>(this T[] targetArray, int targetId, int backId, T nullValue = default)
+    {
+        targetArray[targetId] = targetArray[backId];
+        targetArray[backId] = nullValue;
+    }
 }

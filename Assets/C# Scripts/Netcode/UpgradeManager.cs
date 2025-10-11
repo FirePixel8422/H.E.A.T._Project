@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using Unity.Collections;
-using Unity.Mathematics;
+﻿using System;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -16,24 +15,26 @@ namespace FirePixel.Networking
         [SerializeField] private UpgradeUISlot[] uiSlots;
 
 
-        [SerializeField] private List<UpgradeSO> upgradesLeft;
-        private int totalWeightLeft;
+        [SerializeField] private UpgradeSO[] upgradesLeft;
+        [SerializeField] private int totalWeightLeft;
 
-        [SerializeField] private int2[] upgradesIds;
+        [SerializeField] private List<UpgradeSO> takenUpgrades;
+        public List<UpgradeSO> Upgrades => takenUpgrades;
 
 
         private void Awake()
         {
             // Set UpgradeSO ids and calculate totalWeight
-            int upgradeCount = upgrades.Length;
-            for (int i = 0; i < upgradeCount; i++)
+            int upgradesLeftCount = upgrades.Length;
+
+            for (int i = 0; i < upgradesLeftCount; i++)
             {
                 upgrades[i].upgradeId = i;
-                upgrades[i].upgradesLeftId = i;
                 totalWeightLeft += (int)upgrades[i].rarity;
             }
-            
-            upgradesLeft = new List<UpgradeSO>(upgrades);
+
+            upgradesLeft = new UpgradeSO[upgradesLeftCount];
+            Array.Copy(upgrades, upgradesLeft, upgradesLeftCount);
 
 
             //TEMP
@@ -41,16 +42,6 @@ namespace FirePixel.Networking
             //TEMP
             //TEMP
             Invoke(nameof(CreateUpgradeUI), 0.5f);
-        }
-
-
-        private void Update()
-        {
-            upgradesIds = new int2[upgrades.Length];
-            for (int i = 0; i < upgrades.Length; i++)
-            {
-                upgradesIds[i] = new int2(upgrades[i].upgradeId, upgrades[i].upgradesLeftId);
-            }
         }
 
         public void CreateUpgradeUI()
@@ -64,7 +55,7 @@ namespace FirePixel.Networking
             int upgradeCount = upgrades.Length;
             for (int i = 0; i < upgradeCount; i++)
             {
-                uiSlots[i].SetActiveAndUpdateUI(upgrades[i].upgradeSprite, upgrades[i].upgradeName);
+                uiSlots[i].SetActiveAndUpdateUI(upgrades[i].upgradeSprite, upgrades[i].upgradeName, upgrades[i].rarityColor);
 
                 int tempIndex = i;
                 uiSlots[i].ConfirmButton.onClick.RemoveAllListeners();
@@ -84,10 +75,8 @@ namespace FirePixel.Networking
         /// </summary>
         private UpgradeSO[] GetRandomUpgrades(int upgradeCount)
         {
-            int upgradesLeftCount = upgradesLeft.Count;
-
             // Clamp in case of little upgrades left
-            upgradeCount = Mathf.Min(upgradesLeftCount, upgradeCount);
+            upgradeCount = Mathf.Min(upgradesLeft.Length, upgradeCount);
 
             UpgradeSO[] chosenUpgrades = new UpgradeSO[upgradeCount];
 
@@ -96,8 +85,10 @@ namespace FirePixel.Networking
             {
                 int rWeight = EzRandom.Range(0, totalWeightLeft);
 
-                for (int i2 = 0; i2 < upgradesLeftCount; i2++)
+                for (int i2 = 0; i2 < upgradesLeft.Length; i2++)
                 {
+                    if (upgradesLeft[i2] == null) continue;
+
                     int rarity = (int)upgradesLeft[i2].rarity;
                     // If rolled random number is still more then current to check upgrade, skip it
                     if (rWeight > rarity)
@@ -110,36 +101,24 @@ namespace FirePixel.Networking
                         // Select Upgrade
                         chosenUpgrades[i] = upgradesLeft[i2];
 
-                        // Remove Upgrade from pool temporarly if its not stackable, also remove weight from totalWeightLeft
-                        if (upgradesLeft[i2].stackable == false)
-                        {
-                            int targetUpgradeLeftId = upgradesLeft[i2].upgradeId;
-                            int bottomUpgradeLeftId = upgradesLeft[^1].upgradeId;
+                        // Remove Upgrade from pool temporarely, also remove weight from totalWeightLeft
+                        upgradesLeft[i2] = null;
 
-                            upgrades[targetUpgradeLeftId].upgradesLeftId = upgradesLeft[^1].upgradesLeftId;
-                            upgrades[bottomUpgradeLeftId].upgradesLeftId = upgradesLeft[i2].upgradesLeftId;
+                        totalWeightLeft -= rarity;
 
-                            upgradesLeft.RemoveAtSwapBack(i2);
-                            upgradesLeftCount -= 1;
-                            totalWeightLeft -= rarity;
-                        }
                         break;
                     }
                 }
             }
 
-            // Re Add Temporarly removed upgrades if they were stackable
+            // Re Add Temporarely removed upgrades if they were stackable
             for (int i = 0; i < upgradeCount; i++)
             {
-                DebugLogger.Log("Random Upgrades: " + chosenUpgrades[i].upgradeId);
+                UpgradeSO targetUpgrade = chosenUpgrades[i];
 
-                if (chosenUpgrades[i].stackable == false)
-                {
-                    UpgradeSO targetUpgrade = chosenUpgrades[i];
+                upgradesLeft[targetUpgrade.upgradeId] = targetUpgrade;
 
-                    upgradesLeft.Add(targetUpgrade);    
-                    totalWeightLeft += (int)targetUpgrade.rarity;
-                }
+                totalWeightLeft += (int)targetUpgrade.rarity;
             }
 
             return chosenUpgrades;
@@ -153,22 +132,15 @@ namespace FirePixel.Networking
             Cursor.lockState = CursorLockMode.Locked;
             upgradeUIParent.SetActive(false);
 
-            int upgradesLeftId = upgrades[upgradeId].upgradesLeftId;
-
-            DebugLogger.Log("Toook upgrade: " + upgradesLeftId);
-
             // If Upgrade was non stackable, remove it
-            if (upgradesLeft[upgradesLeftId].stackable == false)
+            if (upgradesLeft[upgradeId].stackable == false)
             {
-                int bottomUpgradeLeftId = upgradesLeft[^1].upgradeId;
-                int targetUpgradeLeftId = upgradesLeft[upgradesLeftId].upgradeId;
+                totalWeightLeft -= (int)upgradesLeft[upgradeId].rarity; 
 
-                upgrades[targetUpgradeLeftId].upgradesLeftId = upgradesLeft[^1].upgradesLeftId;
-                upgrades[bottomUpgradeLeftId].upgradesLeftId = upgradesLeft[upgradesLeftId].upgradesLeftId;
-
-                totalWeightLeft -= (int)upgradesLeft[upgradesLeftId].rarity;
-                upgradesLeft.RemoveAtSwapBack(upgradesLeftId);
+                upgradesLeft[upgradeId] = null;
             }
+
+            takenUpgrades.Add(upgrades[upgradeId]);
 
             TakeUpgrade_ServerRPC(upgradeId);
 

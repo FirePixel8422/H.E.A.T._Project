@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1787274843
+  GlobalObjectIdHash: 2635783685
   InScenePlacedSourceGlobalObjectIdHash: 2635783685
   DeferredDespawnTick: 0
   Ownership: 1
@@ -563,21 +563,27 @@ MonoBehaviour:
   uiSlots:
   - parentObj: {fileID: 7076225307187597420}
     image: {fileID: 3136870085533734003}
+    rarity: {fileID: 4746100873657432132}
     name: {fileID: 1050091601177842367}
     confirmButton: {fileID: 5224825085617946391}
   - parentObj: {fileID: 644440911960056726}
     image: {fileID: 5878526170905547084}
+    rarity: {fileID: 6124015554820574509}
     name: {fileID: 7268174683931041828}
     confirmButton: {fileID: 3115123279597049885}
   - parentObj: {fileID: 2517055363569367732}
     image: {fileID: 4015691245130295563}
+    rarity: {fileID: 9139934884632797931}
     name: {fileID: 432926090494667450}
     confirmButton: {fileID: 1232717532380144467}
   - parentObj: {fileID: 7966805370355028351}
     image: {fileID: 3015965637233110548}
+    rarity: {fileID: 543966914130415563}
     name: {fileID: 6322321627246212574}
     confirmButton: {fileID: 682153763119720332}
-  upgradesIds: []
+  upgradesLeft: []
+  totalWeightLeft: 0
+  takenUpgrades: []
 --- !u!1 &3432148399030355237
 GameObject:
   m_ObjectHideFlags: 0
@@ -2133,7 +2139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1606015839491003312
 RectTransform:
   m_ObjectHideFlags: 0
