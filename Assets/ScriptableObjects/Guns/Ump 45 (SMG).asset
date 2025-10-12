@@ -1,0 +1,252 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0b7c3e06db8a14b87487cb5b20ad5f, type: 3}
+  m_Name: Ump 45 (SMG)
+  m_EditorClassIdentifier: Assembly-CSharp::GunSO
+  gunPrefab: {fileID: 2838943230417780415, guid: 23d6b93d9b059064c865a41c53fda14a,
+    type: 3}
+  baseStats:
+    coreStats:
+      damage: 10
+      headShotMultiplier: 1.5
+      maxEffectiveRange: 25
+      damageFallOffCurve:
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 1
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        valueMultiplier: 1
+        sampleCount: 50
+      bulletSize: 0.05
+      bulletHoleFXSize:
+        min: 0.15
+        max: 0.2
+      bulletHoleFXLifetime: 10
+      projectileCount: 1
+      burstShots: 0
+      burstShotInterval: 0.1
+      heatPerShot: 0.1
+      adsRecoilPattern: []
+      invertX: 0
+      hipRecoilMultiplier:
+        x: 1
+        y: 1
+      adsRecoilMultiplier:
+        x: 1
+        y: 1
+      hipRecoilForce:
+        x: 30
+        y: 100
+      adsRecoilForce:
+        x: 30
+        y: 100
+      hipRecoilRecovery: 0.5
+      adsRecoilRecovery: 0.5
+      recoilRecoveryDelay: 0.25
+      recoilPatternDecayMultiplier: 50
+      spreadCurve:
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 1
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        valueMultiplier: 1
+        sampleCount: 50
+      stabilityLoss: 0.5
+      stabilityRecovery: 0.5
+      roundsPerMinute: 600
+      autoFire: 1
+      inputBufferTime: 0
+    audioStats:
+      shootAudioClip: {fileID: 0}
+      minMaxPitch:
+        min: 0
+        max: 0
+      minMaxPitchAtMaxHeat:
+        min: 0
+        max: 0
+      overHeatAudioClip: {fileID: 0}
+      overHeatMinMaxPitch:
+        min: 0
+        max: 0
+      onHitAudioClip: {fileID: 0}
+      onHitMinMaxPitch:
+        min: 0
+        max: 0
+      onCritAudioClip: {fileID: 0}
+      onCritMinMaxPitch:
+        min: 0
+        max: 0
+      onKillAudioClip: {fileID: 0}
+      onKillMinMaxPitch:
+        min: 0
+        max: 0
+    shakeStats:
+      shakePitch:
+        x: 5
+        y: 5
+      shakeYaw:
+        x: 2
+        y: 2
+      shakeBuildUp:
+        x: 20
+        y: 20
+      shakeDecay:
+        x: 10
+        y: 10
+      pullBackDistance:
+        x: 0.1
+        y: 0.1
+      pullBackBuildUp:
+        x: 25
+        y: 25
+      pullBackDecay:
+        x: 12
+        y: 12
+      pullBackPitchKick:
+        x: 300
+        y: 300
+    gunADSStats:
+      zoomMultiplier: 1
+      scopeCamZoomMultiplier: 1
+      adsSensitivityMultiplier: 1
+      zoomInTime: 0.5
+      zoomOutTime: 0.25
+      normalAnimationName: ADS_Normal
+      zoomAnimationName: ADS_Zoom
+      animLayer: 2
+    swayStats:
+      movementAmplitude:
+        x: 0.05
+        y: 0.05
+      movementFrequency: 6
+      idleAmplitude:
+        x: 0.025
+        y: 0.025
+      idleFrequency: 0.5
+      posSwayMouse:
+        x: 0.005
+        y: 0.005
+      eulerSwayMouse:
+        x: 0.001
+        y: 0.001
+      posSwayMove:
+        x: 0.005
+        y: 0.005
+      eulerSwayMove:
+        x: 0.001
+        y: 0.001
+      swayMultiplier: 1
+      ignoreYForSwayMove: 1
+      offsetSmooth: 12
+      swayRecoverSmooth: 12
+      gunYOffset: 0
+      spreadMultplierCurve:
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 1
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        valueMultiplier: 1
+        sampleCount: 50
+    heatSinkStats:
+      heatSinkSize: 1
+      heatDecayDelay: 0.25
+      heatDecayPower: 0.1
+      overheatDecayDelay: 1
+      overheatDecayPower: 0.075
+      heatDecayMultiplierCurve:
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 1
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        valueMultiplier: 1
+        sampleCount: 50
+  baseAttachments: []
