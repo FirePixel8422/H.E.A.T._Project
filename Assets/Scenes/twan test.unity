@@ -545,7 +545,7 @@ PrefabInstance:
     - target: {fileID: 1511631250735920685, guid: 310b6dfb1f98cfe4ebda4816400df15a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.407
+      value: 0.107
       objectReference: {fileID: 0}
     - target: {fileID: 1511631250735920685, guid: 310b6dfb1f98cfe4ebda4816400df15a,
         type: 3}
@@ -591,6 +591,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Scope Reotech (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2283804610911939735, guid: 310b6dfb1f98cfe4ebda4816400df15a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -696,7 +701,7 @@ PrefabInstance:
     - target: {fileID: 946337225193969093, guid: a178b88085a2a3e43807e9597ceb0df5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0014
       objectReference: {fileID: 0}
     - target: {fileID: 946337225193969093, guid: a178b88085a2a3e43807e9597ceb0df5,
         type: 3}
@@ -774,7 +779,7 @@ PrefabInstance:
     - target: {fileID: 1579069039258499710, guid: 517e002aa9b1455478b4508647ec034a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2207373223113367748, guid: 517e002aa9b1455478b4508647ec034a,
         type: 3}
@@ -1202,7 +1207,7 @@ PrefabInstance:
     - target: {fileID: 1511631250735920685, guid: 310b6dfb1f98cfe4ebda4816400df15a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.571
       objectReference: {fileID: 0}
     - target: {fileID: 1511631250735920685, guid: 310b6dfb1f98cfe4ebda4816400df15a,
         type: 3}
@@ -1252,7 +1257,7 @@ PrefabInstance:
     - target: {fileID: 2283804610911939735, guid: 310b6dfb1f98cfe4ebda4816400df15a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1277,3 +1282,4 @@ SceneRoots:
   - {fileID: 878040706}
   - {fileID: 2142231162}
   - {fileID: 4949478134624466824}
+  - {fileID: 1066026717}
