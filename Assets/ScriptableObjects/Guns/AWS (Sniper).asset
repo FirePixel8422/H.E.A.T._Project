@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0b7c3e06db8a14b87487cb5b20ad5f, type: 3}
   m_Name: AWS (Sniper)
   m_EditorClassIdentifier: 
-  gunPrefab: {fileID: -2591486245370474641, guid: 8ba3dacfee2d77e449d82cf973d27154,
+  gunPrefab: {fileID: 7938153913866528772, guid: 1903c0c146be4e5419f2c9b8d4970bb3,
     type: 3}
   baseStats:
     coreStats:

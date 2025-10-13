@@ -525,6 +525,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3b12978bb28168442b564b0246add77e, type: 2}
   - {fileID: 11400000, guid: 418e04dfa63fd9345bc3ae0af4be0014, type: 2}
   - {fileID: 11400000, guid: ec65a497549736149b120946b299325f, type: 2}
+  - {fileID: 11400000, guid: c5267ac8cfdf6654898124506c373ab0, type: 2}
   baseGuns:
   - {fileID: 11400000, guid: 345d4e08f6ffca9408ae925d7c9c85a0, type: 2}
   - {fileID: 11400000, guid: 27f968b9b70baf2479d2c0044169a853, type: 2}
@@ -2247,7 +2248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3026212890
+  GlobalObjectIdHash: 3834951595
   InScenePlacedSourceGlobalObjectIdHash: 2635783685
   DeferredDespawnTick: 0
   Ownership: 1

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5753348711551410358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7125161630766666231}
+  m_Layer: 0
+  m_Name: MuzzleFlashPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7125161630766666231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5753348711551410358}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0788, z: 0.3542}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 43665708092383072}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &509356215836031115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11,17 +42,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2992d9da6c2454f498fc743c9886c682,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.3458
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2992d9da6c2454f498fc743c9886c682,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0488
+      value: -0.391
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2992d9da6c2454f498fc743c9886c682,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2992d9da6c2454f498fc743c9886c682,
         type: 3}
@@ -83,20 +114,40 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[4]'
       value: 
       objectReference: {fileID: 2100000, guid: 23a77b917d90edb4cae864d99a8600da, type: 2}
+    - target: {fileID: -263929951149831089, guid: 2992d9da6c2454f498fc743c9886c682,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 640697d42c00d65488bf91f84e09a0ad, type: 2}
     - target: {fileID: 919132149155446097, guid: 2992d9da6c2454f498fc743c9886c682,
         type: 3}
       propertyPath: m_Name
       value: SMG
       objectReference: {fileID: 0}
+    - target: {fileID: 2897058138912562765, guid: 2992d9da6c2454f498fc743c9886c682,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 953cc5a4e1096f843bf74b35ee1f3238, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2992d9da6c2454f498fc743c9886c682,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7125161630766666231}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2992d9da6c2454f498fc743c9886c682,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2838943230417780415}
   m_SourcePrefab: {fileID: 100100000, guid: 2992d9da6c2454f498fc743c9886c682, type: 3}
+--- !u!4 &43665708092383072 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2992d9da6c2454f498fc743c9886c682,
+    type: 3}
+  m_PrefabInstance: {fileID: 509356215836031115}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &851445408260818394 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2992d9da6c2454f498fc743c9886c682,
@@ -115,15 +166,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c923460df06e0048a743d98b5dc486a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunRefHolder
-  muzzleFlashPoint: {fileID: 0}
+  muzzleFlashPoint: {fileID: 7125161630766666231}
   MuzzleTransformOffset:
     position: {x: 0, y: 0, z: 0}
     eulerRotation: {x: 0, y: 0, z: 0}
     scale: {x: 0, y: 0, z: 0}
-  emissionRendererObj: {fileID: 1211483032702788623}
---- !u!23 &1211483032702788623 stripped
+  emissionRendererObj: {fileID: 3397389503009302214}
+--- !u!23 &3397389503009302214 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 2992d9da6c2454f498fc743c9886c682,
+  m_CorrespondingSourceObject: {fileID: 2897058138912562765, guid: 2992d9da6c2454f498fc743c9886c682,
     type: 3}
   m_PrefabInstance: {fileID: 509356215836031115}
   m_PrefabAsset: {fileID: 0}

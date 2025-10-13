@@ -94,6 +94,16 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 37055b59230396146a66bad0685da515, type: 2}
+    - target: {fileID: -6393012407469973089, guid: a45202a17dffbd5469527a551c6a64cb,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 953cc5a4e1096f843bf74b35ee1f3238, type: 2}
+    - target: {fileID: -2717041945756256765, guid: a45202a17dffbd5469527a551c6a64cb,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 37055b59230396146a66bad0685da515, type: 2}
     - target: {fileID: 919132149155446097, guid: a45202a17dffbd5469527a551c6a64cb,
         type: 3}
       propertyPath: m_Name
@@ -135,16 +145,16 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     eulerRotation: {x: 0, y: 0, z: 0}
     scale: {x: 0, y: 0, z: 0}
-  emissionRendererObj: {fileID: 1743185055290226216}
+  emissionRendererObj: {fileID: 2934070031486749491}
 --- !u!4 &610841719659302215 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a45202a17dffbd5469527a551c6a64cb,
     type: 3}
   m_PrefabInstance: {fileID: 1148589651006941868}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &1743185055290226216 stripped
+--- !u!23 &2934070031486749491 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: a45202a17dffbd5469527a551c6a64cb,
+  m_CorrespondingSourceObject: {fileID: -6393012407469973089, guid: a45202a17dffbd5469527a551c6a64cb,
     type: 3}
   m_PrefabInstance: {fileID: 1148589651006941868}
   m_PrefabAsset: {fileID: 0}
