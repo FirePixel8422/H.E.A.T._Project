@@ -26,7 +26,7 @@ public class UtilityManager : MonoBehaviour
 
         Destroy(handTransform.GetChild(0).gameObject);
 
-        Instantiate(baseUtiliies[utilityId].UtilityPrefab, handTransform);
+        Instantiate(baseUtiliies[utilityId].Stats.utilityPrefab, handTransform);
     }
 
 

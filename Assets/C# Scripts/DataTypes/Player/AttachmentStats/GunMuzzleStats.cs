@@ -33,7 +33,6 @@ public class GunMuzzleStats : IGunAtachment
         damageFallOffCurve.ApplyToStat(ref gunStatsSet.coreStats.damageFallOffCurve);
         maxEffectiveRange.ApplyToStat(ref gunStatsSet.coreStats.maxEffectiveRange);
 
-
         shootAudioClip.ApplyToStat(ref gunStatsSet.audioStats.shootAudioClip);
         minMaxPitch.ApplyToStat(ref gunStatsSet.audioStats.minMaxPitch);
         minMaxPitchAtMaxHeat.ApplyToStat(ref gunStatsSet.audioStats.minMaxPitchAtMaxHeat);

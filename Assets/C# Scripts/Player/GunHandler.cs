@@ -62,6 +62,8 @@ public class GunHandler : NetworkBehaviour
     private int burstShotsLeft = 0;
     private float burstShotTimer = 0f;
 
+    private PlayerStatsBlock stats;
+
     [Tooltip("multiplier to counter the offset of the DecalProjector Component's pivot, so the decal still sticks to the surface correctly")]
     public const float DecalProjectorPivotMultiplier = 0.0125f;
 
@@ -104,12 +106,13 @@ public class GunHandler : NetworkBehaviour
         {
             currentGunId.OnValueChanged += (int newValue) =>
             {
-                UpdateGunData_ServerRPC(newValue);
+                UpdateGunData_ServerRPC(newValue, ClientManager.LocalClientGameId);
             };
         }
         else
         {
-            RequestGunData_ServerRPC();
+            // Opposite Client
+            RequestGunData_ServerRPC(ClientManager.LocalClientGameId == 0 ? 1 : 0);
         }
 
         Init();
@@ -147,15 +150,17 @@ public class GunHandler : NetworkBehaviour
     {
         ManageUpdateCallbacks(true);
 
+        stats = GetComponent<PlayerStatsHandler>().Stats;
+
         playerController = GetComponent<PlayerController>();
-        playerController.Init(camHandler, gunSwayHandler, adsHandler);
+        playerController.Init(stats, camHandler, gunSwayHandler, adsHandler);
 
         hudHandler = GetComponent<PlayerHUDHandler>();
         anim = GetComponent<Animator>();
 
         recoilHandler.Init(camHandler, playerController);
         adsHandler.Init(anim, camHandler, hudHandler);
-        //gunEmmisionHandler.Init();
+        gunEmmisionHandler.Init();
         gunShakeHandler.Init();
         heatSinkHandler.Init();
 
@@ -184,7 +189,7 @@ public class GunHandler : NetworkBehaviour
     private void SwapGun(int gunId)
     {
         CurrentGunId = gunId;
-        SetupNewGunData(gunId);
+        SetupNewGunData(gunId, ClientManager.LocalClientGameId);
 
         // set gun to always in front layer ("Gun")
         gunRefHolder.gameObject.layer = GlobalGameData.GunLayerId;
@@ -198,42 +203,42 @@ public class GunHandler : NetworkBehaviour
         timeSinceLastShot = coreStats.ShootInterval - 0.25f;
         burstShotTimer = coreStats.burstShotInterval;
 
-        //gunEmmisionHandler.UpdateHeatEmission(0);
-        //UpdateVisualHeatEmmision_ServerRPC(0);
+        gunEmmisionHandler.UpdateHeatEmission(0);
+        UpdateVisualHeatEmmision_ServerRPC(0);
     }
 
     [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
-    private void RequestGunData_ServerRPC()
+    private void RequestGunData_ServerRPC(int playerGameId)
     {
-        RequestGunData_ClientRPC();
+        RequestGunData_ClientRPC(playerGameId);
     }
     [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
-    private void RequestGunData_ClientRPC()
+    private void RequestGunData_ClientRPC(int playerGameId)
     {
         // Let the owner send GunId to the requesting client
         if (IsOwner == false) return;
 
-        UpdateGunData_ServerRPC(CurrentGunId);
+        UpdateGunData_ServerRPC(CurrentGunId, playerGameId);
     }
 
     [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
-    private void UpdateGunData_ServerRPC(int gunId)
+    private void UpdateGunData_ServerRPC(int gunId, int playerGameId)
     {
-        RecieveGunData_ClientRPC(gunId);
+        RecieveGunData_ClientRPC(gunId, playerGameId);
     }
     [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
-    private void RecieveGunData_ClientRPC(int gunId)
+    private void RecieveGunData_ClientRPC(int gunId, int playerGameId)
     {
         // Skip Owner, they already have the correct gun
         if (IsOwner) return;
 
-        SetupNewGunData(gunId);
+        SetupNewGunData(gunId, playerGameId);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private void SetupNewGunData(int gunId)
+    private void SetupNewGunData(int gunId, int playerGameId)
     {
-        GunManager.Instance.SwapGun(gunHolder, gunId,
+        GunManager.Instance.SwapGun(gunHolder, gunId, playerGameId,
             ref gunRefHolder,
             out coreStats,
             out audioStats,
@@ -242,7 +247,7 @@ public class GunHandler : NetworkBehaviour
             out adsHandler.stats);
 
         gunSwayHandler.OnSwapGun(gunRefHolder.transform, adsHandler);
-        //gunEmmisionHandler.OnSwapGun(gunRefHolder.EmissionMatInstance);
+        gunEmmisionHandler.OnSwapGun(gunRefHolder.EmissionMatInstance);
 
         if (gunRefHolder.ScopeCamera != null)
         {
@@ -266,6 +271,23 @@ public class GunHandler : NetworkBehaviour
     }
 
     #endregion
+
+
+    [Header("DEBUGTESTING\n")]
+    public int gunId;
+    public int playerGameId;
+    [ContextMenu("DEBUG Update Gun")]
+    public void UpdateGunData()
+    {
+        SwapGun(CurrentGunId);
+    }
+
+
+
+
+
+
+
 
 
     private void OnUpdate()
@@ -322,10 +344,10 @@ public class GunHandler : NetworkBehaviour
 
     private void OnFixedUpdate()
     {
-        //float heatPercent = CurrentHeatSink.HeatPercentage;
+        float heatPercent = CurrentHeatSink.HeatPercentage;
 
-        //gunEmmisionHandler.UpdateHeatEmission(heatPercent);
-        //UpdateVisualHeatEmmision_ServerRPC(heatPercent);
+        gunEmmisionHandler.UpdateHeatEmission(heatPercent);
+        UpdateVisualHeatEmmision_ServerRPC(heatPercent);
     }
 
 
@@ -397,11 +419,11 @@ public class GunHandler : NetworkBehaviour
 
             if (isCurrentHeatSink)
             {
-                heatSinkHandler[i].UpdateHeatSink(shotThisFrame ? 0 : deltaTime, deltaTime, true);
+                heatSinkHandler[i].UpdateHeatSink(shotThisFrame ? 0 : deltaTime, deltaTime * stats.heatDecayMultiplier, true);
             }
             else
             {
-                heatSinkHandler[i].UpdateHeatSink(deltaTime, deltaTime, false);
+                heatSinkHandler[i].UpdateHeatSink(deltaTime, deltaTime * stats.heatDecayMultiplier, false);
             }
         }
     }
@@ -418,14 +440,14 @@ public class GunHandler : NetworkBehaviour
     {
         gunShakeHandler.AddShake(coreStats.ShootInterval, adsPercentage);
 
-        float2 recoil = coreStats.GetRecoil(adsPercentage);
+        float2 recoil = coreStats.GetRecoil(adsPercentage) * stats.recoilMultiplier;
         StartCoroutine(recoilHandler.AddRecoil(recoil, coreStats.ShootInterval));
 
         NetworkVFXPool.Instance.GetMuzzleFlashObj(gunRefHolder.MuzzleFlashPosition, gunRefHolder.transform.rotation, gunRefHolder.MuzzleFlashScale);
 
-        float2 spreadOffset = RandomPointInCircle(coreStats.GetSpread(adsPercentage));
+        float2 spreadOffset = RandomPointInCircle(coreStats.GetSpread(adsPercentage)) * stats.spreadMultiplier;
 
-        CurrentHeatSink.AddHeat(coreStats.heatPerShot);
+        CurrentHeatSink.AddHeat(coreStats.heatPerShot * stats.heatGenerationMultiplier);
 
         Ray ray = SetupRayCast(adsPercentage);
 
@@ -446,6 +468,9 @@ public class GunHandler : NetworkBehaviour
                 if (hit.transform.TryGetComponent(out SmartHitBox targetHitBox))
                 {
                     float damage = coreStats.GetDamageOutput(hit.distance, targetHitBox.IsHeadHitBox);
+                    damage *= stats.damageMultiplier;
+
+                    PlayerDataLibrary.LocalInstance.healthHandler.GainLifeStealHealth(damage * stats.lifeStealMultiplier, stats.lifeStealOverflowMultiplier);
 
                     targetHitBox.DealDamageToTargetObject(damage, targetHitBox.IsHeadHitBox, hit.point, ray.direction, out HitTypeResult hitTypeResult);
 
@@ -608,18 +633,18 @@ public class GunHandler : NetworkBehaviour
     #endregion
 
 
-    //[ServerRpc(RequireOwnership = false)]
-    //private void UpdateVisualHeatEmmision_ServerRPC(float percent)
-    //{
-    //    UpdateVisualHeatEmmision_ClientRPC(percent);
-    //}
-    //[ClientRpc(RequireOwnership = false)]
-    //private void UpdateVisualHeatEmmision_ClientRPC(float percent)
-    //{
-    //    if (IsOwner) return;
+    [ServerRpc(RequireOwnership = false)]
+    private void UpdateVisualHeatEmmision_ServerRPC(float percent)
+    {
+        UpdateVisualHeatEmmision_ClientRPC(percent);
+    }
+    [ClientRpc(RequireOwnership = false)]
+    private void UpdateVisualHeatEmmision_ClientRPC(float percent)
+    {
+        if (IsOwner) return;
 
-    //    gunEmmisionHandler.UpdateHeatEmission(percent);
-    //}
+        gunEmmisionHandler.UpdateHeatEmission(percent);
+    }
 
     public override void OnDestroy()
     {

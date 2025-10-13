@@ -9,12 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ca0152915f05c14a9075765958396b1, type: 3}
-  m_Name: _ 1
-  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSO
-  rarity: 50
-  stackable: 1
+  m_Script: {fileID: 11500000, guid: 905e6f8a8a2814f4dbeec3cd235dec11, type: 3}
+  m_Name: Grenade
+  m_EditorClassIdentifier: Assembly-CSharp::UtilityUpgradeSO
+  rarity: 15
+  stackable: 0
   upgradeSprite: {fileID: 0}
-  rarityColor: {r: 0.5696902, g: 0.6754716, b: 0.6480199, a: 1}
-  upgradeName: 1
+  rarityColor: {r: 0.3928954, g: 0.2778568, b: 0.8415094, a: 1}
+  upgradeName: Grenade
   upgradeId: 0
+  utility: {fileID: 0}
+  utilityId: 0

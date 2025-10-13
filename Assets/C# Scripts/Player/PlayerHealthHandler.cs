@@ -5,18 +5,24 @@ using UnityEngine;
 
 public class PlayerHealthHandler : NetworkBehaviour, IDamagable
 {
-    [SerializeField] private float maxHealth = 250;
     [SerializeField] private float cHealth = 250;
-
     public float MaxHealth
     {
-        get => maxHealth;
-        set => maxHealth = value;
+        get => stats.maxHealth;
+        set => stats.maxHealth = value;
     }
     public float CurrentHealth
     {
         get => cHealth;
         set => cHealth = value;
+    }
+
+    public void GainLifeStealHealth(float amount, float overFlowMultiplier)
+    {
+        float healthAwayFromMax = MaxHealth - CurrentHealth;
+        float overflow = Mathf.Clamp(amount - healthAwayFromMax, 0, float.MaxValue);
+
+        CurrentHealth += healthAwayFromMax + (overflow * overFlowMultiplier);
     }
 
     private NetworkStateMachine stateMachine;
@@ -25,11 +31,15 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
     /// </summary>
     private PlayerHUDHandler hudHandler;
 
+    private PlayerStatsBlock stats;
+
 
     private void Awake()
     {
         stateMachine = GetComponent<NetworkStateMachine>();
         hudHandler = GetComponent<PlayerHUDHandler>();
+
+        stats = GetComponent<PlayerStatsHandler>().Stats;
     }
 
     public void ResetHealth()
@@ -70,15 +80,15 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
 
         RecieveDamage(damage);
 
-        hudHandler.OnDamageRecieved(damage / maxHealth, hitType);
+        hudHandler.OnDamageRecieved(damage / MaxHealth, hitType);
     }
 
     private bool RecieveDamage(float damage)
     {
-        cHealth -= damage;
+        CurrentHealth -= damage;
 
         // If player health falls below 0, Call OnDeath
-        if (cHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             return true;
         }

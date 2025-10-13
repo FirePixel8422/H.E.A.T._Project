@@ -2,6 +2,7 @@ using FirePixel.Networking;
 using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 using Unity.Netcode;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -98,6 +99,7 @@ public class PlayerController : NetworkBehaviour
     private bool sprintJumped;
 
     private bool initialized;
+    private PlayerStatsBlock stats;
 
 
     #region Input Callbacks and Look and Jump Logic
@@ -128,7 +130,7 @@ public class PlayerController : NetworkBehaviour
             // set sprintJumped to true if player is sprintInput, so the player can jump and keep more momentum
             sprintJumped = sprintInput;
 
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jumpForce * stats.jumpStrengthMultiplier, ForceMode.Impulse);
 
             stateMachine.Jump(0.1f);
         }
@@ -158,8 +160,9 @@ public class PlayerController : NetworkBehaviour
     private void OnEnable() => ManageUpdateCallbacks(true);
     private void OnDisable() => ManageUpdateCallbacks(false);
 
-    public void Init(CameraHandler camHandler, GunSwayHandler gunSwayHandler, ADSHandler adsHandler)
+    public void Init(PlayerStatsBlock stats, CameraHandler camHandler, GunSwayHandler gunSwayHandler, ADSHandler adsHandler)
     {
+        this.stats = stats;
         this.camHandler = camHandler;
         this.gunSwayHandler = gunSwayHandler;
         this.adsHandler = adsHandler;
@@ -167,6 +170,7 @@ public class PlayerController : NetworkBehaviour
         hudHandler = GetComponent<PlayerHUDHandler>();
         rb = GetComponent<Rigidbody>();
         stateMachine = GetComponent<NetworkStateMachine>();
+
 
         initialized = true;
         ManageUpdateCallbacks(true);
@@ -230,13 +234,13 @@ public class PlayerController : NetworkBehaviour
         Vector3 targetForwardVelocity = GetForwardDirection();
 
         // Get target movement speed through GetTargetMoveSpeed
-        targetForwardVelocity *= GetTargetMoveSpeed();
+        targetForwardVelocity *= GetTargetMoveSpeed() * stats.agilityMultiplier;
         targetForwardVelocity.y = rbVelocityY;
 
 
         float targetSpeedChangePower = IsGrounded ? steerPower : midAirSteerPower;
 
-        rb.linearVelocity = VectorLogic.InstantMoveTowards(rb.linearVelocity, targetForwardVelocity, targetSpeedChangePower * fixedDeltaTime);
+        rb.linearVelocity = VectorLogic.InstantMoveTowards(rb.linearVelocity, targetForwardVelocity, targetSpeedChangePower * stats.agilityMultiplier * fixedDeltaTime);
 
         hudHandler.AddCrossHairInstability(Vector3.Distance(targetForwardVelocity, Vector3.zero) * fixedDeltaTime);
 

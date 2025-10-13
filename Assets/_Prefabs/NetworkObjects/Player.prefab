@@ -1516,6 +1516,8 @@ GameObject:
   - component: {fileID: 8084332042966875633}
   - component: {fileID: 6829219136680250846}
   - component: {fileID: 809467867142740111}
+  - component: {fileID: 6049929174235095931}
+  - component: {fileID: 1278298294351702664}
   - component: {fileID: 7984017930997677584}
   - component: {fileID: 7952861885439663320}
   - component: {fileID: 2468621984452962592}
@@ -1567,7 +1569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2369081872
+  GlobalObjectIdHash: 2728525203
   InScenePlacedSourceGlobalObjectIdHash: 2369081872
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1686,6 +1688,7 @@ MonoBehaviour:
     mainCamTransform: {fileID: 6012974010948853806}
     gunCamera: {fileID: 4245517809260214837}
     baseFOV: 75
+    currentFOV: 0
     mainCamMaxTiltAngle: 75
   adsHandler:
     fovMultiplierCurve:
@@ -1735,6 +1738,7 @@ MonoBehaviour:
       sampleCount: 125
     stats:
       zoomMultiplier: 0
+      scopeCamZoomMultiplier: 0
       adsSensitivityMultiplier: 0
       zoomInTime: 0
       zoomOutTime: 0
@@ -1795,6 +1799,7 @@ MonoBehaviour:
       eulerSwayMove:
         x: 0.001
         y: 0.001
+      swayMultiplier: 1
       ignoreYForSwayMove: 0
       offsetSmooth: 12
       swayRecoverSmooth: 15
@@ -1862,6 +1867,8 @@ MonoBehaviour:
   gunOverheatSource: {fileID: 6957241378848993016}
   onHitSource: {fileID: 3482466836178550512}
   overrideIsOwner: 0
+  gunId: 0
+  playerGameId: 0
 --- !u!114 &8084332042966875633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2131,8 +2138,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthHandler
   ShowTopMostFoldoutHeaderGroup: 1
-  maxHealth: 250
   cHealth: 250
+--- !u!114 &6049929174235095931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3487219833232609719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ed1ae12a1676644b686e69bcc4bd49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDataLibrary
+  ShowTopMostFoldoutHeaderGroup: 1
+  overrideIsOwner: 0
+  input: {fileID: 0}
+  gunHandler: {fileID: 0}
+  healthHandler: {fileID: 0}
+  statsHandler: {fileID: 0}
+  controller: {fileID: 0}
+  hotBarHandler: {fileID: 0}
+  hudHandler: {fileID: 0}
+  utilityHandler: {fileID: 0}
+  ragDollController: {fileID: 0}
+--- !u!114 &1278298294351702664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3487219833232609719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0052e646ff4f2c64b9cbce336ca26353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsHandler
+  stats:
+    maxHealth: 250
+    damageMultiplier: 1
+    lifeStealMultiplier: 0
+    lifeStealOverflowMultiplier: 0
+    agilityMultiplier: 1
+    jumpStrengthMultiplier: 1
+    heatGenerationMultiplier: 1
+    heatDecayMultiplier: 1
+    recoilMultiplier: 1
+    spreadMultiplier: 1
 --- !u!114 &7984017930997677584
 MonoBehaviour:
   m_ObjectHideFlags: 0

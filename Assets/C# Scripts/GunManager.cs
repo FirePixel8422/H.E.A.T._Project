@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,8 +18,9 @@ public class GunManager : MonoBehaviour
 
     [SerializeField] private GunSO[] baseGuns;
 
-    [SerializeField] private ArrayWrapper<int>[] attachmentIdsList;
+    [SerializeField] ArrayWrapper<int2>[] attachmentIdsList;
     [SerializeField] private CompleteGunStatsSet[] currentGunStats;
+    public ArrayWrapper<int2>[] AttachmentIdsList => attachmentIdsList;
 
     public int GunCount => baseGuns.Length;
 
@@ -34,13 +36,13 @@ public class GunManager : MonoBehaviour
         }
 
         int gunCount = baseGuns.Length;
-        attachmentIdsList = new ArrayWrapper<int>[gunCount];
+        attachmentIdsList = new ArrayWrapper<int2>[gunCount];
         
         for (int i = 0; i < gunCount; i++)
         {
-            attachmentIdsList[i].Value = new int[5];
+            attachmentIdsList[i].Value = new int2[5];
 
-            Array.Fill(attachmentIdsList[i].Value, -1);
+            Array.Fill(attachmentIdsList[i].Value, new int2(-1, -1));
         }
 
         currentGunStats = new CompleteGunStatsSet[gunCount];
@@ -48,13 +50,13 @@ public class GunManager : MonoBehaviour
         CalculateGunStats();
     }
 
-    public IGunAtachment[] GetCurrentGunAttachments()
+    public IGunAtachment[] GetCurrentGunAttachments(int playerGameId)
     {
         IGunAtachment[] attachments = new IGunAtachment[5];
 
         for (int i = 0; i < 5; i++)
         {
-            int attachmentId = attachmentIdsList[currentGunId].Value[i];
+            int attachmentId = attachmentIdsList[currentGunId].Value[i][playerGameId];
 
             if (attachmentId != -1)
             {
@@ -81,7 +83,7 @@ public class GunManager : MonoBehaviour
 
                 targetAttachment.ApplyToBaseStats(ref targetStatsSet);
 
-                attachmentIdsList[gunId].Value[i] = targetAttachment.AttachmentId;
+                attachmentIdsList[gunId].Value[(int)targetAttachment.Type] = targetAttachment.AttachmentId;
             }
 
             targetStatsSet.BakeAllCurves();
@@ -105,7 +107,7 @@ public class GunManager : MonoBehaviour
     /// Swap gun and get baseGunstats by gunId.
     /// </summary>
     public void SwapGun(
-        Transform gunParentTransform, int gunId, ref GunRefHolder gunRefHolder,
+        Transform gunParentTransform, int gunId, int playerGameId, ref GunRefHolder gunRefHolder,
         out GunCoreStats coreStats,
         out GunAudioStats audioStats,
         out GunShakeStats shakeStats,
@@ -123,10 +125,10 @@ public class GunManager : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
-            int attachmentId = attachmentIdsList[gunId][i];
+            int attachmentId = attachmentIdsList[gunId][i][playerGameId];
 
             if (attachmentId == -1 || attachmentId >= globalAttachmentsList.Length) continue;
-                        
+
             gunRefHolder.SpawnAttachment(globalAttachmentsList[attachmentId]);
         }
         // Initilialize gun After spawning attachments

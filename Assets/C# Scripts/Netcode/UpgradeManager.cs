@@ -141,6 +141,7 @@ namespace FirePixel.Networking
             }
 
             takenUpgrades.Add(upgrades[upgradeId]);
+            upgrades[upgradeId].ApplyUpgrade(GunManager.Instance, PlayerDataLibrary.LocalInstance.utilityHandler, PlayerDataLibrary.LocalInstance.statsHandler);
 
             TakeUpgrade_ServerRPC(upgradeId);
 

@@ -13,15 +13,15 @@ public class GunRefHolder : MonoBehaviour
     public Vector3 MuzzleFlashScale => muzzleFlashPoint.localScale;
 
 
-    //[Header("Part of the gun that glows based on heat")]
-    //[SerializeField] private Renderer emissionRendererObj;
+    [Header("Part of the gun that glows based on heat")]
+    [SerializeField] private Renderer emissionRendererObj;
 
-    //public Material EmissionMatInstance { get; private set; }
+    public Material EmissionMatInstance { get; private set; }
 
 
     public void Init()
     {
-        //EmissionMatInstance = emissionRendererObj.material;
+        EmissionMatInstance = emissionRendererObj.material;
 
         ScopeCamera = GetComponentInChildren<Camera>(true);
     }

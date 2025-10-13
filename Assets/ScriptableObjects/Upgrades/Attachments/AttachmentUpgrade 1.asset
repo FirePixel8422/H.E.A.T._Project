@@ -9,12 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ca0152915f05c14a9075765958396b1, type: 3}
-  m_Name: _ 2
-  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSO
+  m_Script: {fileID: 11500000, guid: da62e120365cf5b4bbd6fb4479951605, type: 3}
+  m_Name: AttachmentUpgrade 1
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeAttachmentSO
   rarity: 50
-  stackable: 1
+  stackable: 0
   upgradeSprite: {fileID: 0}
-  rarityColor: {r: 0.5696902, g: 0.6754716, b: 0.6480199, a: 1}
-  upgradeName: 2
+  rarityColor: {r: 0.428171, g: 0.9547169, b: 0.40890706, a: 1}
+  upgradeName: New Attachment
   upgradeId: 1
+  attachmentUpgrade: {fileID: 0}
+  gunId: 2

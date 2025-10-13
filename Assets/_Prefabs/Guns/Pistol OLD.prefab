@@ -349,6 +349,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunRefHolder
   muzzleFlashPoint: {fileID: 1377138887329911264}
+  MuzzleTransformOffset:
+    position: {x: 0, y: 0, z: 0}
+    eulerRotation: {x: 0, y: 0, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+  emissionRendererObj: {fileID: 335564442526838234}
 --- !u!1 &8812221802997076985
 GameObject:
   m_ObjectHideFlags: 0

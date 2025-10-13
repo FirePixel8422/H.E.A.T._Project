@@ -117,7 +117,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: da8cd85cd5073e34d933d9da147a9d7a,
         type: 3}
       propertyPath: m_Name
-      value: Sniper 2
+      value: AWS Sniper
       objectReference: {fileID: 0}
     - target: {fileID: 6745302439343835087, guid: da8cd85cd5073e34d933d9da147a9d7a,
         type: 3}
@@ -160,9 +160,16 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     eulerRotation: {x: 0, y: 0, z: 0}
     scale: {x: 0, y: 0, z: 0}
+  emissionRendererObj: {fileID: 7078538527439806589}
 --- !u!4 &6536692972791746905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: da8cd85cd5073e34d933d9da147a9d7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6718322660334778034}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7078538527439806589 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -4683669308469848369, guid: da8cd85cd5073e34d933d9da147a9d7a,
     type: 3}
   m_PrefabInstance: {fileID: 6718322660334778034}
   m_PrefabAsset: {fileID: 0}

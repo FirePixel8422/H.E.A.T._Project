@@ -131,9 +131,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunRefHolder
   muzzleFlashPoint: {fileID: 5868199699262499135}
+  MuzzleTransformOffset:
+    position: {x: 0, y: 0, z: 0}
+    eulerRotation: {x: 0, y: 0, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+  emissionRendererObj: {fileID: 1743185055290226216}
 --- !u!4 &610841719659302215 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a45202a17dffbd5469527a551c6a64cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1148589651006941868}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1743185055290226216 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: a45202a17dffbd5469527a551c6a64cb,
     type: 3}
   m_PrefabInstance: {fileID: 1148589651006941868}
   m_PrefabAsset: {fileID: 0}

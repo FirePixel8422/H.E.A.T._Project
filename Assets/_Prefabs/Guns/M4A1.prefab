@@ -155,9 +155,16 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     eulerRotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
+  emissionRendererObj: {fileID: 1797686824693725765}
 --- !u!4 &628681476562157866 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1df73c27c0e4b3b4a8ddd5c259fc7ba5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1095288427938997953}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1797686824693725765 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 1df73c27c0e4b3b4a8ddd5c259fc7ba5,
     type: 3}
   m_PrefabInstance: {fileID: 1095288427938997953}
   m_PrefabAsset: {fileID: 0}
