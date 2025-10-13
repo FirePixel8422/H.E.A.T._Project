@@ -8,8 +8,8 @@ public class UtilityUpgradeSO : UpgradeSO
     [SerializeField] private UtilitySO utility;
     [SerializeField] private int utilityId;
 
-    public override void ApplyUpgrade(GunManager gunManager, UtilityHandler utilityHandler, PlayerStatsHandler statsHandler)
+    public override void ApplyUpgrade(GunManager gunManager, PlayerDataLibrary playerDataLibrary)
     {
-        utilityHandler.utility[utilityId] = utility.Stats;
+        playerDataLibrary.UtilityHandler.utility[utilityId] = utility.Stats;
     }
 }

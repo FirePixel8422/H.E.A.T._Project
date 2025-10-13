@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0b7c3e06db8a14b87487cb5b20ad5f, type: 3}
   m_Name: HK MP5
   m_EditorClassIdentifier: 
-  gunPrefab: {fileID: 5484704871031037484, guid: 4b07b6d66a4e04544bc5f5591b3f340f,
+  gunPrefab: {fileID: 2838943230417780415, guid: 23d6b93d9b059064c865a41c53fda14a,
     type: 3}
   baseStats:
     coreStats:
-      damage: 14
+      damage: 5
       headShotMultiplier: 1.5
       maxEffectiveRange: 17.5
       damageFallOffCurve:
@@ -263,13 +263,13 @@ MonoBehaviour:
         x: -85
         y: -30
     gunADSStats:
-      zoomMultiplier: 1
+      zoomMultiplier: 1.5
       scopeCamZoomMultiplier: 1
       adsSensitivityMultiplier: 1.2
       zoomInTime: 0.175
       zoomOutTime: 0.125
-      normalAnimationName: BrokenPistol_Hip
-      zoomAnimationName: BrokenPistol_ADS
+      normalAnimationName: UMP_Hip
+      zoomAnimationName: UMP_ADS
       animLayer: 2
     swayStats:
       movementAmplitude:

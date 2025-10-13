@@ -22,21 +22,21 @@ public class PerkUpgradeSO : UpgradeSO
 
 
 
-    public override void ApplyUpgrade(GunManager gunManager, UtilityHandler utilityHandler, PlayerStatsHandler statsHandler)
+    public override void ApplyUpgrade(GunManager gunManager, PlayerDataLibrary playerDataLibrary)
     {
-        damageMultiplier.ApplyToStat(ref statsHandler.Stats.damageMultiplier);
-        maxHealth.ApplyToStat(ref statsHandler.Stats.maxHealth);
+        damageMultiplier.ApplyToStat(ref playerDataLibrary.Stats.damageMultiplier);
+        maxHealth.ApplyToStat(ref playerDataLibrary.Stats.maxHealth);
 
-        lifeStealMultiplier.ApplyToStat(ref statsHandler.Stats.lifeStealMultiplier);
-        lifeStealOverflowMultiplier.ApplyToStat(ref statsHandler.Stats.lifeStealOverflowMultiplier);
+        lifeStealMultiplier.ApplyToStat(ref playerDataLibrary.Stats.lifeStealMultiplier);
+        lifeStealOverflowMultiplier.ApplyToStat(ref playerDataLibrary.Stats.lifeStealOverflowMultiplier);
 
-        agilityMultiplier.ApplyToStat(ref statsHandler.Stats.agilityMultiplier);
-        jumpStrengthMultiplier.ApplyToStat(ref statsHandler.Stats.jumpStrengthMultiplier);
+        agilityMultiplier.ApplyToStat(ref playerDataLibrary.Stats.agilityMultiplier);
+        jumpStrengthMultiplier.ApplyToStat(ref playerDataLibrary.Stats.jumpStrengthMultiplier);
 
-        heatGenerationMultiplier.ApplyToStat(ref statsHandler.Stats.heatGenerationMultiplier);
-        heatDecayMultiplier.ApplyToStat(ref statsHandler.Stats.heatDecayMultiplier);
+        heatGenerationMultiplier.ApplyToStat(ref playerDataLibrary.Stats.heatGenerationMultiplier);
+        heatDecayMultiplier.ApplyToStat(ref playerDataLibrary.Stats.heatDecayMultiplier);
 
-        recoilMultiplier.ApplyToStat(ref statsHandler.Stats.recoilMultiplier);
-        spreadMultiplier.ApplyToStat(ref statsHandler.Stats.spreadMultiplier);
+        recoilMultiplier.ApplyToStat(ref playerDataLibrary.Stats.recoilMultiplier);
+        spreadMultiplier.ApplyToStat(ref playerDataLibrary.Stats.spreadMultiplier);
     }
 }

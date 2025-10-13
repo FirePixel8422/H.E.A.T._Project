@@ -150,7 +150,7 @@ public class GunHandler : NetworkBehaviour
     {
         ManageUpdateCallbacks(true);
 
-        stats = GetComponent<PlayerStatsHandler>().Stats;
+        stats = GetComponent<PlayerDataLibrary>().Stats;
 
         playerController = GetComponent<PlayerController>();
         playerController.Init(stats, camHandler, gunSwayHandler, adsHandler);
@@ -470,7 +470,7 @@ public class GunHandler : NetworkBehaviour
                     float damage = coreStats.GetDamageOutput(hit.distance, targetHitBox.IsHeadHitBox);
                     damage *= stats.damageMultiplier;
 
-                    PlayerDataLibrary.LocalInstance.healthHandler.GainLifeStealHealth(damage * stats.lifeStealMultiplier, stats.lifeStealOverflowMultiplier);
+                    PlayerDataLibrary.LocalInstance.HealthHandler.GainLifeStealHealth(damage * stats.lifeStealMultiplier, stats.lifeStealOverflowMultiplier);
 
                     targetHitBox.DealDamageToTargetObject(damage, targetHitBox.IsHeadHitBox, hit.point, ray.direction, out HitTypeResult hitTypeResult);
 

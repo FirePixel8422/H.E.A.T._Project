@@ -4,15 +4,13 @@ using UnityEngine;
 [System.Serializable]
 public class GunEmmisionHandler
 {
-    [SerializeField] private HDRGradient heatGradient;
-
     private Material emissionMatInstance;
-    private int emissionId;
+    private int heatPercentageId;
 
 
     public void Init()
     {
-        emissionId = Shader.PropertyToID("_EmissionColor");
+        heatPercentageId = Shader.PropertyToID("_HeatPercent");
     }
 
     public void OnSwapGun(Material _matInstance)
@@ -24,7 +22,6 @@ public class GunEmmisionHandler
     {
         if (emissionMatInstance == null) return;
 
-        Color heatColor = heatGradient.gradient.Evaluate(percent);
-        emissionMatInstance.SetColor(emissionId, heatColor);
+        emissionMatInstance.SetFloat(heatPercentageId, percent);
     }
 }

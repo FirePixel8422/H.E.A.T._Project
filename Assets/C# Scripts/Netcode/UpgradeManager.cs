@@ -41,7 +41,7 @@ namespace FirePixel.Networking
             //TEMP
             //TEMP
             //TEMP
-            Invoke(nameof(CreateUpgradeUI), 0.5f);
+            //Invoke(nameof(CreateUpgradeUI), 0.5f);
         }
 
         public void CreateUpgradeUI()
@@ -141,7 +141,7 @@ namespace FirePixel.Networking
             }
 
             takenUpgrades.Add(upgrades[upgradeId]);
-            upgrades[upgradeId].ApplyUpgrade(GunManager.Instance, PlayerDataLibrary.LocalInstance.utilityHandler, PlayerDataLibrary.LocalInstance.statsHandler);
+            upgrades[upgradeId].ApplyUpgrade(GunManager.Instance, PlayerDataLibrary.LocalInstance);
 
             TakeUpgrade_ServerRPC(upgradeId);
 

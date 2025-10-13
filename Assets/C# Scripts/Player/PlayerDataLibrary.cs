@@ -11,29 +11,31 @@ public class PlayerDataLibrary : NetworkBehaviour
     [Header("Allow this script to be used outside of network environment")]
     [SerializeField] private bool overrideIsOwner;
 
-    public PlayerInput input;
-    public GunHandler gunHandler;
-    public PlayerHealthHandler healthHandler;
-    public PlayerStatsHandler statsHandler;
-    public PlayerController controller;
-    public PlayerHotBarHandler hotBarHandler;
-    public PlayerHUDHandler hudHandler;
-    public UtilityHandler utilityHandler;
-    public RagDollController ragDollController;
+
+    [SerializeField] private PlayerStatsBlock stats;
+    public PlayerStatsBlock Stats => stats;
+
+    public PlayerInput Input { get; private set; }
+    public GunHandler GunHandler { get; private set; }
+    public PlayerHealthHandler HealthHandler { get; private set; }
+    public PlayerController Controller { get; private set; }
+    public PlayerHotBarHandler HotBarHandler { get; private set; }
+    public PlayerHUDHandler HudHandler { get; private set; }
+    public UtilityHandler UtilityHandler { get; private set; }
+    public RagDollController RagDollController { get; private set; }
 
 
-    private void Start()
+    private void Awake()
     {
-        input = GetComponent<PlayerInput>();
-        gunHandler = GetComponent<GunHandler>();
-        healthHandler = GetComponent<PlayerHealthHandler>();
-        statsHandler = GetComponent<PlayerStatsHandler>();
-        controller = GetComponent<PlayerController>();
-        hotBarHandler = GetComponent<PlayerHotBarHandler>();
-        hudHandler = GetComponent<PlayerHUDHandler>();
-        utilityHandler = GetComponent<UtilityHandler>();
+        Input = GetComponent<PlayerInput>();
+        GunHandler = GetComponent<GunHandler>();
+        HealthHandler = GetComponent<PlayerHealthHandler>();
+        Controller = GetComponent<PlayerController>();
+        HotBarHandler = GetComponent<PlayerHotBarHandler>();
+        HudHandler = GetComponent<PlayerHUDHandler>();
+        UtilityHandler = GetComponent<UtilityHandler>();
 
-        ragDollController = GetComponentInChildren<RagDollController>(true);
+        RagDollController = GetComponentInChildren<RagDollController>(true);
 
         if (overrideIsOwner)
         {

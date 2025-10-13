@@ -547,19 +547,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FirePixel.Networking.UpgradeManager
   ShowTopMostFoldoutHeaderGroup: 1
   upgrades:
-  - {fileID: 11400000, guid: 6ead64705dd9aa5438a135869bb6221b, type: 2}
-  - {fileID: 11400000, guid: 7dc88a1e763af8f48ba8264176ebcf1e, type: 2}
-  - {fileID: 11400000, guid: cf38d412f5f09634ca45ed273f5020e5, type: 2}
-  - {fileID: 11400000, guid: 93ec7c68e7fdd684dba78e5646b91e64, type: 2}
-  - {fileID: 11400000, guid: c75fda2ad15a3384bb77e0eaf59048aa, type: 2}
-  - {fileID: 11400000, guid: 9815a3d202d55a84abcb192a393b29cd, type: 2}
-  - {fileID: 11400000, guid: 43b0652a33f04fa45b2ad7a361791d0c, type: 2}
-  - {fileID: 11400000, guid: d9665ae0f85d17a438d920212be8b4dd, type: 2}
-  - {fileID: 11400000, guid: f505e46aa8636124a8bc2ece647a433d, type: 2}
-  - {fileID: 11400000, guid: 72ded5d29bf2b1440a9be0ead7190cb8, type: 2}
-  - {fileID: 11400000, guid: 560e1a2a8dda3d945a89830e5df171b0, type: 2}
-  - {fileID: 11400000, guid: f2fe59b5748a1234aa8928a27a0ea9c8, type: 2}
-  - {fileID: 11400000, guid: 56939234975eed14197402686707cf6f, type: 2}
+  - {fileID: 11400000, guid: 3c0717f285ad4d243885a60b6e04d74d, type: 2}
+  - {fileID: 11400000, guid: 36c60d0d9de7aaa4298be82d9138b863, type: 2}
+  - {fileID: 11400000, guid: 29bcee980da9ca945b961c27a2cb20ab, type: 2}
+  - {fileID: 11400000, guid: d0526a58c711f8a4586bf16360614a6a, type: 2}
+  - {fileID: 11400000, guid: 116dcfcf362eb164d8fb4cbf333d1510, type: 2}
+  - {fileID: 11400000, guid: 4dddb1ac7f805ac4c9160860151b9acb, type: 2}
+  - {fileID: 11400000, guid: 61a0aca1b151798459fef555a107a2ba, type: 2}
   upgradeUIParent: {fileID: 7438262744063012387}
   uiSlots:
   - parentObj: {fileID: 7076225307187597420}

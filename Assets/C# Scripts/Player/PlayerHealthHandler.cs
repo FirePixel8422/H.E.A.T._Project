@@ -39,7 +39,7 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
         stateMachine = GetComponent<NetworkStateMachine>();
         hudHandler = GetComponent<PlayerHUDHandler>();
 
-        stats = GetComponent<PlayerStatsHandler>().Stats;
+        stats = GetComponent<PlayerDataLibrary>().Stats;
     }
 
     public void ResetHealth()
