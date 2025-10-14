@@ -9,13 +9,13 @@ public class GunScopeStats : IGunAtachment
     
 
     [SerializeField] private SmartAttributeFloat zoomMultiplier = new SmartAttributeFloat(1, ApplyMode.Override);
-    [SerializeField] private SmartAttributeFloat gunYOffset = new SmartAttributeFloat(0, ApplyMode.Override);
+    [SerializeField] private FilterableContainer<Vector3> gunOffset = new FilterableContainer<Vector3>(true);
 
 
     public void ApplyToBaseStats(ref CompleteGunStatsSet gunStatsSet)
     {
         zoomMultiplier.ApplyToStat(ref gunStatsSet.gunADSStats.zoomMultiplier);
-        gunYOffset.ApplyToStat(ref gunStatsSet.swayStats.gunYOffset);
+        gunOffset.ApplyToStat(ref gunStatsSet.swayStats.gunOffset);
     }
 
     public void ApplyToGunObject(GunRefHolder gunRef)

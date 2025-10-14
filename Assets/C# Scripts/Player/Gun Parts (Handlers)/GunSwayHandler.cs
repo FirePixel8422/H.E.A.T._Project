@@ -23,7 +23,7 @@ public unsafe class GunSwayHandler
         this.gunTransform = gunTransform;
         this.adsHandler = adsHandler;
 
-        startPos = gunTransform.localPosition + Vector3.up * stats.gunYOffset;
+        startPos = gunTransform.localPosition + stats.gunOffset;
         startEuler = gunTransform.localEulerAngles;
     }
 

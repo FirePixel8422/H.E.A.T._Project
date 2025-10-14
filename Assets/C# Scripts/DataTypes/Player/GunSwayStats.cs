@@ -28,8 +28,8 @@ public struct GunSwayStats
     public float offsetSmooth;
     public float swayRecoverSmooth;
 
-    [Header("Gun Y Offset for scopes")]
-    public float gunYOffset;
+    [Header("Gun Offset for scopes")]
+    public Vector3 gunOffset;
 
     [Header("Spread Multiplier")]
     public NativeSampledAnimationCurve spreadMultplierCurve;
@@ -66,7 +66,7 @@ public struct GunSwayStats
         ignoreYForSwayMove  = true,
         offsetSmooth = 12f,
         swayRecoverSmooth = 12f,
-        gunYOffset = 0,
+        gunOffset = Vector3.zero,
         spreadMultplierCurve = NativeSampledAnimationCurve.Default
     };
 }
