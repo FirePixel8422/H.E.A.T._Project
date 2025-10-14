@@ -23,5 +23,5 @@ MonoBehaviour:
       value: 1.5
       applyMode: 3
     gunOffset:
-      ignoreData: 1
-      data: {x: 0, y: 0, z: 0}
+      ignoreData: 0
+      data: {x: 0.0001, y: -0.0177, z: 0}

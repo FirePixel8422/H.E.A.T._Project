@@ -22,6 +22,6 @@ MonoBehaviour:
     zoomMultiplier:
       value: 4
       applyMode: 3
-    gunYOffset:
-      value: 0
-      applyMode: 3
+    gunOffset:
+      ignoreData: 0
+      data: {x: 1.32, y: 0, z: 0}
