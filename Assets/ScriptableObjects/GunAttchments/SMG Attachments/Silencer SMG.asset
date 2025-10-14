@@ -15,7 +15,7 @@ MonoBehaviour:
   attachmentPrefab: {fileID: 1579069039258499710, guid: 517e002aa9b1455478b4508647ec034a,
     type: 3}
   transformOffset:
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 0.001, y: -0.041, z: -0.234}
     eulerRotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
   stats:

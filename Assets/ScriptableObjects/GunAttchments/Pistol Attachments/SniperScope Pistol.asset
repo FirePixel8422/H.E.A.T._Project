@@ -15,13 +15,13 @@ MonoBehaviour:
   attachmentPrefab: {fileID: 462111671257272191, guid: a178b88085a2a3e43807e9597ceb0df5,
     type: 3}
   transformOffset:
-    position: {x: 0, y: 0, z: 0}
+    position: {x: -0.0014, y: 0.0266, z: -0.2143}
     eulerRotation: {x: 0, y: 0, z: 0}
-    scale: {x: 1, y: 1, z: 1}
+    scale: {x: 0.8, y: 0.8, z: 0.8}
   stats:
     zoomMultiplier:
       value: 4
       applyMode: 3
-    gunYOffset:
-      value: 0
-      applyMode: 3
+    gunOffset:
+      ignoreData: 1
+      data: {x: 0, y: 0, z: 0}
