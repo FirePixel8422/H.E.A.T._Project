@@ -1,3 +1,4 @@
+using System.Net.Mail;
 using UnityEngine;
 
 public class ArmoryBehavior : MonoBehaviour
@@ -10,6 +11,11 @@ public class ArmoryBehavior : MonoBehaviour
     public GameObject[] previewGuns;
     public GameObject[] previewGunsAttachments;
     int selectedGun;
+    int selectedAttachment;
+
+    [Header("Attachments")]
+    public AttachmentType[] attachments;
+
     public void SetActiveGun()
     {
         selectedGun = 0;
@@ -33,9 +39,18 @@ public class ArmoryBehavior : MonoBehaviour
         armoryScreens[0].SetActive(false);
         armoryScreens[1].SetActive(true);
     }
-    public void AttachmentButton()
+    public void AttachmentButton(int partNumber)
     {
+        animator.SetInteger("ArmoryUI", 2);
         armoryScreens[2].SetActive(true);
+        
+        previewGunsAttachments[selectedGun].SetActive(false);
+
+        selectedAttachment = partNumber;
+        foreach(GameObject attachment in attachments[selectedAttachment].attachmentComponenets)
+        {
+            attachment.SetActive(true);
+        }
     }
     public void BackToGuns()
     {
@@ -45,5 +60,25 @@ public class ArmoryBehavior : MonoBehaviour
         armoryScreens[2].SetActive(false);
         armoryScreens[1].SetActive(false);
         armoryScreens[0].SetActive(true);
+    }
+    public void BackToCustomize()
+    {
+        animator.SetInteger("ArmoryUI", 3);
+
+        armoryScreens[2].SetActive(false);
+
+        previewGunsAttachments[selectedGun].SetActive(true);
+
+        foreach (GameObject attachment in attachments[selectedAttachment].attachmentComponenets)
+        {
+            attachment.SetActive(false);
+        }
+    }
+
+
+    [System.Serializable]
+    public class AttachmentType
+    {
+        public GameObject[] attachmentComponenets;
     }
 }
