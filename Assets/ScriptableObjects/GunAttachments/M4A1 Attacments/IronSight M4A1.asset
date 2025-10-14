@@ -17,8 +17,11 @@ MonoBehaviour:
   transformOffset:
     position: {x: 0, y: 0, z: 0}
     eulerRotation: {x: 0, y: 0, z: 0}
-  type: 2
+    scale: {x: 1, y: 1, z: 1}
   stats:
     zoomMultiplier:
       value: 1
-      applymode: 2
+      applyMode: 3
+    gunOffset:
+      ignoreData: 0
+      data: {x: 0, y: -0.0008, z: 0}

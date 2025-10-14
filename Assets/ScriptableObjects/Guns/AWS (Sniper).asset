@@ -196,7 +196,7 @@ MonoBehaviour:
         x: -30
         y: 0
     gunADSStats:
-      zoomMultiplier: 4
+      zoomMultiplier: 1
       scopeCamZoomMultiplier: 1
       adsSensitivityMultiplier: 0.75
       zoomInTime: 0.25
