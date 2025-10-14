@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using FirePixel.Networking;
+using UnityEngine;
 
 
 
@@ -10,6 +11,6 @@ public class UpgradeAttachmentSO : UpgradeSO
 
     public override void ApplyUpgrade(GunManager gunManager, PlayerDataLibrary playerDataLibrary)
     {
-        gunManager.AttachmentIdsList[gunId][(int)attachmentUpgrade.Stats.Type] = attachmentUpgrade.Stats.AttachmentId;
+        gunManager.UnlockAttachment_ServerRPC(ClientManager.LocalClientGameId, gunId, (int)attachmentUpgrade.Stats.Type, attachmentUpgrade.Stats.AttachmentId);
     }
 }

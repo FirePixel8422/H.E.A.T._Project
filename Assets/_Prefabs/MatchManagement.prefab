@@ -101,6 +101,9 @@ MonoBehaviour:
   defaultMatchSettings:
     privateLobby: 0
   UITransform: {fileID: 0}
+  matchState: 0
+  matchStartDelay: 2
+  matchEndDelay: 3
 --- !u!114 &4552873996528808999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +139,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   playerPrefab: {fileID: 3487219833232609719, guid: 33ae4ad9ad2946a4d92fcec06e7c86be,
     type: 3}
+  spawnFreezeTime: 1
 --- !u!114 &4267619818096258449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0d409050b64f9408920ae7b792a543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overrideIsOwner: 0
   globalAttachmentsList:
   - {fileID: 11400000, guid: e896a95b555f9c64c96ff5e7296195e6, type: 2}
   - {fileID: 11400000, guid: 37ee397e79299d64793e92affc8882fd, type: 2}

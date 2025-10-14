@@ -6,7 +6,15 @@ namespace FirePixel.Networking
 {
     public class PlayerManager : NetworkBehaviour
     {
+        public static PlayerManager Instance {get; private set;}
+        private void Awake()
+        {
+            Instance = this;
+        }
+
+
         [SerializeField] private GameObject playerPrefab;
+        [SerializeField] private float spawnFreezeTime;
 
         private Vector3[] playerSpawnPositions;
         private Quaternion[] playerSpawnRotations;
@@ -37,7 +45,7 @@ namespace FirePixel.Networking
         /// </summary>
 
         [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
-        public void SpawnPlayer_ServerRPC(ulong ownerNetworkId)
+        private void SpawnPlayer_ServerRPC(ulong ownerNetworkId)
         {
             if (spawnPointsActive == false) return;
 
@@ -47,6 +55,13 @@ namespace FirePixel.Networking
             Quaternion rot = playerSpawnRotations[arrayId];
 
             NetworkObject spawnedPlayer = NetworkObject.InstantiateAndSpawn(playerPrefab, NetworkManager, ownerNetworkId, position: pos, rotation: rot);
+
+            Invoke(nameof(EnablePlayerInput), spawnFreezeTime);
+        }
+
+        private void EnablePlayerInput()
+        {
+            PlayerDataLibrary.LocalInstance.Input.enabled = true;
         }
     }
 }

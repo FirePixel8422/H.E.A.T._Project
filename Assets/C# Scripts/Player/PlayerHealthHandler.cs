@@ -1,11 +1,15 @@
 ﻿using FirePixel.Networking;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class PlayerHealthHandler : NetworkBehaviour, IDamagable
 {
     [SerializeField] private float cHealth = 250;
+    [SerializeField] private TextMeshProUGUI healthTextObj;
+    [SerializeField] private Slider healthSlider;
     public float MaxHealth
     {
         get => stats.MaxHealth;
@@ -13,7 +17,16 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
     public float CurrentHealth
     {
         get => cHealth;
-        set => cHealth = value;
+        set
+        {
+            cHealth = value;
+
+            if (IsOwner || PlayerDataLibrary.LocalInstance.overrideIsOwner)
+            {
+                healthTextObj.text = value.ToString();
+                healthSlider.value = cHealth / MaxHealth;
+            }
+        }
     }
 
     public void GainLifeStealHealth(float amount, float overFlowMultiplier)
@@ -118,7 +131,7 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
 
         NetworkObject.Despawn(gameObject);
 
-        this.FindObjectOfType<PlayerManager>().SpawnPlayer_ServerRPC(deadClientNetworkId);
+        MatchManager.Instance.OnPlayerDeath_ServerRPC(ClientManager.LocalClientGameId);
     }
     [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
     private void OnDeath_ClientRPC(GameIdRPCTargets rpcTargets)

@@ -33,11 +33,22 @@ public class GunManager : MonoBehaviour
 
     [SerializeField] ArrayWrapper<int2>[] attachmentIdsList;
     [SerializeField] private CompleteGunStatsSet[] currentGunStats;
-    public ArrayWrapper<int2>[] AttachmentIdsList => attachmentIdsList;
 
     public int GunCount => baseGuns.Length;
 
     private int currentGunId;
+
+
+    [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
+    public void UnlockAttachment_ServerRPC(int playerGameId, int gunId, int attachmentTypeId, int newAttachmentId)
+    {
+        UnlockAttachment_ClientRPC(playerGameId, gunId, attachmentTypeId, newAttachmentId);
+    }
+    [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
+    private void UnlockAttachment_ClientRPC(int playerGameId, int gunId, int attachmentTypeId, int newAttachmentId)
+    {
+        attachmentIdsList[gunId].Value[attachmentTypeId][playerGameId] = newAttachmentId;
+    }
 
 
     private void SetupAttachments(int playerGameId)

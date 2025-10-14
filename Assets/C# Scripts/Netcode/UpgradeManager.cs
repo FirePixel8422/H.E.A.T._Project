@@ -48,7 +48,6 @@ namespace FirePixel.Networking
 
         public void CreateUpgradeUI()
         {
-            Cursor.lockState = CursorLockMode.None;
             upgradeUIParent.SetActive(true);
 
             UpgradeSO[] upgrades = GetRandomUpgrades(GlobalGameData.UpgradeCount);
@@ -145,13 +144,8 @@ namespace FirePixel.Networking
             {
                 UpgradeSO targetUpgrade = chosenUpgrades[i];
 
-                if (targetUpgrade.stackable == false)
-                {
-                    upgradesLeft[targetUpgrade.UpgradeId] = targetUpgrade;
-                }
+                upgradesLeft[targetUpgrade.UpgradeId] = targetUpgrade;
             }
-
-            UpdateWeight();
 
             return chosenUpgrades;
         }
@@ -177,34 +171,18 @@ namespace FirePixel.Networking
         public void TakeUpgrade(int upgradeId)
         {
             // Disable Upgrade Screen
-            Cursor.lockState = CursorLockMode.Locked;
             upgradeUIParent.SetActive(false);
 
             // If Upgrade was non stackable, remove it
             if (globalUpgradesList[upgradeId].stackable == false)
             {
-                totalWeightLeft -= (int)globalUpgradesList[upgradeId].rarity;
-
-                //upgradesLeft[upgradeId] = null;
+                upgradesLeft[upgradeId] = null;
             }
             globalUpgradesList[upgradeId].ApplyUpgrade(GunManager.Instance, PlayerDataLibrary.LocalInstance);
 
-            TakeUpgrade_ServerRPC(upgradeId);
-
-
             PlayerDataLibrary.LocalInstance.GunHandler.UpdateGunData();
-        }
 
-        [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
-        private void TakeUpgrade_ServerRPC(int upgradeId)
-        {
-            TakeUpgrade_ClientRPC(upgradeId);
-        }
-
-        [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
-        private void TakeUpgrade_ClientRPC(int upgradeId)
-        {
-
+            MatchManager.Instance.OnEndUpgradePhase_ServerRPC();
         }
     }
 }

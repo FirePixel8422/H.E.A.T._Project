@@ -9,7 +9,7 @@ public class PlayerDataLibrary : NetworkBehaviour
     public static PlayerDataLibrary LocalInstance { get; private set; }
 
     [Header("Allow this script to be used outside of network environment")]
-    [SerializeField] private bool overrideIsOwner;
+    public bool overrideIsOwner;
 
 
     [SerializeField] private PlayerStatsBlock stats;
@@ -24,6 +24,8 @@ public class PlayerDataLibrary : NetworkBehaviour
     public UtilityHandler UtilityHandler { get; private set; }
     public RagDollController RagDollController { get; private set; }
 
+    public Rigidbody Rigidbody { get; private set; }
+
 
     private void Awake()
     {
@@ -36,6 +38,8 @@ public class PlayerDataLibrary : NetworkBehaviour
         UtilityHandler = GetComponent<UtilityHandler>();
 
         RagDollController = GetComponentInChildren<RagDollController>(true);
+
+        Rigidbody = GetComponent<Rigidbody>();
 
         if (overrideIsOwner)
         {

@@ -5,7 +5,7 @@
 [System.Serializable]
 public class UtilityStats
 {
-    public GameObject utilityPrefab;
+    public Throwable utilityPrefab;
 
     [SerializeField] private int maxCharges = 2;
     private int chargesLeft;
