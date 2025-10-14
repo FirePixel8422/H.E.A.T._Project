@@ -12,6 +12,7 @@ public class UpgradeSO : ScriptableObject
     public Sprite upgradeSprite;
     public Color rarityColor;
     public string upgradeName;
+    public string upgradeDescription;
 
 
     public int UpgradeId { get; set; }
