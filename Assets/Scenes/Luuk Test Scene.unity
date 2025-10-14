@@ -5828,6 +5828,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8927559205125815136, guid: 47d8fd93def297f4fba40f2e726286a6,
         type: 3}
+      propertyPath: overrideIsOwner
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927559205125815136, guid: 47d8fd93def297f4fba40f2e726286a6,
+        type: 3}
       propertyPath: unlockedGuns.Array.size
       value: 4
       objectReference: {fileID: 0}

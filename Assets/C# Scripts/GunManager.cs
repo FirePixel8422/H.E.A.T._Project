@@ -1,6 +1,7 @@
 using FirePixel.Networking;
 using System;
 using Unity.Mathematics;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +12,18 @@ public class GunManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        SetupAttachments();
+        if (overrideIsOwner)
+        {
+            SetupAttachments(0);
+        }
+        else
+        {
+            SetupAttachments(NetworkManager.Singleton.LocalClientId == 0 ? 0 : 1);
+        }
     }
 
+    [Header("Allow this script to be used outside of network environment")]
+    [SerializeField] private bool overrideIsOwner;
 
     [SerializeField] private GunAttachmentSO[] globalAttachmentsList;
 
@@ -30,7 +40,7 @@ public class GunManager : MonoBehaviour
     private int currentGunId;
 
 
-    private void SetupAttachments()
+    private void SetupAttachments(int playerGameId)
     {
         int attachmentCount = globalAttachmentsList.Length;
         for (int i = 0; i < attachmentCount; i++)
@@ -54,7 +64,7 @@ public class GunManager : MonoBehaviour
 
         currentGunStats = new CompleteGunStatsSet[gunCount];
 
-        CalculateGunStats();
+        CalculateGunBaseStats(playerGameId);
     }
 
     public void UnlockGun(int gunId)
@@ -64,7 +74,7 @@ public class GunManager : MonoBehaviour
         UpgradeManager.Instance.OnGainGun(gunId);
     }
 
-    public void CalculateGunStats()
+    public void CalculateGunBaseStats(int playerGameId)
     {
         int gunCount = baseGuns.Length;
         for (int gunId = 0; gunId < gunCount; gunId++)
@@ -80,7 +90,7 @@ public class GunManager : MonoBehaviour
 
                 targetAttachment.ApplyToBaseStats(ref targetStatsSet);
 
-                attachmentIdsList[gunId].Value[(int)targetAttachment.Type] = targetAttachment.AttachmentId;
+                attachmentIdsList[gunId].Value[(int)targetAttachment.Type][playerGameId] = targetAttachment.AttachmentId;
             }
 
             targetStatsSet.BakeAllCurves();
@@ -88,7 +98,6 @@ public class GunManager : MonoBehaviour
             currentGunStats[gunId] = targetStatsSet;
         }
     }
-
     public void SetupHeatSinks(out GunHeatSink[] heatSinks, Image heatBar, Animator anim)
     {
         heatSinks = new GunHeatSink[GunCount];
@@ -127,9 +136,9 @@ public class GunManager : MonoBehaviour
             if (attachmentId == -1 || attachmentId >= globalAttachmentsList.Length) continue;
 
             gunRefHolder.SpawnAttachment(globalAttachmentsList[attachmentId]);
-        }
 
-        CalculateGunStats();
+            globalAttachmentsList[attachmentId].Stats.ApplyToBaseStats(ref currentGunStats[gunId]);
+        }
 
         // Initilialize gun After spawning attachments
         gunRefHolder.Init();
