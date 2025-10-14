@@ -520,15 +520,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   globalAttachmentsList:
-  - {fileID: 11400000, guid: 8c2600a700342b142bb0a03b8770beed, type: 2}
-  - {fileID: 11400000, guid: 01652b5aac7c3704fa89ca7229c4fb56, type: 2}
-  - {fileID: 11400000, guid: 3b12978bb28168442b564b0246add77e, type: 2}
-  - {fileID: 11400000, guid: 418e04dfa63fd9345bc3ae0af4be0014, type: 2}
-  - {fileID: 11400000, guid: ec65a497549736149b120946b299325f, type: 2}
-  - {fileID: 11400000, guid: c5267ac8cfdf6654898124506c373ab0, type: 2}
+  - {fileID: 11400000, guid: e896a95b555f9c64c96ff5e7296195e6, type: 2}
+  - {fileID: 11400000, guid: 37ee397e79299d64793e92affc8882fd, type: 2}
+  - {fileID: 11400000, guid: 64138a1c4fe22584ebc96341b30e2e2c, type: 2}
+  - {fileID: 11400000, guid: d1d2f771ef3b73c44afd57f2ff7b6bff, type: 2}
+  - {fileID: 11400000, guid: 89fec2f0e91f51a46b6cde1f8aac3af4, type: 2}
+  - {fileID: 11400000, guid: dc46232bce1c67643803311019f69192, type: 2}
+  - {fileID: 11400000, guid: 0333a4d77f8a42342bb080c74727bc9b, type: 2}
+  - {fileID: 11400000, guid: 098532dd9b8970f4885cc75065c32dcb, type: 2}
+  - {fileID: 11400000, guid: db4794ccfefe2e340911bf7dea99fe49, type: 2}
+  - {fileID: 11400000, guid: f3780b66d4178984cbd9b6def7fa8c25, type: 2}
+  - {fileID: 11400000, guid: b69846cd3d93074419473ce7cae08412, type: 2}
+  - {fileID: 11400000, guid: 33572b4c6d294a043b04a8b103c270f5, type: 2}
+  - {fileID: 11400000, guid: 1b67a7e3440800d49b0218dab094ef72, type: 2}
+  - {fileID: 11400000, guid: 42ff4b6c73b55b249a02cda7e651348e, type: 2}
+  - {fileID: 11400000, guid: 090efb0a797d14b4fae224ae1c5de1b6, type: 2}
+  - {fileID: 11400000, guid: c27ea0521df14d742bdc99aa2190355c, type: 2}
+  - {fileID: 11400000, guid: e1c3943a905043f4bbf2af77d36f3916, type: 2}
+  - {fileID: 11400000, guid: 476f40e0e2eb90849965bfe44ed0e396, type: 2}
+  - {fileID: 11400000, guid: f845bec7cbd5eca45bf2dc51c385f29d, type: 2}
+  - {fileID: 11400000, guid: 8e0bddb69d58ddb4da7d07080c3f92f8, type: 2}
+  - {fileID: 11400000, guid: 5e6e5141fc1ea354597a8cc943b5140f, type: 2}
   baseGuns:
-  - {fileID: 11400000, guid: 345d4e08f6ffca9408ae925d7c9c85a0, type: 2}
   - {fileID: 11400000, guid: 27f968b9b70baf2479d2c0044169a853, type: 2}
+  - {fileID: 11400000, guid: 345d4e08f6ffca9408ae925d7c9c85a0, type: 2}
   - {fileID: 11400000, guid: efca6e1d6873b4e4ea917692e2fe765c, type: 2}
   - {fileID: 11400000, guid: 32d506f0be6f2a64c9a137600b5378e7, type: 2}
   attachmentIdsList: []
