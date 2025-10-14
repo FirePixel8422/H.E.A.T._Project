@@ -211,7 +211,7 @@ namespace FirePixel.Networking
         {
             dead = true;
 
-            ragDollController.StartRagdoll(ragdollDirection, ragdollImpactPoint);
+            //ragDollController.StartRagdoll(ragdollDirection, ragdollImpactPoint);
         }
 
 

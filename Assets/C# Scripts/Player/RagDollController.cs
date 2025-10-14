@@ -53,8 +53,6 @@ public class RagDollController : NetworkBehaviour
 
     public void StartRagdoll(Vector3 ragdollDirection, Vector3 ragdollImpactPoint)
     {
-        return;
-
         RecreateRagdollTransforms();
         Ragdoll(ragdollDirection, ragdollImpactPoint);
 
@@ -84,6 +82,7 @@ public class RagDollController : NetworkBehaviour
         List<Transform> children = playerBonesRoot.GetAllChildren();
         int childCount = children.Count;
 
+        Matrix4x4 playerMatrix = playerBonesRoot.localToWorldMatrix;
         List<Matrix4x4> matrices = new List<Matrix4x4>(childCount);
 
         for (int i = 0; i < childCount; i++)
@@ -96,6 +95,7 @@ public class RagDollController : NetworkBehaviour
         children = transform.GetAllChildren();
         childCount = children.Count;
 
+        TransformUtility.SetTransformFromMatrix(transform, playerMatrix);
         for (int i = 0; i < childCount; i++)
         {
             TransformUtility.SetTransformFromMatrix(children[i], matrices[i]);
@@ -111,7 +111,11 @@ public class RagDollController : NetworkBehaviour
         {
             mainColliders[i].enabled = false;
         }
-        mainRigidbody.isKinematic = true;
+
+        if (mainRigidbody != null)
+        {
+            mainRigidbody.isKinematic = true;
+        }
 
 
         int boneCount = bones.Length;
@@ -145,8 +149,7 @@ public class RagDollController : NetworkBehaviour
     {
         if (Application.isPlaying == false) return;
 
-        RecreateRagdollTransforms();
-        Ragdoll(ragDollDirection, ragDollImpactPoint.position);
+        StartRagdoll(ragDollDirection, ragDollImpactPoint.position);
     }
 
 #endif
