@@ -14,7 +14,7 @@ public class UpgradeSO : ScriptableObject
     public string upgradeName;
 
 
-    [HideInInspector] public int upgradeId;
+    public int UpgradeId { get; set; }
 
 
     public virtual void ApplyUpgrade(GunManager gunManager, PlayerDataLibrary playerDataLibrary)

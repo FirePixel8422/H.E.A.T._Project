@@ -562,12 +562,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FirePixel.Networking.UpgradeManager
   ShowTopMostFoldoutHeaderGroup: 1
   upgrades:
+  - {fileID: 11400000, guid: 3ef7588a156e07f49a0f36008d6ebccf, type: 2}
+  - {fileID: 11400000, guid: d83a3a588e292f540952cabf18c1a343, type: 2}
+  - {fileID: 11400000, guid: 8021d6a441606634e9b92ffa96bc8e36, type: 2}
   - {fileID: 11400000, guid: 3c0717f285ad4d243885a60b6e04d74d, type: 2}
   - {fileID: 11400000, guid: 36c60d0d9de7aaa4298be82d9138b863, type: 2}
   - {fileID: 11400000, guid: 29bcee980da9ca945b961c27a2cb20ab, type: 2}
   - {fileID: 11400000, guid: d0526a58c711f8a4586bf16360614a6a, type: 2}
   - {fileID: 11400000, guid: 116dcfcf362eb164d8fb4cbf333d1510, type: 2}
   - {fileID: 11400000, guid: 4dddb1ac7f805ac4c9160860151b9acb, type: 2}
+  - {fileID: 11400000, guid: 61a0aca1b151798459fef555a107a2ba, type: 2}
   - {fileID: 11400000, guid: 61a0aca1b151798459fef555a107a2ba, type: 2}
   upgradeUIParent: {fileID: 7438262744063012387}
   uiSlots:
@@ -591,9 +595,13 @@ MonoBehaviour:
     rarity: {fileID: 543966914130415563}
     name: {fileID: 6322321627246212574}
     confirmButton: {fileID: 682153763119720332}
+  gunAttachmentUpgrades:
+  - Value: []
+  - Value: []
+  - Value: []
+  - Value: []
   upgradesLeft: []
   totalWeightLeft: 0
-  takenUpgrades: []
 --- !u!1 &3432148399030355237
 GameObject:
   m_ObjectHideFlags: 0

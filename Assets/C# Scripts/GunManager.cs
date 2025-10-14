@@ -1,3 +1,4 @@
+using FirePixel.Networking;
 using System;
 using Unity.Mathematics;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class GunManager : MonoBehaviour
     [SerializeField] private GunAttachmentSO[] globalAttachmentsList;
 
     [SerializeField] private GunSO[] baseGuns;
+    [SerializeField] private bool[] unlockedGuns;
+    public bool[] UnlockedGuns => unlockedGuns;
 
     [SerializeField] ArrayWrapper<int2>[] attachmentIdsList;
     [SerializeField] private CompleteGunStatsSet[] currentGunStats;
@@ -37,7 +40,11 @@ public class GunManager : MonoBehaviour
 
         int gunCount = baseGuns.Length;
         attachmentIdsList = new ArrayWrapper<int2>[gunCount];
-        
+
+        unlockedGuns = new bool[gunCount];
+        UnlockGun(0);
+
+
         for (int i = 0; i < gunCount; i++)
         {
             attachmentIdsList[i].Value = new int2[5];
@@ -50,21 +57,11 @@ public class GunManager : MonoBehaviour
         CalculateGunStats();
     }
 
-    public IGunAtachment[] GetCurrentGunAttachments(int playerGameId)
+    public void UnlockGun(int gunId)
     {
-        IGunAtachment[] attachments = new IGunAtachment[5];
+        unlockedGuns[gunId] = true;
 
-        for (int i = 0; i < 5; i++)
-        {
-            int attachmentId = attachmentIdsList[currentGunId].Value[i][playerGameId];
-
-            if (attachmentId != -1)
-            {
-                attachments[i] = globalAttachmentsList[attachmentId].Stats;
-            }
-        }
-
-        return attachments;
+        UpgradeManager.Instance.OnGainGun(gunId);
     }
 
     public void CalculateGunStats()
@@ -139,7 +136,17 @@ public class GunManager : MonoBehaviour
 
     public int GetNextGunId() 
     {
-        currentGunId = (currentGunId + 1) % baseGuns.Length;
+        for (int i = 0; i < GunCount; i++)
+        {
+            int nextGunId = (currentGunId + 1) % baseGuns.Length;
+
+            if (unlockedGuns[nextGunId] == false) continue;
+
+            currentGunId = nextGunId;
+            return currentGunId;
+        }
+
+        DebugLogger.Log("Player Only has 1 gun");
         return currentGunId;
     }
 
