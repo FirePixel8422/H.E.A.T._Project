@@ -8,6 +8,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8890357668754083090, guid: 1210dc9775012e44dac1cce6fdb0f2f1,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 01221b24bcd05af41a928254daf4ef19, type: 2}
     - target: {fileID: -8679921383154817045, guid: 1210dc9775012e44dac1cce6fdb0f2f1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -101,6 +106,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 173271712195790415}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &502309112276841633 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8890357668754083090, guid: 1210dc9775012e44dac1cce6fdb0f2f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 173271712195790415}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1055808676121606942 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1210dc9775012e44dac1cce6fdb0f2f1,
@@ -146,6 +157,7 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 1559934413636065995}
+    - renderer: {fileID: 502309112276841633}
   - screenRelativeHeight: 0.09552186
     fadeTransitionWidth: 0
     renderers:

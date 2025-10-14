@@ -140,7 +140,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 36cd8494a94820c46824135225bcc9ee, type: 2}
+      objectReference: {fileID: 2100000, guid: 6dd2a299b68c9ad41aeff36e4321503d, type: 2}
     - target: {fileID: -7511558181221131132, guid: 2f23f919fe8d68b4fb8f768d2c74ccca,
         type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
@@ -156,6 +156,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 5743307322470683528, guid: 2f23f919fe8d68b4fb8f768d2c74ccca,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 36cd8494a94820c46824135225bcc9ee, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -175,6 +180,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1266139573513529571}
     m_Modifications:
+    - target: {fileID: 1244003106053335956, guid: 39502b818dfa44847ae0f35cade1d662,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a0dc518c195faf40a5f8b7aad1616ef, type: 2}
     - target: {fileID: 4662189132535192291, guid: 39502b818dfa44847ae0f35cade1d662,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -332,6 +342,11 @@ PrefabInstance:
     - target: {fileID: 6829742172658459655, guid: 41728973826f31845a360c4e67f2cd5f,
         type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 65013347aad2b5447bf5a25b34edc0dc, type: 2}
+    - target: {fileID: 7061345004986158712, guid: 41728973826f31845a360c4e67f2cd5f,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 65013347aad2b5447bf5a25b34edc0dc, type: 2}
     m_RemovedComponents: []
