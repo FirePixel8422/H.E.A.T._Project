@@ -229,7 +229,7 @@ MonoBehaviour:
       ignoreYForSwayMove: 1
       offsetSmooth: 8
       swayRecoverSmooth: 12
-      gunYOffset: 0
+      gunOffset: {x: 0, y: 0, z: 0}
       spreadMultplierCurve:
         curve:
           serializedVersion: 2
@@ -290,5 +290,4 @@ MonoBehaviour:
           m_RotationOrder: 4
         valueMultiplier: 1
         sampleCount: 75
-  baseAttachments:
-  - {fileID: 11400000, guid: ec65a497549736149b120946b299325f, type: 2}
+  baseAttachments: []

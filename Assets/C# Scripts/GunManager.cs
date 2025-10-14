@@ -138,7 +138,7 @@ public class GunManager : MonoBehaviour
     {
         for (int i = 0; i < GunCount; i++)
         {
-            int nextGunId = (currentGunId + 1) % baseGuns.Length;
+            int nextGunId = (currentGunId + 1 + i) % baseGuns.Length;
 
             if (unlockedGuns[nextGunId] == false) continue;
 

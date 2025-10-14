@@ -6,7 +6,7 @@
 public class PerkUpgradeSO : UpgradeSO
 {
     [SerializeField] private SmartAttributeFloat damageMultiplier = new SmartAttributeFloat(1, ApplyMode.Skip);
-    [SerializeField] private SmartAttributeFloat maxHealth = new SmartAttributeFloat(0, ApplyMode.Skip);
+    [SerializeField] private SmartAttributeFloat maxHealthMultiplier = new SmartAttributeFloat(1, ApplyMode.Skip);
 
     [SerializeField] private SmartAttributeFloat lifeStealMultiplier = new SmartAttributeFloat(1, ApplyMode.Skip);
     [SerializeField] private SmartAttributeFloat lifeStealOverflowMultiplier = new SmartAttributeFloat(1, ApplyMode.Skip);
@@ -25,7 +25,7 @@ public class PerkUpgradeSO : UpgradeSO
     public override void ApplyUpgrade(GunManager gunManager, PlayerDataLibrary playerDataLibrary)
     {
         damageMultiplier.ApplyToStat(ref playerDataLibrary.Stats.damageMultiplier);
-        maxHealth.ApplyToStat(ref playerDataLibrary.Stats.maxHealth);
+        maxHealthMultiplier.ApplyToStat(ref playerDataLibrary.Stats.maxHealthMultiplier);
 
         lifeStealMultiplier.ApplyToStat(ref playerDataLibrary.Stats.lifeStealMultiplier);
         lifeStealOverflowMultiplier.ApplyToStat(ref playerDataLibrary.Stats.lifeStealOverflowMultiplier);

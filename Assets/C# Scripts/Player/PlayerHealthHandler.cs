@@ -8,8 +8,7 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
     [SerializeField] private float cHealth = 250;
     public float MaxHealth
     {
-        get => stats.maxHealth;
-        set => stats.maxHealth = value;
+        get => stats.MaxHealth;
     }
     public float CurrentHealth
     {

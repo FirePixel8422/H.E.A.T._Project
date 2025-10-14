@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4087933105
+  GlobalObjectIdHash: 3013006890
   InScenePlacedSourceGlobalObjectIdHash: 4087933105
   DeferredDespawnTick: 0
   Ownership: 1
@@ -620,6 +620,7 @@ MonoBehaviour:
   overrideIsOwner: 1
   stats:
     maxHealth: 250
+    maxHealthMultiplier: 1
     damageMultiplier: 1
     lifeStealMultiplier: 0
     lifeStealOverflowMultiplier: 0
@@ -850,7 +851,7 @@ MonoBehaviour:
       ignoreYForSwayMove: 0
       offsetSmooth: 12
       swayRecoverSmooth: 15
-      gunYOffset: 0
+      gunOffset: {x: 0, y: 0, z: 0}
       spreadMultplierCurve:
         curve:
           serializedVersion: 2
@@ -878,38 +879,6 @@ MonoBehaviour:
           m_RotationOrder: 4
         valueMultiplier: 1
         sampleCount: 50
-  gunEmmisionHandler:
-    heatGradient:
-      gradient:
-        serializedVersion: 2
-        key0: {r: 2.363859, g: 3.1711173, b: 3.3056602, a: 1}
-        key1: {r: 7.0339622, g: 5.2152796, b: 1.1546311, a: 1}
-        key2: {r: 15.437255, g: 3.4285324, b: 1.2524554, a: 0}
-        key3: {r: 23.968628, g: 0.8205447, b: 0, a: 0}
-        key4: {r: 33.896763, g: 1.4197598, b: 0, a: 0}
-        key5: {r: 0, g: 0, b: 0, a: 0}
-        key6: {r: 0, g: 0, b: 0, a: 0}
-        key7: {r: 0, g: 0, b: 0, a: 0}
-        ctime0: 0
-        ctime1: 32446
-        ctime2: 46122
-        ctime3: 58982
-        ctime4: 65535
-        ctime5: 0
-        ctime6: 0
-        ctime7: 0
-        atime0: 0
-        atime1: 65535
-        atime2: 0
-        atime3: 0
-        atime4: 0
-        atime5: 0
-        atime6: 0
-        atime7: 0
-        m_Mode: 0
-        m_ColorSpace: 0
-        m_NumColorKeys: 5
-        m_NumAlphaKeys: 2
   gunShotSource: {fileID: 5837324410720302518}
   gunOverheatSource: {fileID: 6957241378848993016}
   onHitSource: {fileID: 119527403880472137}
@@ -2862,12 +2831,7 @@ PrefabInstance:
     - target: {fileID: 3088868075374821422, guid: c0eb4b36e7e97f24b8ef673c374d8424,
         type: 3}
       propertyPath: m_Name
-      value: MatchManagement (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5287381020941622744, guid: c0eb4b36e7e97f24b8ef673c374d8424,
-        type: 3}
-      propertyPath: instaLoadSceneOnHost
-      value: 0
+      value: MatchManagement
       objectReference: {fileID: 0}
     - target: {fileID: 6343942968702181189, guid: c0eb4b36e7e97f24b8ef673c374d8424,
         type: 3}
@@ -2919,14 +2883,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8116700478484987294, guid: c0eb4b36e7e97f24b8ef673c374d8424,
-        type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 4092382242
-      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 8116700478484987294, guid: c0eb4b36e7e97f24b8ef673c374d8424, type: 3}
-    - {fileID: 795178507919566232, guid: c0eb4b36e7e97f24b8ef673c374d8424, type: 3}
+    - {fileID: 3457302914162975081, guid: c0eb4b36e7e97f24b8ef673c374d8424, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

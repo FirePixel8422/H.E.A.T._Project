@@ -1,10 +1,13 @@
-﻿
+﻿using UnityEngine;
 
 
 [System.Serializable]
 public class PlayerStatsBlock
 {
-    public float maxHealth = 250;
+    [SerializeField] private float maxHealth = 250;
+    public float maxHealthMultiplier = 1;
+    public float MaxHealth => maxHealth * maxHealthMultiplier;
+
     public float damageMultiplier = 1;
 
     public float lifeStealMultiplier = 0;

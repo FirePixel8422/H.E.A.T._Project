@@ -10,6 +10,7 @@ public class UpgradeUISlot
     [SerializeField] private Image image;
     [SerializeField] private Image rarity;
     [SerializeField] private TextMeshProUGUI name;
+    [SerializeField] private TextMeshProUGUI description;
     [SerializeField] private Button confirmButton;
     public Button ConfirmButton => confirmButton;
 
@@ -26,12 +27,13 @@ public class UpgradeUISlot
     /// <summary>
     /// Calls <see cref="SetActive(bool)"/> and Updates UI Image and name
     /// </summary>
-    public void SetActiveAndUpdateUI(Sprite upgradeSprite, string upgradeName, Color rarityColor)
+    public void SetActiveAndUpdateUI(Sprite upgradeSprite, string name, string description, Color rarityColor)
     {
         SetActive(true);
 
         image.sprite = upgradeSprite;
         rarity.color = rarityColor;
-        name.text = upgradeName;
+        this.name.text = name;
+        this.description.text = description;
     }
 }

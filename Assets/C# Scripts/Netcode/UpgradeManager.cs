@@ -9,7 +9,7 @@ namespace FirePixel.Networking
     {
         public static UpgradeManager Instance { get; private set; }
 
-
+        [SerializeField] private UpgradeSO[] globalUpgradesList;
         [SerializeField] private UpgradeSO[] upgrades;
 
         [SerializeField] private GameObject upgradeUIParent;
@@ -26,12 +26,16 @@ namespace FirePixel.Networking
         {
             Instance = this;
 
+            for (int i = 0; i < globalUpgradesList.Length; i++)
+            {
+                globalUpgradesList[i].UpgradeId = i;
+            }
+
             // Set UpgradeSO ids and calculate totalWeight
             int upgradesLeftCount = upgrades.Length;
 
             for (int i = 0; i < upgradesLeftCount; i++)
             {
-                upgrades[i].UpgradeId = i;
                 totalWeightLeft += (int)upgrades[i].rarity;
             }
 
@@ -57,7 +61,7 @@ namespace FirePixel.Networking
             int upgradeCount = upgrades.Length;
             for (int i = 0; i < upgradeCount; i++)
             {
-                uiSlots[i].SetActiveAndUpdateUI(upgrades[i].upgradeSprite, upgrades[i].upgradeName, upgrades[i].rarityColor);
+                uiSlots[i].SetActiveAndUpdateUI(upgrades[i].upgradeSprite, upgrades[i].upgradeName, upgrades[i].upgradeDescription, upgrades[i].rarityColor);
 
                 int tempIndex = i;
                 uiSlots[i].ConfirmButton.onClick.RemoveAllListeners();
@@ -82,6 +86,14 @@ namespace FirePixel.Networking
             for (int gunAttachmentUpgradeId = 0; gunAttachmentUpgradeId < targetGunUpgradeCount; gunAttachmentUpgradeId++)
             {
                 upgradesLeft[upgradePoolLength + gunAttachmentUpgradeId] = gunAttachmentUpgrades[gunId][gunAttachmentUpgradeId];
+            }
+
+            // Set UpgradeSO ids and calculate totalWeight
+            int upgradesLeftCount = upgrades.Length;
+
+            for (int i = 0; i < upgradesLeftCount; i++)
+            {
+                totalWeightLeft += (int)upgrades[i].rarity;
             }
         }
 
@@ -140,7 +152,7 @@ namespace FirePixel.Networking
                         chosenUpgrades[i] = upgradesLeft[i2];
 
                         // Remove Upgrade from main pool temporarely, also remove weight from totalWeightLeft
-                        upgradesLeft[i2] = null;
+                        //upgradesLeft[i2] = null;
 
                         totalWeightLeft -= rarity;
 
@@ -149,12 +161,12 @@ namespace FirePixel.Networking
                 }
             }
 
-            // perma Remove upgrades if they were non attachment upgrades
+            // Only re add upgarde if its non stackable
             for (int i = 0; i < upgradeCount; i++)
             {
                 UpgradeSO targetUpgrade = chosenUpgrades[i];
 
-                upgradesLeft[targetUpgrade.UpgradeId] = targetUpgrade;
+                //globalUpgradesList[targetUpgrade.UpgradeId] = targetUpgrade;
 
                 totalWeightLeft += (int)targetUpgrade.rarity;
             }
@@ -171,13 +183,13 @@ namespace FirePixel.Networking
             upgradeUIParent.SetActive(false);
 
             // If Upgrade was non stackable, remove it
-            if (upgradesLeft[upgradeId].stackable == false)
+            if (globalUpgradesList[upgradeId].stackable == false)
             {
-                totalWeightLeft -= (int)upgradesLeft[upgradeId].rarity; 
+                totalWeightLeft -= (int)globalUpgradesList[upgradeId].rarity; 
 
-                upgradesLeft[upgradeId] = null;
+                //upgradesLeft[upgradeId] = null;
             }
-            upgrades[upgradeId].ApplyUpgrade(GunManager.Instance, PlayerDataLibrary.LocalInstance);
+            globalUpgradesList[upgradeId].ApplyUpgrade(GunManager.Instance, PlayerDataLibrary.LocalInstance);
 
             TakeUpgrade_ServerRPC(upgradeId);
 

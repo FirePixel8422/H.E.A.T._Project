@@ -4,7 +4,7 @@
 
 public interface IDamagable
 {
-    public float MaxHealth { get; set; }
+    public float MaxHealth { get;}
     public float CurrentHealth { get; set; }
 
 

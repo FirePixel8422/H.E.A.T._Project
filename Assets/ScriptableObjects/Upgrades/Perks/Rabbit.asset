@@ -10,29 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d784a6295f574b4eb759a18bfddbae0, type: 3}
-  m_Name: PerkUpgrade
+  m_Name: Rabbit
   m_EditorClassIdentifier: Assembly-CSharp::PerkUpgradeSO
   rarity: 50
   stackable: 0
   upgradeSprite: {fileID: 0}
-  rarityColor: {r: 0.83828604, g: 0.40329653, b: 0.89433956, a: 1}
-  upgradeName: DAMGE x3
-  upgradeId: 0
+  rarityColor: {r: 0.41960785, g: 0.38039216, b: 0.81960785, a: 1}
+  upgradeName: Rabbit
+  upgradeDescription: Increases jump Height by 50%
   damageMultiplier:
-    value: 3
-    applyMode: 1
-  maxHealth:
-    value: 0
+    value: 1
+    applyMode: 0
+  maxHealthMultiplier:
+    value: 1
     applyMode: 0
   lifeStealMultiplier:
+    value: 1
+    applyMode: 0
+  lifeStealOverflowMultiplier:
     value: 1
     applyMode: 0
   agilityMultiplier:
     value: 1
     applyMode: 0
   jumpStrengthMultiplier:
-    value: 1
-    applyMode: 0
+    value: 0.5
+    applyMode: 2
   heatGenerationMultiplier:
     value: 1
     applyMode: 0

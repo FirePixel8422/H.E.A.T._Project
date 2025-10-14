@@ -188,7 +188,7 @@ MonoBehaviour:
       ignoreYForSwayMove: 1
       offsetSmooth: 12
       swayRecoverSmooth: 12
-      gunYOffset: 0
+      gunOffset: {x: 0, y: 0, z: 0}
       spreadMultplierCurve:
         curve:
           serializedVersion: 2
