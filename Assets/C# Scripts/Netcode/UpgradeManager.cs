@@ -26,10 +26,7 @@ namespace FirePixel.Networking
         {
             Instance = this;
 
-
-            int globalUpgradesCount = globalUpgradesList.Length;
-
-            for (int i = 0; i < globalUpgradesCount; i++)
+            for (int i = 0; i < globalUpgradesList.Length; i++)
             {
                 globalUpgradesList[i].UpgradeId = i;
             }
@@ -37,13 +34,13 @@ namespace FirePixel.Networking
             // Set UpgradeSO ids and calculate totalWeight
             int upgradesLeftCount = upgrades.Length;
 
-            upgradesLeft = new UpgradeSO[globalUpgradesCount];
-
             for (int i = 0; i < upgradesLeftCount; i++)
             {
-                int targetUpgradeId = upgrades[i].UpgradeId;
-                upgradesLeft[targetUpgradeId] = upgrades[i];
+                totalWeightLeft += (int)upgrades[i].rarity;
             }
+
+            upgradesLeft = new UpgradeSO[upgradesLeftCount];
+            Array.Copy(upgrades, upgradesLeft, upgradesLeftCount);
         }
 
         public void CreateUpgradeUI()
@@ -83,6 +80,14 @@ namespace FirePixel.Networking
             {
                 upgradesLeft[upgradePoolLength + gunAttachmentUpgradeId] = gunAttachmentUpgrades[gunId][gunAttachmentUpgradeId];
             }
+
+            // Set UpgradeSO ids and calculate totalWeight
+            int upgradesLeftCount = upgrades.Length;
+
+            for (int i = 0; i < upgradesLeftCount; i++)
+            {
+                totalWeightLeft += (int)upgrades[i].rarity;
+            }
         }
 
         private void Update()
@@ -103,18 +108,39 @@ namespace FirePixel.Networking
         /// </summary>
         private UpgradeSO[] GetRandomUpgrades(int upgradeCount)
         {
-            UpdateWeight();
-
             // Clamp in case of little upgrades left
             upgradeCount = Mathf.Min(upgradesLeft.Length, upgradeCount);
 
             UpgradeSO[] chosenUpgrades = new UpgradeSO[upgradeCount];
 
+
+            //// Prepare Possible Upgrade list
+            //UpgradeSO[] targetUpgradePool = upgradesLeft;
+            //int targetUpgradeCount = targetUpgradePool.Length;
+
+            //bool[] unlockedGuns = GunManager.Instance.UnlockedGuns;
+
+            //for (int gunId = 0; gunId < GunManager.Instance.GunCount; gunId++)
+            //{
+            //    if (unlockedGuns[gunId] == true)
+            //    {
+            //        int targetGunUpgradeCount = gunAttachmentUpgrades[gunId].Length;
+
+            //        Array.Resize(ref targetUpgradePool, targetUpgradeCount + targetGunUpgradeCount);
+
+            //        for (int gunAttachmentUpgradeId = 0; gunAttachmentUpgradeId < targetGunUpgradeCount; gunAttachmentUpgradeId++)
+            //        {
+            //            targetUpgradePool[targetUpgradeCount + gunAttachmentUpgradeId] = gunAttachmentUpgrades[gunId][gunAttachmentUpgradeId];
+            //        }
+            //    }
+            //}
+
+
             for (int i = 0; i < upgradeCount; i++)
             {
                 int rWeight = EzRandom.Range(0, totalWeightLeft);
 
-                for (int i2 = 0; i2 < globalUpgradesList.Length; i2++)
+                for (int i2 = 0; i2 < upgradesLeft.Length; i2++)
                 {
                     if (upgradesLeft[i2] == null) continue;
 
@@ -131,7 +157,7 @@ namespace FirePixel.Networking
                         chosenUpgrades[i] = upgradesLeft[i2];
 
                         // Remove Upgrade from main pool temporarely, also remove weight from totalWeightLeft
-                        upgradesLeft[i2] = null;
+                        //upgradesLeft[i2] = null;
 
                         totalWeightLeft -= rarity;
 
@@ -145,29 +171,12 @@ namespace FirePixel.Networking
             {
                 UpgradeSO targetUpgrade = chosenUpgrades[i];
 
-                if (targetUpgrade.stackable == false)
-                {
-                    upgradesLeft[targetUpgrade.UpgradeId] = targetUpgrade;
-                }
-            }
+                //globalUpgradesList[targetUpgrade.UpgradeId] = targetUpgrade;
 
-            UpdateWeight();
+                totalWeightLeft += (int)targetUpgrade.rarity;
+            }
 
             return chosenUpgrades;
-        }
-
-
-        private void UpdateWeight()
-        {
-            // Set UpgradeSO ids and calculate totalWeight
-            int upgradesCount = globalUpgradesList.Length;
-
-            for (int i = 0; i < upgradesCount; i++)
-            {
-                if (upgradesLeft[i] == null) continue;
-
-                totalWeightLeft += (int)upgradesLeft[i].rarity;
-            }
         }
 
 
