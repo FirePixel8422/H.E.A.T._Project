@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 782c24ea4d37d404695fd0182f57f6cb, type: 3}
-  m_Name: UMP Unlock
-  m_EditorClassIdentifier: Assembly-CSharp::GunUnlockUpgradeSO
+  m_Script: {fileID: 11500000, guid: da62e120365cf5b4bbd6fb4479951605, type: 3}
+  m_Name: Eotech Scope M4A1
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeAttachmentSO
   rarity: 15
   stackable: 0
   upgradeSprite: {fileID: 0}
-  rarityColor: {r: 1, g: 0.27058828, b: 0.894724, a: 1}
-  upgradeName: UMP
+  rarityColor: {r: 1, g: 0, b: 0.71429586, a: 0}
+  upgradeName: Eotech Scope
   upgradeDescription: 
-  gunId: 2
+  attachmentUpgrade: {fileID: 11400000, guid: d1d2f771ef3b73c44afd57f2ff7b6bff, type: 2}
+  gunId: 1
