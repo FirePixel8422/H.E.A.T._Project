@@ -128,6 +128,9 @@ public class GunManager : MonoBehaviour
 
             gunRefHolder.SpawnAttachment(globalAttachmentsList[attachmentId]);
         }
+
+        CalculateGunStats();
+
         // Initilialize gun After spawning attachments
         gunRefHolder.Init();
 

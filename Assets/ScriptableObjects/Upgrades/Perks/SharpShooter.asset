@@ -15,7 +15,7 @@ MonoBehaviour:
   rarity: 30
   stackable: 0
   upgradeSprite: {fileID: 0}
-  rarityColor: {r: 0.42010072, g: 0.3816233, b: 0.81886786, a: 1}
+  rarityColor: {r: 0, g: 0.43137255, b: 1, a: 1}
   upgradeName: SharpShooter
   upgradeDescription: Decreases weapon spread by 50%
   damageMultiplier:
