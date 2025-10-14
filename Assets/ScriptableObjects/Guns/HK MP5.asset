@@ -16,7 +16,7 @@ MonoBehaviour:
     type: 3}
   baseStats:
     coreStats:
-      damage: 5
+      damage: 15
       headShotMultiplier: 1.5
       maxEffectiveRange: 17.5
       damageFallOffCurve:
@@ -296,7 +296,7 @@ MonoBehaviour:
       ignoreYForSwayMove: 1
       offsetSmooth: 8
       swayRecoverSmooth: 12
-      gunYOffset: 0
+      gunOffset: {x: 0, y: 0, z: 0}
       spreadMultplierCurve:
         curve:
           serializedVersion: 2

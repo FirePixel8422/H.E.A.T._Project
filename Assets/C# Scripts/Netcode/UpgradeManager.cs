@@ -41,13 +41,6 @@ namespace FirePixel.Networking
 
             upgradesLeft = new UpgradeSO[upgradesLeftCount];
             Array.Copy(upgrades, upgradesLeft, upgradesLeftCount);
-
-
-            //TEMP
-            //TEMP
-            //TEMP
-            //TEMP
-            Invoke(nameof(CreateUpgradeUI), 0.5f);
         }
 
         public void CreateUpgradeUI()
@@ -94,6 +87,18 @@ namespace FirePixel.Networking
             for (int i = 0; i < upgradesLeftCount; i++)
             {
                 totalWeightLeft += (int)upgrades[i].rarity;
+            }
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                //TEMP
+                //TEMP
+                //TEMP
+                //TEMP
+                CreateUpgradeUI();
             }
         }
 
@@ -194,12 +199,7 @@ namespace FirePixel.Networking
             TakeUpgrade_ServerRPC(upgradeId);
 
 
-
-            //TEMP
-            //TEMP
-            //TEMP
-            //TEMP
-            Invoke(nameof(CreateUpgradeUI), 0.5f);
+            PlayerDataLibrary.LocalInstance.GunHandler.UpdateGunData();
         }
 
         [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
