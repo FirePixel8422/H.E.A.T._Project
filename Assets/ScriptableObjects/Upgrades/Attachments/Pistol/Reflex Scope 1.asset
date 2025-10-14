@@ -15,7 +15,7 @@ MonoBehaviour:
   rarity: 50
   stackable: 0
   upgradeSprite: {fileID: 0}
-  rarityColor: {r: 0.1682303, g: 1, b: 0, a: 0}
+  rarityColor: {r: 1, g: 1, b: 1, a: 1}
   upgradeName: Reflex Scope
   upgradeDescription: 
   attachmentUpgrade: {fileID: 11400000, guid: 098532dd9b8970f4885cc75065c32dcb, type: 2}

@@ -15,7 +15,7 @@ MonoBehaviour:
   rarity: 15
   stackable: 0
   upgradeSprite: {fileID: 0}
-  rarityColor: {r: 1, g: 0.27058828, b: 0.9140981, a: 1}
+  rarityColor: {r: 0.60784316, g: 0, b: 1, a: 1}
   upgradeName: AWS
   upgradeDescription: 
   gunId: 3

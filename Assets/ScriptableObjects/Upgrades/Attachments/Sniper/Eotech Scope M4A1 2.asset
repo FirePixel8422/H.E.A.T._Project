@@ -15,8 +15,8 @@ MonoBehaviour:
   rarity: 15
   stackable: 0
   upgradeSprite: {fileID: 0}
-  rarityColor: {r: 1, g: 0, b: 0.71429586, a: 0}
+  rarityColor: {r: 0.60784316, g: 0, b: 1, a: 1}
   upgradeName: Eotech Scope
   upgradeDescription: 
   attachmentUpgrade: {fileID: 11400000, guid: f845bec7cbd5eca45bf2dc51c385f29d, type: 2}
-  gunId: 0
+  gunId: 3

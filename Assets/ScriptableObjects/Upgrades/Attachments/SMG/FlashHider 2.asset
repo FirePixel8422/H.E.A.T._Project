@@ -15,8 +15,8 @@ MonoBehaviour:
   rarity: 30
   stackable: 0
   upgradeSprite: {fileID: 0}
-  rarityColor: {r: 0.41960785, g: 0.38039216, b: 0.81960785, a: 1}
+  rarityColor: {r: 0, g: 0.43137255, b: 1, a: 1}
   upgradeName: Flash Hider
   upgradeDescription: 
   attachmentUpgrade: {fileID: 11400000, guid: 33572b4c6d294a043b04a8b103c270f5, type: 2}
-  gunId: 0
+  gunId: 2
