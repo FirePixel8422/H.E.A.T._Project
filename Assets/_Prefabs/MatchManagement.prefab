@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7332ffd667763c4ab6a74ead269ca01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: Thomas Test Scene
+  nextSceneName: Luuk Test Scene
   invisibleScreenCover: {fileID: 0}
   rejoinMenu: {fileID: 0}
   lobbySearchInterval: 3

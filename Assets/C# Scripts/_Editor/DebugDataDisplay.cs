@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Profiling;
 
@@ -36,6 +37,12 @@ public class DebugDataDisplay : MonoBehaviour
     [SerializeField] private int activeAudioSources;
 
     [SerializeField] private int networkObjectCount;
+
+    [Header("MetworkObjectFinder")]
+    [SerializeField] private ulong toSearchHashId;
+    [SerializeField] private NetworkObject foundObject;
+    [SerializeField] private NetworkObject[] globalList;
+
 
     private static readonly CultureInfo enCulture = new CultureInfo("en-US");
 
@@ -96,6 +103,16 @@ public class DebugDataDisplay : MonoBehaviour
         totalUnusedReservedMemoryMB = (Profiler.GetTotalUnusedReservedMemoryLong() / (1024 * 1024)).ToString("N0", enCulture) + " mb";
         monoHeapSizeMB = (Profiler.GetMonoHeapSizeLong() / (1024 * 1024)).ToString("N0", enCulture) + " mb";
         monoUsedSizeMB = (Profiler.GetMonoUsedSizeLong() / (1024 * 1024)).ToString("N0", enCulture) + " mb";
+
+
+        globalList = this.FindObjectsOfType<NetworkObject>();
+        for (int i = 0; i < globalList.Length; i++)
+        {
+            if (globalList[i].PrefabIdHash == toSearchHashId)
+            {
+                foundObject = globalList[i];
+            }
+        }
     }
 
     // Manual reload method to refresh expensive stats (call from inspector button)

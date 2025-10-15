@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public unsafe class GunSwayHandler
+public class GunSwayHandler
 {
     [SerializeField] private Transform gunTransform;
     private ADSHandler adsHandler;
@@ -18,7 +18,7 @@ public unsafe class GunSwayHandler
     private float bobTimer;
 
 
-    public unsafe void OnSwapGun(Transform gunTransform, ADSHandler adsHandler)
+    public void OnSwapGun(Transform gunTransform, ADSHandler adsHandler)
     {
         this.gunTransform = gunTransform;
         this.adsHandler = adsHandler;

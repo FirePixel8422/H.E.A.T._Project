@@ -21,7 +21,7 @@ namespace FirePixel.Networking
         private void Awake()
         {
             Instance = this;
-            muzzleFlashPool.Initialize();
+            muzzleFlashPool.Initialize(true);
             waitTime = new WaitForSeconds(muzzleFlashMaxDuration);
         }
 
@@ -62,6 +62,13 @@ namespace FirePixel.Networking
             yield return waitTime;
 
             targetPool.ReleasePooledObject(toReleaseObj, clearParent);
+        }
+
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            muzzleFlashPool.Dispose();
         }
     }
 }

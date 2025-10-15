@@ -23,18 +23,20 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
 
             if (IsOwner || PlayerDataLibrary.LocalInstance.overrideIsOwner)
             {
-                healthTextObj.text = value.ToString();
-                healthSlider.value = cHealth / MaxHealth;
+                DebugLogger.Log("Updating health: " + value);
+
+                healthTextObj.text = Mathf.FloorToInt(value).ToString();
+                healthSlider.value = value / MaxHealth;
             }
         }
     }
 
-    public void GainLifeStealHealth(float amount, float overFlowMultiplier)
+    public void GainLifeStealHealth(float toHeal, float overFlowMultiplier)
     {
         float healthAwayFromMax = MaxHealth - CurrentHealth;
-        float overflow = Mathf.Clamp(amount - healthAwayFromMax, 0, float.MaxValue);
+        float overflow = Mathf.Clamp(toHeal - healthAwayFromMax, 0, float.MaxValue);
 
-        CurrentHealth += healthAwayFromMax + (overflow * overFlowMultiplier);
+        CurrentHealth += toHeal + (overflow * overFlowMultiplier);
     }
 
     private NetworkStateMachine stateMachine;
@@ -118,20 +120,26 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
         stateMachine.Die(hitDir, hitPoint, 0.25f);
 
         Die();
-        OnDeath_ServerRPC(GameIdRPCTargets.SendToOppositeOfLocalClient(), OwnerClientId);
+        OnDeath_ServerRPC(GameIdRPCTargets.SendToOppositeOfLocalClient(), NetworkObject.GetOwnerClientGameId());
     }
 
     /// <summary>
     /// Notify Server client has died and update game state on server
     /// </summary>
     [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
-    private void OnDeath_ServerRPC(GameIdRPCTargets rpcTargets, ulong deadClientNetworkId)
+    private void OnDeath_ServerRPC(GameIdRPCTargets rpcTargets, int deadPlayerGameId)
     {
         OnDeath_ClientRPC(rpcTargets);
 
-        NetworkObject.Despawn(gameObject);
+        PlayerHealthHandler[] players = this.FindObjectsOfType<PlayerHealthHandler>();
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i].IsSpawned == false) continue;
 
-        MatchManager.Instance.OnPlayerDeath_ServerRPC(ClientManager.LocalClientGameId);
+            players[i].NetworkObject.Despawn(gameObject);
+        }
+
+        MatchManager.Instance.OnPlayerDeath_ServerRPC(deadPlayerGameId);
     }
     [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
     private void OnDeath_ClientRPC(GameIdRPCTargets rpcTargets)

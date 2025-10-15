@@ -234,7 +234,7 @@ Transform:
   m_GameObject: {fileID: 44254656}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.89, y: -0.95, z: -2.21}
+  m_LocalPosition: {x: 6.87, y: -0.95, z: -2.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1397,6 +1397,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Human_BasicMotionsDummy_F
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919964345722665524, guid: 73e24cf6536bfef4b98ccd6eb529a5fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4483023120822781941, guid: 73e24cf6536bfef4b98ccd6eb529a5fd,
         type: 3}
@@ -3616,7 +3621,7 @@ Transform:
   m_GameObject: {fileID: 1270946623}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.72, y: -0.95, z: 2.67}
+  m_LocalPosition: {x: -8.77, y: -0.95, z: -1.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5174,6 +5179,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthHandler
   ShowTopMostFoldoutHeaderGroup: 1
   cHealth: 250
+  healthTextObj: {fileID: 0}
+  healthSlider: {fileID: 0}
 --- !u!114 &1730879151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5705,7 +5712,7 @@ MonoBehaviour:
       ignoreYForSwayMove: 1
       offsetSmooth: 8
       swayRecoverSmooth: 12
-      gunYOffset: 0
+      gunOffset: {x: 0, y: 0, z: 0}
       spreadMultplierCurve:
         curve:
           serializedVersion: 2

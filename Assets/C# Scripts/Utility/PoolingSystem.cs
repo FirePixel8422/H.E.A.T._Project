@@ -17,9 +17,10 @@ public class PoolingSystem<T> where T : Component
 #if UNITY_EDITOR
     private Transform objHolderParent;
 #endif
+    private bool dontDestroyOnLoad;
 
 
-    public PoolingSystem(T pooledPrefab, int startCapacity, bool dynamicRefill)
+    public PoolingSystem(T pooledPrefab, int startCapacity, bool dynamicRefill, bool dontDestroyOnLoad)
     {
         this.pooledPrefab = pooledPrefab;
         this.startCapacity = startCapacity;
@@ -31,16 +32,22 @@ public class PoolingSystem<T> where T : Component
             return;
         }
 
-        Initialize();
+        Initialize(dontDestroyOnLoad);
     }
-    public void Initialize()
+    public void Initialize(bool dontDestroyOnLoad)
     {
         allObjects = new List<T>(startCapacity);
         availableObjects = new Queue<T>(startCapacity);
 
 #if UNITY_EDITOR
         objHolderParent = new GameObject("DEBUG_PoolingSystemHolder: " + pooledPrefab.name).transform;
+        if (dontDestroyOnLoad)
+        {
+            GameObject.DontDestroyOnLoad(objHolderParent);
+        }
 #endif
+
+        this.dontDestroyOnLoad = dontDestroyOnLoad;
 
         for (int i = 0; i < startCapacity; i++)
         {
@@ -117,6 +124,11 @@ public class PoolingSystem<T> where T : Component
         obj.transform.SetParent(objHolderParent);
 #endif
 
+        if (dontDestroyOnLoad)
+        {
+            GameObject.DontDestroyOnLoad(obj);
+        }
+
         return obj;
     }
 
@@ -134,5 +146,26 @@ public class PoolingSystem<T> where T : Component
             obj.transform.SetParent(parent, true);
         }
         return obj;
+    }
+
+    /// <summary>
+    /// Destroy all Pooled objects and Dispose of this PoolingSystem Instance
+    /// </summary>
+    public void Dispose()
+    {
+        int objCount = allObjects.Count;
+        for (int i = 0; i < objCount; i++)
+        {
+            if (allObjects[i] == null) continue;
+
+            GameObject.Destroy(allObjects[i].gameObject);
+        }
+
+#if UNITY_EDITOR
+        if (objHolderParent != null)
+        {
+            GameObject.Destroy(objHolderParent.gameObject);
+        }
+#endif
     }
 }
