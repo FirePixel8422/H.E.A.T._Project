@@ -180,7 +180,7 @@ namespace FirePixel.Networking
             }
             globalUpgradesList[upgradeId].ApplyUpgrade(GunManager.Instance, PlayerDataLibrary.LocalInstance);
 
-            PlayerDataLibrary.LocalInstance.GunHandler.UpdateGunData();
+            //PlayerDataLibrary.LocalInstance.GunHandler.UpdateGunData();
 
             MatchManager.Instance.OnEndUpgradePhase_ServerRPC();
         }
