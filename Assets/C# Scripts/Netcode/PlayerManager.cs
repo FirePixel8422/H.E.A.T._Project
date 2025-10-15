@@ -16,6 +16,9 @@ namespace FirePixel.Networking
         [SerializeField] private GameObject playerPrefab;
         [SerializeField] private float spawnFreezeTime;
 
+        [SerializeField] private PlayerStatsBlock defaultPlayerStats;
+        public PlayerStatsBlock[] PlayerStats;
+
         private Vector3[] playerSpawnPositions;
         private Quaternion[] playerSpawnRotations;
         private bool spawnPointsActive;
@@ -24,6 +27,10 @@ namespace FirePixel.Networking
         public override void OnNetworkSpawn()
         {
             NetworkManager.SceneManager.OnLoadEventCompleted += (_, _, _, _) => TryRequestLocalPlayerSpawn();
+
+            PlayerStats = new PlayerStatsBlock[GlobalGameData.MaxPlayers];
+
+            PlayerStats[NetworkManager.LocalClientId == 0 ? 0 : 1] = defaultPlayerStats;
         }
 
         /// <summary>

@@ -6,6 +6,11 @@ public class UtilityHandler : NetworkBehaviour
 {
     public UtilityStats[] utility;
 
+    private void Start()
+    {
+        utility = new UtilityStats[2];
+    }
+
     public void UseUtility(int id)
     {
         if (utility[id].IsUsable)

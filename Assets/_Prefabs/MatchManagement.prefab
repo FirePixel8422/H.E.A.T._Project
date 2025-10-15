@@ -103,6 +103,7 @@ MonoBehaviour:
   UITransform: {fileID: 0}
   matchState: 0
   matchStartDelay: 2
+  matchUpgradeDelay: 2.5
   matchEndDelay: 3
 --- !u!114 &4552873996528808999
 MonoBehaviour:
@@ -140,6 +141,19 @@ MonoBehaviour:
   playerPrefab: {fileID: 3487219833232609719, guid: 33ae4ad9ad2946a4d92fcec06e7c86be,
     type: 3}
   spawnFreezeTime: 1
+  defaultPlayerStats:
+    maxHealth: 250
+    maxHealthMultiplier: 1
+    damageMultiplier: 1
+    lifeStealMultiplier: 0
+    lifeStealOverflowMultiplier: 0
+    agilityMultiplier: 1
+    jumpStrengthMultiplier: 1
+    heatGenerationMultiplier: 1
+    heatDecayMultiplier: 1
+    recoilMultiplier: 1
+    spreadMultiplier: 1
+  PlayerStats: []
 --- !u!114 &4267619818096258449
 MonoBehaviour:
   m_ObjectHideFlags: 0

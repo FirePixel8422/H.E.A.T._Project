@@ -84,19 +84,6 @@ namespace FirePixel.Networking
             }
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                //TEMP
-                //TEMP
-                //TEMP
-                //TEMP
-                CreateUpgradeUI();
-            }
-        }
-
-
         /// <summary>
         /// Get up to <paramref name="upgradeCount"/> random upgrades based on upgrades left in <see cref="upgradesLeft"/> based on their <see cref="UpgradeRarity"/>
         /// </summary>
@@ -150,7 +137,6 @@ namespace FirePixel.Networking
             return chosenUpgrades;
         }
 
-
         private void UpdateWeight()
         {
             // Set UpgradeSO ids and calculate totalWeight
@@ -165,8 +151,6 @@ namespace FirePixel.Networking
                 totalWeightLeft += (int)upgradesLeft[i].rarity;
             }
         }
-
-
 
         public void TakeUpgrade(int upgradeId)
         {
@@ -184,5 +168,22 @@ namespace FirePixel.Networking
 
             MatchManager.Instance.OnEndUpgradePhase_ServerRPC();
         }
+
+#if UNITY_EDITOR
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                PlayerDataLibrary.LocalInstance.Input.enabled = false;
+                PlayerDataLibrary.LocalInstance.Rigidbody.isKinematic = true;
+                Cursor.lockState = CursorLockMode.None;
+                CreateUpgradeUI();
+            }
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                PlayerDataLibrary.LocalInstance.HealthHandler.DealDamage(float.MaxValue, true, default, default, out _);
+            }
+        }
+#endif
     }
 }

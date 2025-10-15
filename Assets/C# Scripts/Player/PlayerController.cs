@@ -101,6 +101,23 @@ public class PlayerController : NetworkBehaviour
     private PlayerStatsBlock stats;
 
 
+    #region Player Transforms Syncing Variables
+
+    // Interpolation target data for remote players
+    [SerializeField] private Vector3 targetPosition;
+    [SerializeField] private Quaternion targetRotation;
+
+    // Interpolation smoothing factor (adjust if needed)
+    [SerializeField] private float remoteLerpRate = 12f;
+
+    // Send interval (seconds) — 20Hz by default
+    private const float SendInterval = 0.05f;
+    private float sendTimer;
+
+    #endregion
+
+
+
     #region Input Callbacks and Look and Jump Logic
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -201,18 +218,19 @@ public class PlayerController : NetworkBehaviour
     private bool registeredForUpdates = false;
     private void ManageUpdateCallbacks(bool register)
     {
+        if (registeredForUpdates == register) return;
+        registeredForUpdates = register;
+
 #if UNITY_EDITOR
         if ((IsOwner && IsSpawned && initialized) || overrideIsOwner)
 #else
         if (IsOwner && IsSpawned && initialized)
 #endif
         {
-            if (registeredForUpdates == register) return;
-
-            UpdateScheduler.ManageFixedUpdate(OnFixedUpdate, register);
             UpdateScheduler.ManageUpdate(OnUpdate, register);
-            registeredForUpdates = register;
         }
+
+        UpdateScheduler.ManageFixedUpdate(OnFixedUpdate, register);
     }
 
 #endregion
@@ -223,34 +241,49 @@ public class PlayerController : NetworkBehaviour
     /// </summary>
     private void OnFixedUpdate()
     {
-        if (rb == null) return;
-
         float fixedDeltaTime = Time.fixedDeltaTime;
 
-        // Update RigidBody velocity and send Transform Data to ServerRPC
-        float rbVelocityY = rb.linearVelocity.y;
-
-        Vector3 targetForwardVelocity = GetForwardDirection();
-
-        // Get target movement speed through GetTargetMoveSpeed
-        targetForwardVelocity *= GetTargetMoveSpeed() * stats.agilityMultiplier;
-        targetForwardVelocity.y = rbVelocityY;
-
-
-        float targetSpeedChangePower = IsGrounded ? steerPower : midAirSteerPower;
-
-        rb.linearVelocity = VectorLogic.InstantMoveTowards(rb.linearVelocity, targetForwardVelocity, targetSpeedChangePower * stats.agilityMultiplier * fixedDeltaTime);
-
-        hudHandler.AddCrossHairInstability(Vector3.Distance(targetForwardVelocity, Vector3.zero) * fixedDeltaTime);
-
-        // If player is falling
-        if (rbVelocityY < 0)
+        // Send transform data to server at fixed rate
+        if (IsOwner)
         {
-            rb.AddForce(Vector3.down * fallGravityMultiplier, ForceMode.Acceleration);
-        }
+            if (rb == null) return;
 
-        // Send transform data to server
-        SendPlayerTransforms_ServerRPC(transform.position, camHandler.MainCamLocalEulerPitch, transform.eulerAngles.y);
+            // Update RigidBody velocity and send Transform Data to ServerRPC
+            float rbVelocityY = rb.linearVelocity.y;
+
+            Vector3 targetForwardVelocity = GetForwardDirection();
+
+            // Get target movement speed through GetTargetMoveSpeed
+            targetForwardVelocity *= GetTargetMoveSpeed() * stats.agilityMultiplier;
+            targetForwardVelocity.y = rbVelocityY;
+
+
+            float targetSpeedChangePower = IsGrounded ? steerPower : midAirSteerPower;
+
+            rb.linearVelocity = VectorLogic.InstantMoveTowards(rb.linearVelocity, targetForwardVelocity, targetSpeedChangePower * stats.agilityMultiplier * fixedDeltaTime);
+
+            hudHandler.AddCrossHairInstability(Vector3.Distance(targetForwardVelocity, Vector3.zero) * fixedDeltaTime);
+
+            // If player is falling
+            if (rbVelocityY < 0)
+            {
+                rb.AddForce(Vector3.down * fallGravityMultiplier, ForceMode.Acceleration);
+            }
+
+            // Sync Transformation at set interval
+            sendTimer += fixedDeltaTime;
+            if (sendTimer >= SendInterval)
+            {
+                sendTimer = 0f;
+                SendPlayerTransforms_ServerRPC(transform.position, camHandler.MainCamLocalEulerPitch, transform.eulerAngles.y);
+            }
+        }
+        // Lerp to Synced Transformation
+        else
+        {
+            float t = remoteLerpRate * fixedDeltaTime;
+            transform.SetPositionAndRotation(Vector3.Lerp(transform.position, targetPosition, t), Quaternion.Slerp(transform.rotation, targetRotation, t));
+        }
     }
 
     private void OnUpdate()
@@ -300,18 +333,21 @@ public class PlayerController : NetworkBehaviour
 
     #region Send/Recieve Transform Data
 
-    [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
+
+    [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Unreliable)]
     private void SendPlayerTransforms_ServerRPC(Vector3 pos, float pitch, float yaw)
     {
         RecievePlayerTransforms_ClientRPC(pos, pitch, yaw);
     }
 
-    [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
+    [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Unreliable)]
     private void RecievePlayerTransforms_ClientRPC(Vector3 pos, float pitch, float yaw)
     {
         if (IsOwner) return;
 
-        transform.SetPositionAndRotation(pos, Quaternion.Euler(0f, yaw, 0f));
+        // Store target for interpolation
+        targetPosition = pos;
+        targetRotation = Quaternion.Euler(0f, yaw, 0f);
         camHandler.MainCamLocalEulerPitch = pitch;
     }
 

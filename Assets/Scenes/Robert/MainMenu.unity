@@ -4488,7 +4488,7 @@ PrefabInstance:
     - target: {fileID: 5498845739196442587, guid: c0eb4b36e7e97f24b8ef673c374d8424,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6343942968702181189, guid: c0eb4b36e7e97f24b8ef673c374d8424,
         type: 3}
@@ -4538,6 +4538,11 @@ PrefabInstance:
     - target: {fileID: 6343942968702181189, guid: c0eb4b36e7e97f24b8ef673c374d8424,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438262744063012387, guid: c0eb4b36e7e97f24b8ef673c374d8424,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8116700478484987294, guid: c0eb4b36e7e97f24b8ef673c374d8424,

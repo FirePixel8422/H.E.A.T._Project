@@ -228,7 +228,24 @@ namespace FirePixel.Networking
                 }
 
                 // Join oldest joinable lobby
-                Lobby lobby = lobbies[0];
+                Lobby lobby = null;
+                lobbyFound = false;
+
+                for (int i = 0; i < lobbies.Count; i++)
+                {
+                    lobby = lobbies[i];
+
+                    if (lobby.AvailableSlots > 0)
+                    {
+                        lobbyFound = true;
+                        break;
+                    }
+                }
+
+                if (lobbyFound == false)
+                {
+                    return await CreateLobbyAsync();
+                }
 
                 await LobbyManager.SetLobbyData(lobby, false);
 
@@ -280,7 +297,7 @@ namespace FirePixel.Networking
                     new QueryFilter(
                         field: QueryFilter.FieldOptions.AvailableSlots,
                         op: QueryFilter.OpOptions.GT,
-                        value: "-1"),
+                        value: "0"),
 
                     //Only show non locked lobbies (lobbies that are not yet in a started match)
                      new QueryFilter(

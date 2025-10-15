@@ -1,4 +1,5 @@
-﻿using Unity.Netcode;
+﻿using FirePixel.Networking;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,9 +12,7 @@ public class PlayerDataLibrary : NetworkBehaviour
     [Header("Allow this script to be used outside of network environment")]
     public bool overrideIsOwner;
 
-
-    [SerializeField] private PlayerStatsBlock stats;
-    public PlayerStatsBlock Stats => stats;
+    public PlayerStatsBlock Stats;
 
     public PlayerInput Input { get; private set; }
     public GunHandler GunHandler { get; private set; }
@@ -53,5 +52,6 @@ public class PlayerDataLibrary : NetworkBehaviour
         {
             LocalInstance = this;
         }
+        Stats = PlayerManager.Instance.PlayerStats[OwnerClientId == 0 ? 0 : 1];
     }
 }

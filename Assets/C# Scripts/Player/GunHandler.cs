@@ -204,7 +204,7 @@ public class GunHandler : NetworkBehaviour
         burstShotTimer = coreStats.burstShotInterval;
 
         gunEmmisionHandler.UpdateHeatEmission(0);
-        UpdateVisualHeatEmmision_ServerRPC(0);
+        //UpdateVisualHeatEmmision_ServerRPC(0);
     }
 
     [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
@@ -347,7 +347,7 @@ public class GunHandler : NetworkBehaviour
         float heatPercent = CurrentHeatSink.HeatPercentage;
 
         gunEmmisionHandler.UpdateHeatEmission(heatPercent);
-        UpdateVisualHeatEmmision_ServerRPC(heatPercent);
+        //UpdateVisualHeatEmmision_ServerRPC(heatPercent);
     }
 
 
@@ -633,18 +633,18 @@ public class GunHandler : NetworkBehaviour
     #endregion
 
 
-    [ServerRpc(RequireOwnership = false)]
-    private void UpdateVisualHeatEmmision_ServerRPC(float percent)
-    {
-        UpdateVisualHeatEmmision_ClientRPC(percent);
-    }
-    [ClientRpc(RequireOwnership = false)]
-    private void UpdateVisualHeatEmmision_ClientRPC(float percent)
-    {
-        if (IsOwner) return;
+    //[ServerRpc(RequireOwnership = false)]
+    //private void UpdateVisualHeatEmmision_ServerRPC(float percent)
+    //{
+    //    UpdateVisualHeatEmmision_ClientRPC(percent);
+    //}
+    //[ClientRpc(RequireOwnership = false)]
+    //private void UpdateVisualHeatEmmision_ClientRPC(float percent)
+    //{
+    //    if (IsOwner) return;
 
-        gunEmmisionHandler.UpdateHeatEmission(percent);
-    }
+    //    gunEmmisionHandler.UpdateHeatEmission(percent);
+    //}
 
     public override void OnDestroy()
     {
