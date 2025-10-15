@@ -35,11 +35,13 @@ public class ButtonFunctions : NetworkBehaviour
     }
     public void GoToSettings()
     {
-
+        mainScreens[0].SetActive(false);
+        mainScreens[5].SetActive(true);
     }
     public void GoToCredits()
     {
-
+        mainScreens[0].SetActive(false);
+        mainScreens[6].SetActive(true);
     }
     public void ExitGame()
     {
@@ -81,10 +83,6 @@ public class ButtonFunctions : NetworkBehaviour
             mainScreens[2].SetActive(true);
         }
     }
-    public void StartGame()
-    {
-
-    }
     //ALLE BACKBUTTONS HIERONDER
     public void BackToMain()
     {
@@ -100,6 +98,16 @@ public class ButtonFunctions : NetworkBehaviour
     {
         mainScreens[4].SetActive(false);
         mainScreens[1].SetActive(true);
+    }
+    public void BackToMainSettings()
+    {
+        mainScreens[5].SetActive(false);
+        mainScreens[0].SetActive(true);
+    }
+    public void BackToMainCredits()
+    {
+        mainScreens[6].SetActive(false);
+        mainScreens[0].SetActive(true);
     }
     #endregion
 
