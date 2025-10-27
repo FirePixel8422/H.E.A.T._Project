@@ -37,11 +37,11 @@ MonoBehaviour:
     value: 1
     applyMode: 0
   heatGenerationMultiplier:
-    value: 0.5
+    value: -0.5
     applyMode: 2
   heatDecayMultiplier:
     value: 1
-    applyMode: 2
+    applyMode: 0
   recoilMultiplier:
     value: 1
     applyMode: 0

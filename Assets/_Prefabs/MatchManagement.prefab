@@ -211,7 +211,6 @@ MonoBehaviour:
   globalUpgradesList:
   - {fileID: 11400000, guid: 9ffe1d38b2448dd4a827617258abb957, type: 2}
   - {fileID: 11400000, guid: b079ad8f43417c344a6cf6fc669432c2, type: 2}
-  - {fileID: 11400000, guid: d3c13a6992340b4439565590b1ab3e04, type: 2}
   - {fileID: 11400000, guid: 29208698494f4e646a10fd4de7ee8ebc, type: 2}
   - {fileID: 11400000, guid: e4d6419016ca4e8489caad42cf2e55b6, type: 2}
   - {fileID: 11400000, guid: 17a37422639571a40b2cbfd7aa7bdc9a, type: 2}
@@ -241,7 +240,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6557459bd91f5794898f4a87dbe1dba6, type: 2}
   - {fileID: 11400000, guid: c9c09b5989adf0b45b807b07d334ba13, type: 2}
   - {fileID: 11400000, guid: 1e2fdc7d7320ac047940dabaf75978e5, type: 2}
-  - {fileID: 11400000, guid: f21bcf4d99f7c2b49863f761061e5626, type: 2}
   - {fileID: 11400000, guid: 8988c79ef1ba98b46adfba64ee3784db, type: 2}
   - {fileID: 11400000, guid: 390431e052e706c45afcf4b842bb3a08, type: 2}
   - {fileID: 11400000, guid: 2feb0ec92d40cd34ba7432e463832435, type: 2}
@@ -269,7 +267,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6557459bd91f5794898f4a87dbe1dba6, type: 2}
   - {fileID: 11400000, guid: c9c09b5989adf0b45b807b07d334ba13, type: 2}
   - {fileID: 11400000, guid: 1e2fdc7d7320ac047940dabaf75978e5, type: 2}
-  - {fileID: 11400000, guid: f21bcf4d99f7c2b49863f761061e5626, type: 2}
   - {fileID: 11400000, guid: 8988c79ef1ba98b46adfba64ee3784db, type: 2}
   - {fileID: 11400000, guid: 390431e052e706c45afcf4b842bb3a08, type: 2}
   - {fileID: 11400000, guid: 2feb0ec92d40cd34ba7432e463832435, type: 2}

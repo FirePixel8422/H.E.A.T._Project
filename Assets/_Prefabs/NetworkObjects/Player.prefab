@@ -3652,6 +3652,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: cc7856c5-ffa1-41c5-b552-74e92825d07b
     m_ActionName: 'Gameplay/HotBar4[/Keyboard/4]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a1d66dcc-8c4a-4fe1-9244-a9ea7aefabb3
+    m_ActionName: 'Gameplay/OnESC[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -3905,39 +3909,10 @@ MonoBehaviour:
       offsetSmooth: 12
       swayRecoverSmooth: 15
       gunOffset: {x: 0, y: 0, z: 0}
-      spreadMultplierCurve:
-        curve:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 1
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: 0
-            outSlope: 1
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        valueMultiplier: 1
-        sampleCount: 50
   gunShotSource: {fileID: 5837324410720302518}
   gunOverheatSource: {fileID: 6957241378848993016}
   onHitSource: {fileID: 3482466836178550512}
   overrideIsOwner: 0
-  gunId: 0
-  playerGameId: 0
 --- !u!114 &6829219136680250846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3962,7 +3937,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 1
-  jumpForce: 4.5
+  jumpForce: 5
   fallGravityMultiplier: 5
   groundCheckRadius: 0.1
   mouseSensitivity: 0.1
