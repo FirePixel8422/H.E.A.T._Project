@@ -17,9 +17,9 @@ MonoBehaviour:
   upgradeSprite: {fileID: 0}
   rarityColor: {r: 0, g: 0.43137255, b: 1, a: 1}
   upgradeName: Chromium Bullets
-  upgradeDescription: Increases damage by 25%
+  upgradeDescription: increases damage by 20%
   damageMultiplier:
-    value: 1.25
+    value: 0.2
     applyMode: 2
   maxHealthMultiplier:
     value: 1

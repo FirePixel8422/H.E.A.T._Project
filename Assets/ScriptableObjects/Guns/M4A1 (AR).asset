@@ -318,4 +318,5 @@ MonoBehaviour:
           m_RotationOrder: 4
         valueMultiplier: 1
         sampleCount: 75
-  baseAttachments: []
+  baseAttachments:
+  - {fileID: 11400000, guid: 37ee397e79299d64793e92affc8882fd, type: 2}

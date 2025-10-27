@@ -17,7 +17,7 @@ MonoBehaviour:
   upgradeSprite: {fileID: 0}
   rarityColor: {r: 0, g: 0.43137255, b: 1, a: 1}
   upgradeName: Rabbit
-  upgradeDescription: Increases jump Height by 30%
+  upgradeDescription: increases jump Height by 20%
   damageMultiplier:
     value: 1
     applyMode: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
     value: 1
     applyMode: 0
   jumpStrengthMultiplier:
-    value: 0.3
+    value: 0.2
     applyMode: 2
   heatGenerationMultiplier:
     value: 1

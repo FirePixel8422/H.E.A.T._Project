@@ -138,7 +138,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        valueMultiplier: 0.05
+        valueMultiplier: 0.1
         sampleCount: 3
       stabilityLoss: 1
       stabilityRecovery: 1
@@ -263,4 +263,5 @@ MonoBehaviour:
           m_RotationOrder: 4
         valueMultiplier: 1
         sampleCount: 75
-  baseAttachments: []
+  baseAttachments:
+  - {fileID: 11400000, guid: 5e6e5141fc1ea354597a8cc943b5140f, type: 2}

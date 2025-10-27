@@ -17,12 +17,12 @@ MonoBehaviour:
   upgradeSprite: {fileID: 0}
   rarityColor: {r: 0.60784316, g: 0, b: 1, a: 1}
   upgradeName: Tanky
-  upgradeDescription: Increases health by 40%
+  upgradeDescription: increases health by 30%
   damageMultiplier:
     value: 1
     applyMode: 0
   maxHealthMultiplier:
-    value: 0.4
+    value: 0.3
     applyMode: 2
   lifeStealMultiplier:
     value: 1

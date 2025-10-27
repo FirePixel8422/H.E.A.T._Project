@@ -17,12 +17,12 @@ MonoBehaviour:
   upgradeSprite: {fileID: 0}
   rarityColor: {r: 1, g: 0.74509805, b: 0, a: 1}
   upgradeName: Glass cannon
-  upgradeDescription: +100%  damage and -50% health
+  upgradeDescription: +60%  damage and -30% health
   damageMultiplier:
-    value: 1
+    value: 0.6
     applyMode: 2
   maxHealthMultiplier:
-    value: 0.5
+    value: 0.7
     applyMode: 1
   lifeStealMultiplier:
     value: 1

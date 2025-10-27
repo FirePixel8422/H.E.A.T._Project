@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Bigger Battery
   m_EditorClassIdentifier: Assembly-CSharp::PerkUpgradeSO
   rarity: 15
-  stackable: 1
+  stackable: 0
   upgradeSprite: {fileID: 0}
   rarityColor: {r: 0.60784316, g: 0, b: 1, a: 1}
   upgradeName: Bigger battery
-  upgradeDescription: +50% Heat decay
+  upgradeDescription: +40% heat decay
   damageMultiplier:
     value: 1
     applyMode: 0
@@ -40,7 +40,7 @@ MonoBehaviour:
     value: 1
     applyMode: 0
   heatDecayMultiplier:
-    value: 0.5
+    value: 0.4
     applyMode: 2
   recoilMultiplier:
     value: 1

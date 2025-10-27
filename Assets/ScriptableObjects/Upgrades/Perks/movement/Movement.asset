@@ -17,7 +17,7 @@ MonoBehaviour:
   upgradeSprite: {fileID: 0}
   rarityColor: {r: 1, g: 0.74509805, b: 0, a: 1}
   upgradeName: Movement
-  upgradeDescription: +75% agility and +75% jump
+  upgradeDescription: +25% agility and +25% jump
   damageMultiplier:
     value: 1
     applyMode: 0
@@ -31,10 +31,10 @@ MonoBehaviour:
     value: 1
     applyMode: 0
   agilityMultiplier:
-    value: 0.75
+    value: 0.25
     applyMode: 2
   jumpStrengthMultiplier:
-    value: 0.75
+    value: 0.25
     applyMode: 2
   heatGenerationMultiplier:
     value: 1

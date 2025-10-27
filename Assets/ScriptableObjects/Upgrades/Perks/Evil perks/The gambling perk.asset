@@ -17,35 +17,35 @@ MonoBehaviour:
   upgradeSprite: {fileID: 0}
   rarityColor: {r: 1, g: 0.74509805, b: 0, a: 1}
   upgradeName: All or nothing
-  upgradeDescription: 50/50 win +25% all stats, lose -25% all stats
+  upgradeDescription: 50/50 win +20% all stats, lose -20% all stats
   damageMultiplier:
-    value: 0.25
+    value: 0.2
     applyMode: 2
   maxHealthMultiplier:
-    value: 0.25
+    value: 0.2
     applyMode: 2
   lifeStealMultiplier:
-    value: 0.25
+    value: 0.2
     applyMode: 2
   lifeStealOverflowMultiplier:
-    value: 0.25
-    applyMode: 2
+    value: 0.2
+    applyMode: 0
   agilityMultiplier:
-    value: 0.25
+    value: 0.2
     applyMode: 2
   jumpStrengthMultiplier:
-    value: 0.25
+    value: 0.2
     applyMode: 2
   heatGenerationMultiplier:
-    value: -0.25
+    value: -0.2
     applyMode: 2
   heatDecayMultiplier:
-    value: 0.25
+    value: 0.2
     applyMode: 2
   recoilMultiplier:
-    value: -0.25
-    applyMode: 2
+    value: -0.2
+    applyMode: 0
   spreadMultiplier:
-    value: 0.25
+    value: 0.2
     applyMode: 2
   unluckyStatMultiplier: -1

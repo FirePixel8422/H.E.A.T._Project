@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Cold Bullets
   m_EditorClassIdentifier: Assembly-CSharp::PerkUpgradeSO
   rarity: 15
-  stackable: 1
+  stackable: 0
   upgradeSprite: {fileID: 0}
   rarityColor: {r: 0.60784316, g: 0, b: 1, a: 1}
   upgradeName: Cold bullets
-  upgradeDescription: -50% heat generation
+  upgradeDescription: -40% heat generation
   damageMultiplier:
     value: 1
     applyMode: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     value: 1
     applyMode: 0
   heatGenerationMultiplier:
-    value: -0.5
+    value: -0.4
     applyMode: 2
   heatDecayMultiplier:
     value: 1

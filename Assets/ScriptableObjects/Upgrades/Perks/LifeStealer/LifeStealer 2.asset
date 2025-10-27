@@ -17,15 +17,15 @@ MonoBehaviour:
   upgradeSprite: {fileID: 0}
   rarityColor: {r: 1, g: 0.74509805, b: 0, a: 1}
   upgradeName: Lifestealer
-  upgradeDescription: +30% lifesteal and +25% overhealth
+  upgradeDescription: +30% lifesteal and +30% life overflow and +30% health
   damageMultiplier:
     value: 1
     applyMode: 0
   maxHealthMultiplier:
-    value: 1
-    applyMode: 0
+    value: 0.3
+    applyMode: 2
   lifeStealMultiplier:
-    value: 0.4
+    value: 0.3
     applyMode: 2
   lifeStealOverflowMultiplier:
     value: 0.3

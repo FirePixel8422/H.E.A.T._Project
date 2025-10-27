@@ -16,7 +16,7 @@ MonoBehaviour:
   stackable: 0
   upgradeSprite: {fileID: 0}
   rarityColor: {r: 0, g: 0.43137255, b: 1, a: 1}
-  upgradeName: Sillencer
+  upgradeName: Sillencer (Sniper)
   upgradeDescription: 
   attachmentUpgrade: {fileID: 11400000, guid: 8e0bddb69d58ddb4da7d07080c3f92f8, type: 2}
   gunId: 3
