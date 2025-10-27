@@ -8,12 +8,26 @@ public class GunBatteryStats : IGunAtachment
     public AttachmentType Type { get; set; }
 
 
-    [SerializeField] private SmartAttributeFloat zoomMultiplier;
+    [SerializeField] private SmartAttributeFloat damage = new(1, ApplyMode.Skip);
+    [SerializeField] private SmartAttributeFloat headShotMultiplier = new(1.5f, ApplyMode.Skip);
+
+    [SerializeField] private FilterableContainer<NativeSampledAnimationCurve> damageFallOffCurve = new(NativeSampledAnimationCurve.Default, true);
+    [SerializeField] private SmartAttributeFloat maxEffectiveRange = new(1, ApplyMode.Skip);
+
+    [SerializeField] private SmartAttributeInt burstShots = new(2, ApplyMode.Skip);
+    [SerializeField] private SmartAttributeFloat burstShotInterval = new(2, ApplyMode.Skip);
 
 
     public void ApplyToBaseStats(ref CompleteGunStatsSet gunStatsSet)
     {
-        zoomMultiplier.ApplyToStat(ref gunStatsSet.gunADSStats.zoomMultiplier);
+        damage.ApplyToStat(ref gunStatsSet.coreStats.damage);
+        headShotMultiplier.ApplyToStat(ref gunStatsSet.coreStats.headShotMultiplier);
+
+        damageFallOffCurve.ApplyToStat(ref gunStatsSet.coreStats.damageFallOffCurve);
+        maxEffectiveRange.ApplyToStat(ref gunStatsSet.coreStats.maxEffectiveRange);
+
+        burstShots.ApplyToStat(ref gunStatsSet.coreStats.burstShots);
+        burstShotInterval.ApplyToStat(ref gunStatsSet.coreStats.burstShotInterval);
     }
 
     public void ApplyToGunObject(GunRefHolder gunRef)

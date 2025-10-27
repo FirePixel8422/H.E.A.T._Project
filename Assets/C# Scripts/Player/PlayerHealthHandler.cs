@@ -34,7 +34,6 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
 
     public void GainLifeStealHealth(float damageDealt, float lifeStealMultiplier, float overFlowMultiplier)
     {
-        return;
         float missingHealth = MaxHealth - Mathf.Min(CurrentHealth, MaxHealth);
 
         // Base healing amount (clamped to missing health)
@@ -54,7 +53,7 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
 
     private NetworkStateMachine stateMachine;
     private PlayerHUDHandler hudHandler;
-    private PlayerStatsBlock stats;
+    [SerializeField] private PlayerStatsBlock stats;
 
 
     private void Awake()

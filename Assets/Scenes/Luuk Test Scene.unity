@@ -5974,7 +5974,6 @@ GameObject:
   m_Component:
   - component: {fileID: 169381727}
   - component: {fileID: 169381730}
-  - component: {fileID: 169381729}
   - component: {fileID: 169381728}
   m_Layer: 0
   m_Name: Deathcamera
@@ -6022,7 +6021,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -6042,14 +6041,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!81 &169381729
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 169381726}
-  m_Enabled: 1
 --- !u!20 &169381730
 Camera:
   m_ObjectHideFlags: 0
@@ -27964,7 +27955,6 @@ GameObject:
   m_Component:
   - component: {fileID: 770529699}
   - component: {fileID: 770529702}
-  - component: {fileID: 770529701}
   - component: {fileID: 770529700}
   m_Layer: 0
   m_Name: Deathcamera
@@ -28012,7 +28002,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -28032,14 +28022,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!81 &770529701
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 770529698}
-  m_Enabled: 1
 --- !u!20 &770529702
 Camera:
   m_ObjectHideFlags: 0
@@ -64551,9 +64533,9 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.025324257
-          y: 0.9973971
-          z: -0.06548728
-          w: -0.016396483
+          y: 0.99739724
+          z: -0.06548729
+          w: -0.016396485
     - Position:
         x: -3.0099983
         y: 0
@@ -69881,7 +69863,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1879603668}
   - component: {fileID: 1879603671}
-  - component: {fileID: 1879603670}
   - component: {fileID: 1879603669}
   m_Layer: 0
   m_Name: Deathcamera
@@ -69929,7 +69910,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -69949,14 +69930,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!81 &1879603670
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1879603667}
-  m_Enabled: 1
 --- !u!20 &1879603671
 Camera:
   m_ObjectHideFlags: 0

@@ -9,12 +9,9 @@ public class GunMuzzleStats : IGunAtachment
 
 
     [SerializeField] private SmartAttributeFloat damage = new(1, ApplyMode.Skip);
-
     [SerializeField] private SmartAttributeFloat headShotMultiplier = new(1.5f, ApplyMode.Skip);
 
     [SerializeField] private FilterableContainer<NativeSampledAnimationCurve> damageFallOffCurve = new(NativeSampledAnimationCurve.Default, true);
-
-
     [SerializeField] private SmartAttributeFloat maxEffectiveRange = new(1, ApplyMode.Skip);
 
     [SerializeField] private FilterableContainer<AudioClip> shootAudioClip = new(true);
