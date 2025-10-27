@@ -216,6 +216,7 @@ public class PlayerController : NetworkBehaviour
     }
 
     private bool registeredForUpdates = false;
+    private bool registeredForFixedUpdates = false;
     private void ManageUpdateCallbacks(bool register)
     {
 #if UNITY_EDITOR
@@ -224,14 +225,17 @@ public class PlayerController : NetworkBehaviour
         if (IsOwner)
 #endif
         {
-            if (registeredForUpdates == register || IsSpawned == false || initialized == false) return;
-            registeredForUpdates = register;
-
-            DebugLogger.Log($"PlayerController: Managing Update Callbacks. Register: {register} for Player: {OwnerClientId}");
-            UpdateScheduler.ManageUpdate(OnUpdate, register);
+            if (registeredForUpdates != register && IsSpawned && initialized)
+            {
+                registeredForUpdates = register;
+                UpdateScheduler.ManageUpdate(OnUpdate, register);
+            }
         }
-
-        UpdateScheduler.ManageFixedUpdate(OnFixedUpdate, register);
+        if (registeredForFixedUpdates != register)
+        {
+            registeredForFixedUpdates = register;
+            UpdateScheduler.ManageFixedUpdate(OnFixedUpdate, register);
+        }
     }
 
 #endregion
@@ -288,6 +292,9 @@ public class PlayerController : NetworkBehaviour
         {
             float t = remoteLerpRate * fixedDeltaTime;
             transform.SetPositionAndRotation(Vector3.Lerp(transform.position, targetPosition, t), Quaternion.Slerp(transform.rotation, targetRotation, t));
+
+
+            //ERRORR
         }
     }
 

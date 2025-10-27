@@ -262,11 +262,11 @@ MonoBehaviour:
     swayStats:
       movementAmplitude:
         x: 0.015
-        y: 0.001
+        y: 0
       movementFrequency: 2
       idleAmplitude:
         x: 0.015
-        y: 0.00025
+        y: 0
       idleFrequency: 2.5
       posSwayMouse:
         x: 0.00015
@@ -285,33 +285,6 @@ MonoBehaviour:
       offsetSmooth: 8
       swayRecoverSmooth: 12
       gunOffset: {x: 0, y: 0, z: 0}
-      spreadMultplierCurve:
-        curve:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 1
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: 0
-            outSlope: 1
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        valueMultiplier: 1
-        sampleCount: 50
     heatSinkStats:
       heatSinkSize: 1
       heatDecayDelay: 0.5
