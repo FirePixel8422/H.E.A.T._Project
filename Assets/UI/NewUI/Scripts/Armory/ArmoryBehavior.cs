@@ -4,6 +4,7 @@ using UnityEngine;
 public class ArmoryBehavior : MonoBehaviour
 {
     public Animator animator;
+    public ClickAndRotate[] gunRotateScripts;
 
     [Header("Armory")]
     public GameObject[] armoryScreens;
@@ -28,6 +29,9 @@ public class ArmoryBehavior : MonoBehaviour
             gun.SetActive(false);
         }
         previewGuns[GunID].SetActive(true);
+        previewGuns[GunID].transform.rotation = Quaternion.identity;
+        gunRotateScripts[GunID].rotationX = 0f;
+        gunRotateScripts[GunID].rotationY = 0f;
 
         selectedGun = GunID;
     }

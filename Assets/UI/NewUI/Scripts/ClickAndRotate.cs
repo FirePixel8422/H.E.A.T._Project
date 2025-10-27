@@ -6,8 +6,8 @@ public class ClickAndRotate : MonoBehaviour
     [SerializeField] private MinMaxFloat clampX;
 
     public float rotationSpeed = 5f;
-    private float rotationX = 0f;
-    private float rotationY = 0f;
+    public float rotationX = 0f;
+    public float rotationY = 0f;
 
     private void Update()
     {

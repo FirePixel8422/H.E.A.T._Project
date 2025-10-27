@@ -115,8 +115,6 @@ public class ButtonFunctions : NetworkBehaviour
     {
         yield return new WaitForSeconds(time);
 
-        mainCamera.transform.Rotate(0f, -180f, 0f);
-
         mainCamera.SetActive(false);
         armoryPlayer.SetActive(true);
 
