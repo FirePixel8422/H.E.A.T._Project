@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174a1d098324a1b418be4db14bce6746, type: 3}
+  m_Name: The gambling perk 1
+  m_EditorClassIdentifier: Assembly-CSharp::RNGPerkUpgradeSO
+  rarity: 5
+  stackable: 0
+  upgradeSprite: {fileID: 0}
+  rarityColor: {r: 1, g: 0.74509805, b: 0, a: 1}
+  upgradeName: All or nothing
+  upgradeDescription: 50/50 win +25% all stats, lose -25% all stats
+  damageMultiplier:
+    value: 0.25
+    applyMode: 2
+  maxHealthMultiplier:
+    value: 0.25
+    applyMode: 2
+  lifeStealMultiplier:
+    value: 0.25
+    applyMode: 2
+  lifeStealOverflowMultiplier:
+    value: 0.25
+    applyMode: 2
+  agilityMultiplier:
+    value: 0.25
+    applyMode: 2
+  jumpStrengthMultiplier:
+    value: 0.25
+    applyMode: 2
+  heatGenerationMultiplier:
+    value: -0.25
+    applyMode: 2
+  heatDecayMultiplier:
+    value: 0.25
+    applyMode: 2
+  recoilMultiplier:
+    value: -0.25
+    applyMode: 2
+  spreadMultiplier:
+    value: 0.25
+    applyMode: 2
+  unluckyStatMultiplier: -1
