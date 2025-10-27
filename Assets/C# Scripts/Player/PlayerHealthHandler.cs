@@ -36,17 +36,19 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
     {
         float missingHealth = MaxHealth - CurrentHealth;
 
-        float lifeStealOverflow = Mathf.Clamp(damageDealt - missingHealth, 0, float.MaxValue);
+        float lifeStealAmount = Mathf.Clamp(damageDealt * lifeStealMultiplier, 0, missingHealth);
+        float overflowAmount = missingHealth - Mathf.MoveTowards(lifeStealAmount, 0, missingHealth);
 
-        CurrentHealth += (damageDealt - lifeStealOverflow) * lifeStealMultiplier + lifeStealOverflow * overFlowMultiplier;
+        if (overFlowMultiplier > 0)
+        {
+            lifeStealAmount -= overflowAmount + overflowAmount / lifeStealMultiplier * overFlowMultiplier;
+        }
+
+        CurrentHealth += lifeStealAmount;
     }
 
     private NetworkStateMachine stateMachine;
-    /// <summary>
-    /// The Local players hudHandler
-    /// </summary>
     private PlayerHUDHandler hudHandler;
-
     private PlayerStatsBlock stats;
 
 
@@ -54,12 +56,16 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
     {
         stateMachine = GetComponent<NetworkStateMachine>();
         hudHandler = GetComponent<PlayerHUDHandler>();
+    }
 
-        stats = GetComponent<PlayerDataLibrary>().Stats;
+    public override void OnNetworkSpawn()
+    {
+        ResetHealth();
     }
 
     public void ResetHealth()
     {
+        stats = GetComponent<PlayerDataLibrary>().Stats;
         CurrentHealth = MaxHealth;
     }
 
