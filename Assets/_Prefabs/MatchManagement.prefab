@@ -103,7 +103,6 @@ MonoBehaviour:
   UITransform: {fileID: 0}
   matchState: 0
   matchStartDelay: 2
-  matchUpgradeDelay: 2.5
   matchEndDelay: 3
 --- !u!114 &4552873996528808999
 MonoBehaviour:
@@ -234,21 +233,57 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d83a3a588e292f540952cabf18c1a343, type: 2}
   - {fileID: 11400000, guid: 8021d6a441606634e9b92ffa96bc8e36, type: 2}
   - {fileID: 11400000, guid: ef550204f410aaf4cb96e9ad3f85ad97, type: 2}
+  - {fileID: 11400000, guid: 29197a32a6cd27641b99c8a856a40ffc, type: 2}
+  - {fileID: 11400000, guid: a8d8ec4a6b9c096428896298fcd2353a, type: 2}
+  - {fileID: 11400000, guid: 7f4ab68479dd09c4e9dfcc7ef3736f78, type: 2}
   - {fileID: 11400000, guid: b71dc08be92806e4382686dbcebde535, type: 2}
+  - {fileID: 11400000, guid: 70f5debaa7450b14b9f2e397da5d3eef, type: 2}
+  - {fileID: 11400000, guid: 6557459bd91f5794898f4a87dbe1dba6, type: 2}
+  - {fileID: 11400000, guid: c9c09b5989adf0b45b807b07d334ba13, type: 2}
+  - {fileID: 11400000, guid: 1e2fdc7d7320ac047940dabaf75978e5, type: 2}
+  - {fileID: 11400000, guid: f21bcf4d99f7c2b49863f761061e5626, type: 2}
+  - {fileID: 11400000, guid: 8988c79ef1ba98b46adfba64ee3784db, type: 2}
+  - {fileID: 11400000, guid: 390431e052e706c45afcf4b842bb3a08, type: 2}
+  - {fileID: 11400000, guid: 2feb0ec92d40cd34ba7432e463832435, type: 2}
+  - {fileID: 11400000, guid: 2e29a37b2c4303844bda24998297652e, type: 2}
+  - {fileID: 11400000, guid: b06ece0c385f4914d8638c1fcc2a3dd6, type: 2}
   - {fileID: 11400000, guid: f31e60c5ddb10794086093c1f9878cac, type: 2}
+  - {fileID: 11400000, guid: 03d13fe6233407b42b650d5b078ae6ec, type: 2}
+  - {fileID: 11400000, guid: 0492441b6172835488265ef814400ff3, type: 2}
   - {fileID: 11400000, guid: 3636b9304546c894790767fcd59748fc, type: 2}
+  - {fileID: 11400000, guid: db839b5e7cf5e404da99c5c1823bfcd9, type: 2}
+  - {fileID: 11400000, guid: 207129bafdccb1a439b8595395c5a2f4, type: 2}
   - {fileID: 11400000, guid: d0526a58c711f8a4586bf16360614a6a, type: 2}
-  - {fileID: 11400000, guid: 61a0aca1b151798459fef555a107a2ba, type: 2}
+  - {fileID: 11400000, guid: 7237097dc60802a4a83dfafcc3c5e26f, type: 2}
+  - {fileID: 11400000, guid: 08c002fa37f13e744bda4e5d45921a7d, type: 2}
   upgrades:
   - {fileID: 11400000, guid: 3ef7588a156e07f49a0f36008d6ebccf, type: 2}
   - {fileID: 11400000, guid: d83a3a588e292f540952cabf18c1a343, type: 2}
   - {fileID: 11400000, guid: 8021d6a441606634e9b92ffa96bc8e36, type: 2}
   - {fileID: 11400000, guid: ef550204f410aaf4cb96e9ad3f85ad97, type: 2}
+  - {fileID: 11400000, guid: 29197a32a6cd27641b99c8a856a40ffc, type: 2}
+  - {fileID: 11400000, guid: a8d8ec4a6b9c096428896298fcd2353a, type: 2}
+  - {fileID: 11400000, guid: 7f4ab68479dd09c4e9dfcc7ef3736f78, type: 2}
   - {fileID: 11400000, guid: b71dc08be92806e4382686dbcebde535, type: 2}
+  - {fileID: 11400000, guid: 70f5debaa7450b14b9f2e397da5d3eef, type: 2}
+  - {fileID: 11400000, guid: 6557459bd91f5794898f4a87dbe1dba6, type: 2}
+  - {fileID: 11400000, guid: c9c09b5989adf0b45b807b07d334ba13, type: 2}
+  - {fileID: 11400000, guid: 1e2fdc7d7320ac047940dabaf75978e5, type: 2}
+  - {fileID: 11400000, guid: f21bcf4d99f7c2b49863f761061e5626, type: 2}
+  - {fileID: 11400000, guid: 8988c79ef1ba98b46adfba64ee3784db, type: 2}
+  - {fileID: 11400000, guid: 390431e052e706c45afcf4b842bb3a08, type: 2}
+  - {fileID: 11400000, guid: 2feb0ec92d40cd34ba7432e463832435, type: 2}
+  - {fileID: 11400000, guid: 2e29a37b2c4303844bda24998297652e, type: 2}
+  - {fileID: 11400000, guid: b06ece0c385f4914d8638c1fcc2a3dd6, type: 2}
   - {fileID: 11400000, guid: f31e60c5ddb10794086093c1f9878cac, type: 2}
+  - {fileID: 11400000, guid: 03d13fe6233407b42b650d5b078ae6ec, type: 2}
+  - {fileID: 11400000, guid: 0492441b6172835488265ef814400ff3, type: 2}
   - {fileID: 11400000, guid: 3636b9304546c894790767fcd59748fc, type: 2}
+  - {fileID: 11400000, guid: db839b5e7cf5e404da99c5c1823bfcd9, type: 2}
+  - {fileID: 11400000, guid: 207129bafdccb1a439b8595395c5a2f4, type: 2}
   - {fileID: 11400000, guid: d0526a58c711f8a4586bf16360614a6a, type: 2}
-  - {fileID: 11400000, guid: 61a0aca1b151798459fef555a107a2ba, type: 2}
+  - {fileID: 11400000, guid: 7237097dc60802a4a83dfafcc3c5e26f, type: 2}
+  - {fileID: 11400000, guid: 08c002fa37f13e744bda4e5d45921a7d, type: 2}
   upgradeUIParent: {fileID: 7438262744063012387}
   uiSlots:
   - parentObj: {fileID: 3167335855528267762}
