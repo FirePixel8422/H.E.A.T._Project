@@ -244,7 +244,11 @@ public class PlayerController : NetworkBehaviour
         float fixedDeltaTime = Time.fixedDeltaTime;
 
         // Send transform data to server at fixed rate
+#if UNITY_EDITOR
+        if (IsOwner || overrideIsOwner)
+#else
         if (IsOwner)
+#endif
         {
             if (rb == null) return;
 
@@ -343,7 +347,11 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Unreliable)]
     private void RecievePlayerTransforms_ClientRPC(Vector3 pos, float pitch, float yaw)
     {
+#if UNITY_EDITOR
+        if (IsOwner || overrideIsOwner) return;
+#else
         if (IsOwner) return;
+#endif
 
         // Store target for interpolation
         targetPosition = pos;
@@ -351,7 +359,7 @@ public class PlayerController : NetworkBehaviour
         camHandler.MainCamLocalEulerPitch = pitch;
     }
 
-    #endregion
+#endregion
 
 
     public override void OnDestroy()
@@ -365,7 +373,6 @@ public class PlayerController : NetworkBehaviour
     
 
 #if UNITY_EDITOR
-
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
