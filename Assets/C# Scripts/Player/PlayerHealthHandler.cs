@@ -34,14 +34,18 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
 
     public void GainLifeStealHealth(float damageDealt, float lifeStealMultiplier, float overFlowMultiplier)
     {
-        float missingHealth = MaxHealth - CurrentHealth;
+        float missingHealth = MaxHealth - Mathf.Min(CurrentHealth, MaxHealth);
 
-        float lifeStealAmount = Mathf.Clamp(damageDealt * lifeStealMultiplier, 0, missingHealth);
-        float overflowAmount = missingHealth - Mathf.MoveTowards(lifeStealAmount, 0, missingHealth);
+        // Base healing amount (clamped to missing health)
+        float lifeStealAmount = Mathf.Min(damageDealt * lifeStealMultiplier, missingHealth);
 
-        if (overFlowMultiplier > 0)
+        // Overflow based purely on raw damage, not multiplied heal
+        float overflowAmount = Mathf.Max(damageDealt - missingHealth, 0f);
+
+        // Add overflow heal if any
+        if (overFlowMultiplier > 0f && overflowAmount > 0f)
         {
-            lifeStealAmount -= overflowAmount + overflowAmount / lifeStealMultiplier * overFlowMultiplier;
+            lifeStealAmount += overflowAmount * overFlowMultiplier;
         }
 
         CurrentHealth += lifeStealAmount;
