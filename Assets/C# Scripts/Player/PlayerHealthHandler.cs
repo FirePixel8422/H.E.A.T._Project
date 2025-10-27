@@ -1,5 +1,6 @@
 ﻿using FirePixel.Networking;
 using TMPro;
+using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,12 +32,13 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
         }
     }
 
-    public void GainLifeStealHealth(float toHeal, float overFlowMultiplier)
+    public void GainLifeStealHealth(float damageDealt, float lifeStealMultiplier, float overFlowMultiplier)
     {
-        float healthAwayFromMax = MaxHealth - CurrentHealth;
-        float overflow = Mathf.Clamp(toHeal - healthAwayFromMax, 0, float.MaxValue);
+        float missingHealth = MaxHealth - CurrentHealth;
 
-        CurrentHealth += toHeal + (overflow * overFlowMultiplier);
+        float lifeStealOverflow = Mathf.Clamp(damageDealt - missingHealth, 0, float.MaxValue);
+
+        CurrentHealth += (damageDealt - lifeStealOverflow) * lifeStealMultiplier + lifeStealOverflow * overFlowMultiplier;
     }
 
     private NetworkStateMachine stateMachine;

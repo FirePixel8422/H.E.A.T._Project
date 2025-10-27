@@ -251,7 +251,7 @@ public class GunHandler : NetworkBehaviour
 
         if (gunRefHolder.ScopeCamera != null)
         {
-            gunRefHolder.ScopeCamera.fieldOfView = camHandler.BaseFOV * adsHandler.ADSFovMultiplier;
+            gunRefHolder.ScopeCamera.fieldOfView = camHandler.BaseFOV * adsHandler.ADSFovMultiplier * (1 - adsHandler.ADSFovMultiplier);
         }
 
         // adsHandler.OnSwapGun is called too fast on players with overrideIsOwner on in non network scenes
@@ -470,7 +470,7 @@ public class GunHandler : NetworkBehaviour
                     float damage = coreStats.GetDamageOutput(hit.distance, targetHitBox.IsHeadHitBox);
                     damage *= stats.damageMultiplier;
 
-                    PlayerDataLibrary.LocalInstance.HealthHandler.GainLifeStealHealth(damage * stats.lifeStealMultiplier, stats.lifeStealOverflowMultiplier);
+                    PlayerDataLibrary.LocalInstance.HealthHandler.GainLifeStealHealth(damage, stats.lifeStealMultiplier, stats.lifeStealOverflowMultiplier);
 
                     targetHitBox.DealDamageToTargetObject(damage, targetHitBox.IsHeadHitBox, hit.point, ray.direction, out HitTypeResult hitTypeResult);
 

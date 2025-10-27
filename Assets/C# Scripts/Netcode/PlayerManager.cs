@@ -68,6 +68,8 @@ namespace FirePixel.Networking
 
         private void EnablePlayerInput()
         {
+            if (PlayerDataLibrary.LocalInstance == null) return;
+
             PlayerDataLibrary.LocalInstance.Input.enabled = true;
         }
     }

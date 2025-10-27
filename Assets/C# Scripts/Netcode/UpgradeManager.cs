@@ -172,13 +172,6 @@ namespace FirePixel.Networking
 #if UNITY_EDITOR
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                PlayerDataLibrary.LocalInstance.Input.enabled = false;
-                PlayerDataLibrary.LocalInstance.Rigidbody.isKinematic = true;
-                Cursor.lockState = CursorLockMode.None;
-                CreateUpgradeUI();
-            }
             if (Input.GetKeyDown(KeyCode.L))
             {
                 PlayerDataLibrary.LocalInstance.HealthHandler.DealDamage(float.MaxValue, true, default, default, out _);

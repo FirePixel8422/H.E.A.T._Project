@@ -20,6 +20,15 @@ public struct SmartAttributeFloat
         };
     }
 
+    public void InvertedApplyToStat(ref float stat, float multiplier)
+    {
+        stat = applyMode switch
+        {
+            ApplyMode.Add => stat + value * multiplier,
+            _ => stat,
+        };
+    }
+
     public SmartAttributeFloat(float value, ApplyMode applyMode)
     {
         this.value = value;

@@ -4,7 +4,8 @@
 
 public class GunRefHolder : MonoBehaviour
 {
-    public Camera ScopeCamera { get; set; }
+    public Camera ScopeCamera;
+
 
     [SerializeField] private Transform muzzleFlashPoint;
     public TransformOffset MuzzleTransformOffset;

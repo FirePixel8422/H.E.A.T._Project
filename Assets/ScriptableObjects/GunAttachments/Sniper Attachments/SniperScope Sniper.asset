@@ -23,7 +23,7 @@ MonoBehaviour:
       value: 4
       applyMode: 3
     scopeCamZoomMultiplier:
-      value: 4
+      value: 1
       applyMode: 3
     gunOffset:
       ignoreData: 1
