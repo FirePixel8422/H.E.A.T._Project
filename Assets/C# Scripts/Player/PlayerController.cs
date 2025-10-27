@@ -218,15 +218,16 @@ public class PlayerController : NetworkBehaviour
     private bool registeredForUpdates = false;
     private void ManageUpdateCallbacks(bool register)
     {
-        if (registeredForUpdates == register) return;
-        registeredForUpdates = register;
-
 #if UNITY_EDITOR
-        if ((IsOwner && IsSpawned && initialized) || overrideIsOwner)
+        if (IsOwner || overrideIsOwner)
 #else
-        if (IsOwner && IsSpawned && initialized)
+        if (IsOwner)
 #endif
         {
+            if (registeredForUpdates == register || IsSpawned == false || initialized == false) return;
+            registeredForUpdates = register;
+
+            DebugLogger.Log($"PlayerController: Managing Update Callbacks. Register: {register} for Player: {OwnerClientId}");
             UpdateScheduler.ManageUpdate(OnUpdate, register);
         }
 

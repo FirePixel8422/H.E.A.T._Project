@@ -27,14 +27,6 @@ public class GunSwayHandler
         startEuler = gunTransform.localEulerAngles;
     }
 
-    /// <summary>
-    /// MovementState affects sway, speed percent01 of maxSpeed and IsAirborne are used for sway percentage
-    /// </summary>
-    public float GetSpreadMultiplierNerf(float percentage)
-    {
-        return stats.spreadMultplierCurve.Evaluate(percentage);
-    }
-
     public void OnUpdate(Vector2 mouseInput, Vector2 moveDir, float moveSpeed, bool isGrounded, float deltaTime)
     {
         //DebugLogger.Log(moveDir);

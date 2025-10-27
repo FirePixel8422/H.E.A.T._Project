@@ -31,22 +31,6 @@ public struct GunSwayStats
     [Header("Gun Offset for scopes")]
     public Vector3 gunOffset;
 
-    [Header("Spread Multiplier")]
-    public NativeSampledAnimationCurve spreadMultplierCurve;
-
-
-    /// <summary>
-    /// Bake all curves from the AnimationCurves in this struct into their internal float arrays.
-    /// </summary>
-    public void BakeAllCurves()
-    {
-        spreadMultplierCurve.Bake();
-    }
-    public void Dispose()
-    {
-        spreadMultplierCurve.Dispose();
-    }
-
     /// <summary>
     /// Default values for SwayStats
     /// </summary>
@@ -67,6 +51,5 @@ public struct GunSwayStats
         offsetSmooth = 12f,
         swayRecoverSmooth = 12f,
         gunOffset = Vector3.zero,
-        spreadMultplierCurve = NativeSampledAnimationCurve.Default
     };
 }

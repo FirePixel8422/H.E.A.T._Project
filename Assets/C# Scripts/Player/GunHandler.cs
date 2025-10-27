@@ -133,12 +133,12 @@ public class GunHandler : NetworkBehaviour
     private void ManageUpdateCallbacks(bool register)
     {
 #if UNITY_EDITOR
-        if ((IsOwner && IsSpawned) || overrideIsOwner)
+        if (IsOwner || overrideIsOwner)
 #else
-        if (IsOwner && IsSpawned)
+        if (IsOwner)
 #endif
         {
-            if (registeredForUpdates == register) return;
+            if (registeredForUpdates == register || IsSpawned == false) return;
 
             UpdateScheduler.ManageUpdate(OnUpdate, register);
             UpdateScheduler.ManageFixedUpdate(OnFixedUpdate, register);
@@ -271,24 +271,6 @@ public class GunHandler : NetworkBehaviour
     }
 
     #endregion
-
-
-    [Header("DEBUGTESTING\n")]
-    public int gunId;
-    public int playerGameId;
-    [ContextMenu("DEBUG Update Gun")]
-    public void UpdateGunData()
-    {
-        SwapGun(CurrentGunId);
-    }
-
-
-
-
-
-
-
-
 
     private void OnUpdate()
     {

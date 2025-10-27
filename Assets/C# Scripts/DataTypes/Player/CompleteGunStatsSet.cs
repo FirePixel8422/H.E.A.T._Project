@@ -28,14 +28,12 @@ public struct CompleteGunStatsSet
     public void BakeAllCurves()
     {
         coreStats.BakeAllCurves();
-        swayStats.BakeAllCurves();
         heatSinkStats.BakeAllCurves();
     }
 
     public void Dispose()
     {
         coreStats.Dispose();
-        swayStats.Dispose();
         heatSinkStats.Dispose();
     }
 
