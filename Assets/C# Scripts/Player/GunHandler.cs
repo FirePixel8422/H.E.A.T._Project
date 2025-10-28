@@ -19,8 +19,8 @@ public class GunHandler : NetworkBehaviour
     private Animator anim;
 
     [Header("Data Driven Gun Parts")]
-    [SerializeField] private GunCoreStats coreStats;
-    [SerializeField] private GunAudioStats audioStats;
+    [SerializeField] private GunCoreStats coreStats = GunCoreStats.Default;
+    [SerializeField] private GunAudioStats audioStats = GunAudioStats.Default;
 
     [SerializeField] private NetworkValue<int> currentGunId = new NetworkValue<int>();
     public int CurrentGunId
@@ -508,7 +508,7 @@ public class GunHandler : NetworkBehaviour
 
         if (CurrentHeatSink.Overheated)
         {
-            gunOverheatSource.PlayOneShotClipWithPitch(audioStats.overHeatAudioClip, EzRandom.Range(audioStats.overHeatMinMaxPitch));
+            gunOverheatSource.PlayOneShotClipWithPitch(audioStats.overHeatAudioClip, EzRandom.Range(audioStats.overHeatMinMaxPitch), audioStats.volumeMultiplier);
         }
 
         // Call shoot method through the server and all clients, except self > call shoot locally

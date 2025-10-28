@@ -21,7 +21,7 @@ public class GunScopeStats : IGunAtachment
     [SerializeField] private SmartAttributeFloat2 adsRecoilForce = new SmartAttributeFloat2(new float2(1, 1), ApplyMode.Skip);
     [SerializeField] private SmartAttributeFloat adsRecoilRecovery = new SmartAttributeFloat(1, ApplyMode.Skip);
 
-    [SerializeField] private FilterableContainer<NativeSampledAnimationCurve> spreadCurve = new (NativeSampledAnimationCurve.Default, true);
+    [SerializeField] private SmartAttributeFloat spread = new(0.05f, ApplyMode.Skip);
 
 
 
@@ -36,6 +36,11 @@ public class GunScopeStats : IGunAtachment
 
         zoomMultiplier.ApplyToStat(ref gunStatsSet.gunADSStats.zoomMultiplier);
         gunOffset.ApplyToStat(ref gunStatsSet.swayStats.gunOffset);
+
+        adsRecoilForce.ApplyToStat(ref gunStatsSet.coreStats.adsRecoilForce);
+        adsRecoilRecovery.ApplyToStat(ref gunStatsSet.coreStats.adsRecoilRecovery);
+
+        spread.ApplyToStat(ref gunStatsSet.coreStats.spreadCurve.ValueMultiplier);
     }
 
     public void ApplyToGunObject(GunRefHolder gunRef)

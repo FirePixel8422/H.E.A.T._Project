@@ -7,6 +7,9 @@ public struct GunAudioStats
 {
     [Header("Audio clip to play when shooting")]
     public AudioClip shootAudioClip;
+
+    [Header("Sound Volume Multiplier for shots")]
+    public float volumeMultiplier;
     public MinMaxFloat minMaxPitch;
     public MinMaxFloat minMaxPitchAtMaxHeat;
 
@@ -28,9 +31,11 @@ public struct GunAudioStats
 
 
 
+
     public static GunAudioStats Default => new GunAudioStats()
     {
         shootAudioClip = null,
+        volumeMultiplier = 1,
         minMaxPitch = new MinMaxFloat(0.95f, 1.05f),
         minMaxPitchAtMaxHeat = new MinMaxFloat(0.95f, 1.05f),
 

@@ -253,10 +253,10 @@ public static class ExtensionMethods
     /// <summary>
     /// Lets AudioSource play selected clip with selected pitch
     /// </summary>
-    public static void PlayOneShotClipWithPitch(this AudioSource source, AudioClip clip, float pitch)
+    public static void PlayOneShotClipWithPitch(this AudioSource source, AudioClip clip, float pitch, float volume = 1)
     {
         source.pitch = pitch;
-        source.PlayOneShot(clip);
+        source.PlayOneShot(clip, volume);
     }
 
     #endregion

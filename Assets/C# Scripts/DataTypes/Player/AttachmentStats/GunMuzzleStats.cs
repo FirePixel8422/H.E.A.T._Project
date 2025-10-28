@@ -26,7 +26,7 @@ public class GunMuzzleStats : IGunAtachment
 
     [SerializeField] private SmartAttributeFloat spread = new (0.05f, ApplyMode.Skip);
 
-    [SerializeField] private SmartAttributeFloat soundDampeningMultiplier = new (1, ApplyMode.Skip);
+    [SerializeField] private SmartAttributeFloat volumeMultiplier = new (1, ApplyMode.Skip);
 
 
 
@@ -42,7 +42,12 @@ public class GunMuzzleStats : IGunAtachment
         minMaxPitch.ApplyToStat(ref gunStatsSet.audioStats.minMaxPitch);
         minMaxPitchAtMaxHeat.ApplyToStat(ref gunStatsSet.audioStats.minMaxPitchAtMaxHeat);
 
+        adsRecoilForce.ApplyToStat(ref gunStatsSet.coreStats.adsRecoilForce);
+        adsRecoilRecovery.ApplyToStat(ref gunStatsSet.coreStats.adsRecoilRecovery);
+
         spread.ApplyToStat(ref gunStatsSet.coreStats.spreadCurve.ValueMultiplier);
+
+        volumeMultiplier.ApplyToStat(ref gunStatsSet.audioStats.volumeMultiplier);
     }
 
     public void ApplyToGunObject(GunRefHolder gunRef)
