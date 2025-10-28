@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 
 
-public class PlayerDataLibrary : NetworkBehaviour
+public class PlayerDataLibrary : SmartNetworkBehaviour
 {
     public static PlayerDataLibrary LocalInstance { get; private set; }
 
@@ -43,15 +43,16 @@ public class PlayerDataLibrary : NetworkBehaviour
         if (overrideIsOwner)
         {
             LocalInstance = this;
+            Stats = PlayerManager.Instance.PlayerStats[LocalClientGameId];
         }
     }
 
-    public override void OnNetworkSpawn()
+    public override void OnNetworkSystemsSetup()
     {
         if (IsOwner)
         {
             LocalInstance = this;
         }
-        Stats = PlayerManager.Instance.PlayerStats[OwnerClientId == 0 ? 0 : 1];
+        Stats = PlayerManager.Instance.PlayerStats[LocalClientGameId];
     }
 }

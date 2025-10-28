@@ -11,6 +11,7 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
     [SerializeField] private float cHealth = 250;
     [SerializeField] private TextMeshProUGUI healthTextObj;
     [SerializeField] private Slider healthSlider;
+
     public float MaxHealth
     {
         get => stats.MaxHealth;
@@ -66,6 +67,7 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
 
     public override void OnNetworkSpawn()
     {
+        stats = GetComponent<PlayerDataLibrary>().Stats;
         if (IsOwner)
         {
             ResetHealth();

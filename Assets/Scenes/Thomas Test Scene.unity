@@ -498,6 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c923460df06e0048a743d98b5dc486a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunRefHolder
+  ScopeCamera: {fileID: 0}
   muzzleFlashPoint: {fileID: 0}
   MuzzleTransformOffset:
     position: {x: 0, y: 0, z: 0}
@@ -5210,6 +5211,9 @@ MonoBehaviour:
   groundCheckRadius: 0.05
   mouseSensitivity: 0.1
   overrideIsOwner: 0
+  targetPosition: {x: 0, y: 0, z: 0}
+  targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  remoteLerpRate: 12
 --- !u!114 &1730879152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5428,7 +5432,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      valueMultiplier: 1
+      ValueMultiplier: 0
       sampleCount: 75
     bulletSize: 0.065
     bulletHoleFXSize:
@@ -5559,7 +5563,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      valueMultiplier: 1
+      ValueMultiplier: 0
       sampleCount: 75
     stabilityLoss: 0
     stabilityRecovery: 0
@@ -5643,7 +5647,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      valueMultiplier: 1
+      ValueMultiplier: 1
       sampleCount: 125
     stats:
       zoomMultiplier: 1
@@ -5713,39 +5717,10 @@ MonoBehaviour:
       offsetSmooth: 8
       swayRecoverSmooth: 12
       gunOffset: {x: 0, y: 0, z: 0}
-      spreadMultplierCurve:
-        curve:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 1
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: 0
-            outSlope: 1
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        valueMultiplier: 1
-        sampleCount: 50
   gunShotSource: {fileID: 1730879143}
   gunOverheatSource: {fileID: 1730879142}
   onHitSource: {fileID: 0}
   overrideIsOwner: 0
-  gunId: 0
-  playerGameId: 0
 --- !u!114 &1730879154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6469,7 +6444,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2115804173
 MonoBehaviour:
   m_ObjectHideFlags: 0
