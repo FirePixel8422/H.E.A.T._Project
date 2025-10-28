@@ -17,6 +17,6 @@ MonoBehaviour:
   upgradeSprite: {fileID: 0}
   rarityColor: {r: 0.60784316, g: 0, b: 1, a: 1}
   upgradeName: Eotech Scope (M4A1)
-  upgradeDescription: 
+  upgradeDescription: -10% Gun recoil/nZoom x1.5
   attachmentUpgrade: {fileID: 11400000, guid: d1d2f771ef3b73c44afd57f2ff7b6bff, type: 2}
   gunId: 1

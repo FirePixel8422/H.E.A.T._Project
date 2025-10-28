@@ -17,6 +17,6 @@ MonoBehaviour:
   upgradeSprite: {fileID: 0}
   rarityColor: {r: 1, g: 1, b: 1, a: 1}
   upgradeName: Reflex Scope (M4A1)
-  upgradeDescription: 
+  upgradeDescription: -10% Gun recoil/nZoom x1
   attachmentUpgrade: {fileID: 11400000, guid: 64138a1c4fe22584ebc96341b30e2e2c, type: 2}
   gunId: 1
