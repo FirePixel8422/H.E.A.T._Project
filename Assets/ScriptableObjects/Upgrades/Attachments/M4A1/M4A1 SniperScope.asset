@@ -17,6 +17,6 @@ MonoBehaviour:
   upgradeSprite: {fileID: 0}
   rarityColor: {r: 0, g: 0.43137255, b: 1, a: 1}
   upgradeName: Sniper Scope (M4A1)
-  upgradeDescription: -20% Gun recoil/nZoom x4
+  upgradeDescription: -20% Gun recoil\nZoom x4
   attachmentUpgrade: {fileID: 11400000, guid: dc46232bce1c67643803311019f69192, type: 2}
   gunId: 1
