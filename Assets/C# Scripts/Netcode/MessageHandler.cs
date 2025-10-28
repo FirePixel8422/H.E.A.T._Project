@@ -1,14 +1,14 @@
 using System.Collections;
 using TMPro;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+
 namespace FirePixel.Networking
 {
-    public class MessageHandler : NetworkBehaviour
+    public class MessageHandler : SmartNetworkBehaviour
     {
         public static MessageHandler Instance { get; private set; }
         private void Awake()
@@ -70,10 +70,9 @@ namespace FirePixel.Networking
         /// </summary>
         public void OnConfirm(InputAction.CallbackContext ctx)
         {
-            //DebugLogger.Log("Confirm action performed " + (active == false || ctx.performed == false || string.IsNullOrEmpty(inputField.text)));
-            if (active == false || ctx.performed == false || string.IsNullOrEmpty(inputField.text)) return;
+            if (isNetworkSystemInitilized == false || active == false || ctx.performed == false || string.IsNullOrEmpty(inputField.text)) return;
 
-            SendTextGlobal_ServerRPC(ClientManager.LocalClientGameId, ClientManager.LocalUserName, inputField.text);
+            SendTextGlobal_ServerRPC(LocalClientGameId, LocalUserName, inputField.text);
 
             inputField.ActivateInputField();
             inputField.text = "";
@@ -85,7 +84,7 @@ namespace FirePixel.Networking
         /// </summary>
         public void SendTextLocal(string message)
         {
-            StartCoroutine(AddTextToChatBox(ClientManager.LocalClientGameId, ClientManager.LocalUserName, message));
+            StartCoroutine(AddTextToChatBox(LocalClientGameId, LocalUserName, message));
         }
 
         [ServerRpc(RequireOwnership = false)]
@@ -109,7 +108,7 @@ namespace FirePixel.Networking
         private void SendTextToClient_ClientRPC(int clientGameId, string senderName, string text)
         {
             // Send to only "toClientId"
-            if (ClientManager.LocalClientGameId != clientGameId) return;
+            if (LocalClientGameId != clientGameId) return;
 
             StartCoroutine(AddTextToChatBox(clientGameId, senderName, text));
         }
@@ -122,7 +121,7 @@ namespace FirePixel.Networking
 
             TextMeshProUGUI textObj = obj.GetComponent<TextMeshProUGUI>();
 
-            if (clientGameId == ClientManager.LocalClientGameId && showLocalNameAs_You)
+            if (clientGameId == LocalClientGameId && showLocalNameAs_You)
             {
                 playerName = "You";
             }

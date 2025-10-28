@@ -1,6 +1,6 @@
 ﻿using FirePixel.Networking;
+using System.Runtime.CompilerServices;
 using TMPro;
-using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +24,8 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
 
             if (IsOwner || PlayerDataLibrary.LocalInstance.overrideIsOwner)
             {
+                DebugLogger.LogError("Stats error", stats == null);
+
                 DebugLogger.Log("Updating health: " + value);
 
                 healthTextObj.text = Mathf.FloorToInt(value).ToString();
@@ -53,7 +55,7 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
 
     private NetworkStateMachine stateMachine;
     private PlayerHUDHandler hudHandler;
-    [SerializeField] private PlayerStatsBlock stats;
+    private PlayerStatsBlock stats;
 
 
     private void Awake()
@@ -64,7 +66,10 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
 
     public override void OnNetworkSpawn()
     {
-        ResetHealth();
+        if (IsOwner)
+        {
+            ResetHealth();
+        }
     }
 
     public void ResetHealth()

@@ -14,7 +14,11 @@ namespace FirePixel.Networking
             DontDestroyOnLoad(gameObject);
         }
 
+        [Header("Scene to load when exiting a lobby for any reason")]
         [SerializeField] private string mainMenuSceneName = "MainMenu";
+
+        [Header("Log Debug information")]
+        [SerializeField] private bool logDebugInfo = true;
 
 
         #region PlayerIdDataArray var get, set and sync methods
@@ -75,32 +79,52 @@ namespace FirePixel.Networking
         #endregion
 
 
-        /// <summary>
-        /// Turn GameId into NetworkId
-        /// </summary>
-        public static ulong GetClientNetworkId(int gameId) => Instance.playerIdDataArray.Value.GetPlayerNetworkId(gameId);
-
-        /// <summary>
-        /// Turn NetworkId into GameId
-        /// </summary>
-        public static int GetClientGameId(ulong networkId) => Instance.playerIdDataArray.Value.GetPlayerGameId(networkId);
-
-        /// <summary>
-        /// Turn GameId into Player Username
-        /// </summary>
-        public static string GetPlayerName(int gameId) => Instance.playerIdDataArray.Value.GetUserName(gameId);
-
-
-        #region OnConnect, OnDisconnect and OnKicked Callbacks
+        #region OnInitialized Callback System
 
 #pragma warning disable UDR0001
-        [Tooltip("Invoked after NetworkManager.OnClientConnected, before updating ClientManager gameId logic. \nreturns: \nulong clientId, \nint clientGamId, \nint clientInLobbyCount")]
+#pragma warning disable UDR0004
+        /// <summary>
+        /// Invoked after <see cref="ClientManager.OnNetworkSpawn"/> is called.
+        /// </summary>
+        private static Action OnInitialized;
+        private static bool initialized;
+
+        /// <summary>
+        /// Invoke action after <see cref="ClientManager.OnNetworkSpawn"/> is called or instantly if that already happened
+        /// </summary>
+        public static void GetOnInitializedCallback(Action toExecute)
+        {
+            if (initialized == false)
+            {
+                OnInitialized += toExecute;
+            }
+            else
+            {
+                toExecute.Invoke();
+            }
+        }
+#pragma warning restore UDR0001
+#pragma warning restore UDR0004
+
+        #endregion
+
+
+        #region  OnConnect, OnDisconnect and OnKicked Callbacks
+
+#pragma warning disable UDR0001
+        /// <summary>
+        /// Invoked after NetworkManager.OnClientConnected, before updating ClientManager gameId logic. returns: ulong clientId, int clientGamId, int clientInLobbyCount
+        /// </summary>
         public static Action<ulong, int, int> OnClientConnectedCallback;
 
-        [Tooltip("Invoked after NetworkManager.OnClientDisconnected, before updating ClientManager gameId logic. \nreturns: \nulong clientId, \nint clientGamId, \nint clientInLobbyCount")]
+        /// <summary>
+        /// Invoked after <see cref="NetworkManager.OnClientDisconnectCallback"/>, before updating <see cref="ClientManager"/> gameId logic.    returns: ulong clientId, int clientGamId, int clientInLobbyCount
+        /// </summary>
         public static Action<ulong, int, int> OnClientDisconnectedCallback;
 
-        [Tooltip("Invoked when a client is kicked from the server, before destroying the ClientManager gameObject. \nreturns: \nnone")]
+        /// <summary>
+        /// Invoked when a client is kicked from the server, before destroying the <see cref="ClientManager"/> gameObject.
+        /// </summary>
         public static Action OnKicked;
 #pragma warning restore UDR0001
 
@@ -109,25 +133,35 @@ namespace FirePixel.Networking
 
         #region Usefull Data and LocalClient Data
 
-        [Tooltip("Local Client gameId, the number equal to the clientCount when this client joined the lobby")]
+        /// <summary>
+        /// Local Client gameId, an int ranging from 0 to MaxPlayers-1
+        /// </summary>
         public static int LocalClientGameId { get; private set; }
 
 
-        [Tooltip("Amount of Players in server that have been setup by ClientManager (game/team ID System")]
+        /// <summary>
+        /// Amount of Players in server that have been setup by ClientManager (game/team ID System)
+        /// </summary>
         public static int PlayerCount => Instance.playerIdDataArray.Value.PlayerCount;
 
-        [Tooltip("Amount of Players in server that have been setup is 1 higher then the highestPlayerId")]
+        /// <summary>
+        /// Amount of Players in server that have been setup is 1 higher then the highestPlayerId
+        /// </summary>
         public static ulong UnAsignedPlayerId => (ulong)Instance.playerIdDataArray.Value.PlayerCount;
 
 
-        [Tooltip("Local Client UserName, value is set by nameHandler")]
+        /// <summary>
+        /// Local Client UserName, value is set by <see cref="PlayerNameHandler"/>
+        /// </summary>
         public static string LocalUserName { get; private set; }
         public static void SetLocalUsername(string name)
         {
             LocalUserName = name;
         }
 
-        [Tooltip("Local Player GUID, value is set by loaded or generated through LobbyMaker")]
+        /// <summary>
+        /// Local Player GUID, value is set by loaded or generated through LobbyMaker
+        /// </summary>
         public static string LocalPlayerGUID { get; private set; }
         public static void SetPlayerGUID(string guid)
         {
@@ -155,6 +189,25 @@ namespace FirePixel.Networking
 
         #endregion
 
+
+        #region Get Player Data From PlayerIdDataArray Methods
+
+        /// <summary>
+        /// Turn GameId into NetworkId
+        /// </summary>
+        public static ulong GetClientNetworkId(int gameId) => Instance.playerIdDataArray.Value.GetPlayerNetworkId(gameId);
+
+        /// <summary>
+        /// Turn NetworkId into GameId
+        /// </summary>
+        public static int GetClientGameId(ulong networkId) => Instance.playerIdDataArray.Value.GetPlayerGameId(networkId);
+
+        /// <summary>
+        /// Turn GameId into Player Username
+        /// </summary>
+        public static string GetPlayerName(int gameId) => Instance.playerIdDataArray.Value.GetUserName(gameId);
+
+        #endregion
 
 
 
@@ -191,10 +244,14 @@ namespace FirePixel.Networking
 
             // Setup server and client event
             NetworkManager.OnClientDisconnectCallback += OnClientDisconnected_OnClient;
+
+            OnInitialized?.Invoke();
+            OnInitialized = null;
+            initialized = true;
         }
 
 
-        #region Join and Leave Callbacks
+        #region Client OnDisconnect/OnDisconnect Methods
 
         /// <summary>
         /// When a clients joins the lobby, called on the server only
@@ -207,20 +264,19 @@ namespace FirePixel.Networking
 
             playerIdDataArray.Value = updatedDataArray;
 
-            OnClientConnectedCallback?.Invoke(clientNetworkId, playerIdDataArray.Value.GetPlayerGameId(clientNetworkId), NetworkManager.ConnectedClients.Count);
-
             RequestUsernameAndGUID_ClientRPC(GetClientGameId(clientNetworkId), NetworkIdRPCTargets.SendToTargetClient(clientNetworkId));
 
-            DebugLogger.Log("Player " + GetClientGameId(clientNetworkId) + ", (NetworkId: " + clientNetworkId + "), connected to server!");
-        }
+            OnClientConnectedCallback?.Invoke(clientNetworkId, playerIdDataArray.Value.GetPlayerGameId(clientNetworkId), NetworkManager.ConnectedClients.Count);
 
+            DebugLogger.Log("Player " + GetClientGameId(clientNetworkId) + ", (NetworkId: " + clientNetworkId + "), connected to server!", logDebugInfo);
+        }
 
         /// <summary>
         /// When a client leaves the lobby, called on the server only
         /// </summary>
         private void OnClientDisconnected_OnServer(ulong clientNetworkId)
         {
-            DebugLogger.Log("Player " + GetClientGameId(clientNetworkId) + ", (NetworkId: " + clientNetworkId + "), disconnected from server");
+            DebugLogger.Log("Player " + GetClientGameId(clientNetworkId) + ", (NetworkId: " + clientNetworkId + "), disconnected from server", logDebugInfo);
 
             // If the diconnecting client is the host dont update data, the server is shut down anyways.
             if (clientNetworkId == 0) return;
@@ -234,7 +290,6 @@ namespace FirePixel.Networking
             OnClientDisconnectedCallback?.Invoke(clientNetworkId, playerIdDataArray.Value.GetPlayerGameId(clientNetworkId), PlayerCount);
         }
 
-
         /// <summary>
         /// When a client leaves the lobby, called only on disconnecting client
         /// </summary>
@@ -245,6 +300,7 @@ namespace FirePixel.Networking
 
             Destroy(gameObject);
 
+            // If the disconnecting client is the server (host), unsubscribe subscribed NetworkManager Callbacks
             if (IsServer)
             {
                 NetworkManager.OnClientConnectedCallback -= OnClientConnected_OnServer;
@@ -291,11 +347,14 @@ namespace FirePixel.Networking
             // Destroy the rejoin reference on the kicked client
             bool deletionSucces = FileManager.TryDeleteFile("RejoinData.json");
 
-            DebugLogger.Log("RejoinData.json deleted: " + deletionSucces);
+            DebugLogger.Log("RejoinData.json deleted: " + deletionSucces, logDebugInfo);
 
             SceneManager.LoadScene(mainMenuSceneName);
 
-            MessageHandler.Instance.SendTextLocal("You have been kicked from the server!");
+            if (MessageHandler.Instance != null)
+            {
+                MessageHandler.Instance.SendTextLocal("You have been kicked from the server!");
+            }
         }
 
         #endregion
@@ -307,6 +366,7 @@ namespace FirePixel.Networking
 
             if (IsServer)
             {
+
                 // Kick all clients, terminate lobby and shutdown network.
                 DisconnectAllClients_ServerRPC();
 
@@ -314,14 +374,11 @@ namespace FirePixel.Networking
 
                 NetworkManager.Shutdown();
             }
-            else
-            {
-
-            }
 
             playerIdDataArray.OnValueChanged = null;
             OnClientConnectedCallback = null;
             OnClientDisconnectedCallback = null;
+            OnInitialized = null;
             OnKicked = null;
         }
     }
