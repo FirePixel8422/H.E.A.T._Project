@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   mainMenuSceneName: MainMenu
+  logDebugInfo: 1
   playerIdDataArray:
     value:
       networkIds: 
@@ -248,9 +249,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f31e60c5ddb10794086093c1f9878cac, type: 2}
   - {fileID: 11400000, guid: 03d13fe6233407b42b650d5b078ae6ec, type: 2}
   - {fileID: 11400000, guid: 0492441b6172835488265ef814400ff3, type: 2}
-  - {fileID: 11400000, guid: 3636b9304546c894790767fcd59748fc, type: 2}
-  - {fileID: 11400000, guid: db839b5e7cf5e404da99c5c1823bfcd9, type: 2}
-  - {fileID: 11400000, guid: 207129bafdccb1a439b8595395c5a2f4, type: 2}
   - {fileID: 11400000, guid: d0526a58c711f8a4586bf16360614a6a, type: 2}
   - {fileID: 11400000, guid: 7237097dc60802a4a83dfafcc3c5e26f, type: 2}
   - {fileID: 11400000, guid: 08c002fa37f13e744bda4e5d45921a7d, type: 2}
@@ -276,9 +274,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f31e60c5ddb10794086093c1f9878cac, type: 2}
   - {fileID: 11400000, guid: 03d13fe6233407b42b650d5b078ae6ec, type: 2}
   - {fileID: 11400000, guid: 0492441b6172835488265ef814400ff3, type: 2}
-  - {fileID: 11400000, guid: 3636b9304546c894790767fcd59748fc, type: 2}
-  - {fileID: 11400000, guid: db839b5e7cf5e404da99c5c1823bfcd9, type: 2}
-  - {fileID: 11400000, guid: 207129bafdccb1a439b8595395c5a2f4, type: 2}
   - {fileID: 11400000, guid: d0526a58c711f8a4586bf16360614a6a, type: 2}
   - {fileID: 11400000, guid: 7237097dc60802a4a83dfafcc3c5e26f, type: 2}
   - {fileID: 11400000, guid: 08c002fa37f13e744bda4e5d45921a7d, type: 2}
