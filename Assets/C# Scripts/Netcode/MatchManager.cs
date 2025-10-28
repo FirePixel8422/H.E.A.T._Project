@@ -93,7 +93,7 @@ namespace FirePixel.Networking
             Invoke(nameof(RespawnLocalPlayer), respawnDelay);
         }
 
-        private void RespawnLocalPlayer()
+        public void RespawnLocalPlayer()
         {
             MatchState = MatchState.FightingPhase;
             MatchUIHandler.Instance.OnMatchStart();

@@ -26,7 +26,7 @@ namespace FirePixel.Networking
 
         public override void OnNetworkSpawn()
         {
-            NetworkManager.SceneManager.OnLoadEventCompleted += (_, _, _, _) => MatchManager.Instance.OnEndUpgradePhase_ServerRPC();
+            NetworkManager.SceneManager.OnLoadEventCompleted += (_, _, _, _) => MatchManager.Instance.RespawnLocalPlayer();
 
             PlayerStats = new PlayerStatsBlock[GlobalGameData.MaxPlayers];
 
