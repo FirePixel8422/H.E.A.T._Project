@@ -15,13 +15,88 @@ MonoBehaviour:
   attachmentPrefab: {fileID: 462111671257272191, guid: a178b88085a2a3e43807e9597ceb0df5,
     type: 3}
   transformOffset:
-    position: {x: -0.0014, y: 0.0752, z: -0.257}
+    position: {x: 0.0014, y: 0.0748, z: -0.257}
     eulerRotation: {x: 0, y: 0, z: 0}
     scale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
   stats:
+    damage:
+      value: 1
+      applyMode: 0
+    headShotMultiplier:
+      value: 1.5
+      applyMode: 0
+    damageFallOffCurve:
+      ignoreData: 1
+      data:
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 1
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        ValueMultiplier: 1
+        sampleCount: 50
+    maxEffectiveRange:
+      value: 1
+      applyMode: 0
     zoomMultiplier:
       value: 4
       applyMode: 3
     gunOffset:
+      ignoreData: 0
+      data: {x: 0, y: -0.022, z: 0.05}
+    adsRecoilForce:
+      value:
+        x: 0.8
+        y: 0.8
+      applyMode: 0
+    adsRecoilRecovery:
+      value: 1
+      applyMode: 0
+    spreadCurve:
       ignoreData: 1
-      data: {x: 0, y: 0, z: 0}
+      data:
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 1
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        ValueMultiplier: 1
+        sampleCount: 50

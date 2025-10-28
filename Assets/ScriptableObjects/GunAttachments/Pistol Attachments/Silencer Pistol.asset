@@ -52,7 +52,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        valueMultiplier: 1
+        ValueMultiplier: 1
         sampleCount: 50
     maxEffectiveRange:
       value: 1
@@ -76,3 +76,17 @@ MonoBehaviour:
         position: {x: 0, y: 0, z: 0.18}
         eulerRotation: {x: 0, y: 0, z: 0}
         scale: {x: 0.5, y: 0.5, z: 0.5}
+    adsRecoilForce:
+      value:
+        x: 1
+        y: 1
+      applyMode: 0
+    adsRecoilRecovery:
+      value: 1
+      applyMode: 0
+    spread:
+      value: 0.8
+      applyMode: 1
+    soundDampeningMultiplier:
+      value: 0.5
+      applyMode: 1
