@@ -15,7 +15,7 @@ public struct NativeSampledAnimationCurve
     [SerializeField] private AnimationCurve curve;
 
     [Header("Curve X this value is what gets baked into the curve output")]
-    [SerializeField] private float valueMultiplier;
+    public float ValueMultiplier;
 
     [Header("More samples = more accurate, but more memory usage")]
     [Range(2, 500)]
@@ -54,7 +54,7 @@ public struct NativeSampledAnimationCurve
         for (int i = 0; i < sampleCount; i++)
         {
             float t = (float)i / (sampleCount - 1) * Length;
-            bakedCurve[i] = curve.Evaluate(t) * valueMultiplier;
+            bakedCurve[i] = curve.Evaluate(t) * ValueMultiplier;
         }
     }
 
@@ -93,7 +93,7 @@ public struct NativeSampledAnimationCurve
     {
         curve = AnimationCurve.Linear(1, 1, 0, 0),
         Length = 1,
-        valueMultiplier = 1,
+        ValueMultiplier = 1,
         sampleCount = 50,
     };
 

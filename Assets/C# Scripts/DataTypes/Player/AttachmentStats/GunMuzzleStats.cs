@@ -21,10 +21,10 @@ public class GunMuzzleStats : IGunAtachment
 
     [SerializeField] private FilterableContainer<TransformOffset> muzzleFlashTransformOffset = new(TransformOffset.Default, true);
 
-    [SerializeField] private SmartAttributeFloat2 adsRecoilForce = new SmartAttributeFloat2(new float2(1, 1), ApplyMode.Skip);
-    [SerializeField] private SmartAttributeFloat adsRecoilRecovery = new SmartAttributeFloat(1, ApplyMode.Skip);
+    [SerializeField] private SmartAttributeFloat2 adsRecoilForce = new (new float2(1, 1), ApplyMode.Skip);
+    [SerializeField] private SmartAttributeFloat adsRecoilRecovery = new (1, ApplyMode.Skip);
 
-    [SerializeField] private FilterableContainer<NativeSampledAnimationCurve> spreadCurve = new(NativeSampledAnimationCurve.Default, true);
+    [SerializeField] private SmartAttributeFloat spread = new (0.05f, ApplyMode.Skip);
 
     [SerializeField] private SmartAttributeFloat soundDampeningMultiplier = new (1, ApplyMode.Skip);
 
@@ -41,6 +41,8 @@ public class GunMuzzleStats : IGunAtachment
         shootAudioClip.ApplyToStat(ref gunStatsSet.audioStats.shootAudioClip);
         minMaxPitch.ApplyToStat(ref gunStatsSet.audioStats.minMaxPitch);
         minMaxPitchAtMaxHeat.ApplyToStat(ref gunStatsSet.audioStats.minMaxPitchAtMaxHeat);
+
+        spread.ApplyToStat(ref gunStatsSet.coreStats.spreadCurve.ValueMultiplier);
     }
 
     public void ApplyToGunObject(GunRefHolder gunRef)
