@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.Mathematics;
+using UnityEngine;
 
 
 [System.Serializable]
@@ -13,6 +14,11 @@ public class GunGripStats : IGunAtachment
 
     [SerializeField] private FilterableContainer<NativeSampledAnimationCurve> damageFallOffCurve = new(NativeSampledAnimationCurve.Default, true);
     [SerializeField] private SmartAttributeFloat maxEffectiveRange = new(1, ApplyMode.Skip);
+
+    [SerializeField] private SmartAttributeFloat2 adsRecoilForce = new SmartAttributeFloat2(new float2(1, 1), ApplyMode.Skip);
+    [SerializeField] private SmartAttributeFloat adsRecoilRecovery = new SmartAttributeFloat(1, ApplyMode.Skip);
+
+    [SerializeField] private FilterableContainer<NativeSampledAnimationCurve> spreadCurve = new(NativeSampledAnimationCurve.Default, true);
 
 
     public void ApplyToBaseStats(ref CompleteGunStatsSet gunStatsSet)

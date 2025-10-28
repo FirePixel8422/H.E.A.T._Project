@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Unity.Mathematics;
 
 
 [System.Serializable]
@@ -17,6 +18,13 @@ public class GunScopeStats : IGunAtachment
     [SerializeField] private SmartAttributeFloat zoomMultiplier = new SmartAttributeFloat(1, ApplyMode.Override);
     [SerializeField] private FilterableContainer<Vector3> gunOffset = new FilterableContainer<Vector3>(true);
 
+    [SerializeField] private SmartAttributeFloat2 adsRecoilForce = new SmartAttributeFloat2(new float2(1, 1), ApplyMode.Skip);
+    [SerializeField] private SmartAttributeFloat adsRecoilRecovery = new SmartAttributeFloat(1, ApplyMode.Skip);
+
+    [SerializeField] private FilterableContainer<NativeSampledAnimationCurve> spreadCurve = new (NativeSampledAnimationCurve.Default, true);
+
+
+
 
     public void ApplyToBaseStats(ref CompleteGunStatsSet gunStatsSet)
     {
@@ -32,6 +40,6 @@ public class GunScopeStats : IGunAtachment
 
     public void ApplyToGunObject(GunRefHolder gunRef)
     {
-        
+        return;
     }
 }
