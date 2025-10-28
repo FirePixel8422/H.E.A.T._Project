@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
+
 
 public class DeathBehavior : MonoBehaviour
 {
@@ -14,25 +14,31 @@ public class DeathBehavior : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            OnDeathBehavior();
+            StartUpgradeMenus();
         }
     }
-    public void OnDeathBehavior()
+
+    public void StartUpgradeMenus()
     {
-        StartCoroutine(CardSelectionWait(cardSelectionTime));
+        StartCoroutine(FadeInUpgrades());
     }
-    IEnumerator CardSelectionWait(float time)
+    private IEnumerator FadeInUpgrades()
     {
-        deathAnimator.SetInteger("Death", 1);
+        deathAnimator.SetInteger("Death", 1); //fadein/out... round win/lose... fadein/out
         
         yield return new WaitForSeconds(5f);
         upgradeCards.SetActive(true);
+    }
 
-        yield return new WaitForSeconds(time - 1f);
+    public void EndUpgradeMenus()
+    {
+        StartCoroutine(FadeOutUpgrades());
+    }
+    private IEnumerator FadeOutUpgrades()
+    {
         deathAnimator.SetInteger("Death", 2);
 
         yield return new WaitForSeconds(1);
         upgradeCards.SetActive(false);
     }
-
 }

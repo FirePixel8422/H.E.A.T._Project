@@ -4593,11 +4593,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 509207281256151738, guid: c0eb4b36e7e97f24b8ef673c374d8424,
+        type: 3}
+      propertyPath: globalVolume
+      value: 
+      objectReference: {fileID: 677762874}
     - target: {fileID: 840134738611709233, guid: c0eb4b36e7e97f24b8ef673c374d8424,
         type: 3}
       propertyPath: UITransform
       value: 
       objectReference: {fileID: 1934423572}
+    - target: {fileID: 840134738611709233, guid: c0eb4b36e7e97f24b8ef673c374d8424,
+        type: 3}
+      propertyPath: matchEndDelay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 840134738611709233, guid: c0eb4b36e7e97f24b8ef673c374d8424,
+        type: 3}
+      propertyPath: matchStartDelay
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1564546678255805630, guid: c0eb4b36e7e97f24b8ef673c374d8424,
+        type: 3}
+      propertyPath: deathBehavior
+      value: 
+      objectReference: {fileID: 523235461}
+    - target: {fileID: 2256600296602494835, guid: c0eb4b36e7e97f24b8ef673c374d8424,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3088868075374821422, guid: c0eb4b36e7e97f24b8ef673c374d8424,
         type: 3}
       propertyPath: m_Name
@@ -4608,20 +4633,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 446557960
       objectReference: {fileID: 0}
-    - target: {fileID: 3457302914162975081, guid: c0eb4b36e7e97f24b8ef673c374d8424,
+    - target: {fileID: 4471675188063064354, guid: c0eb4b36e7e97f24b8ef673c374d8424,
         type: 3}
-      propertyPath: SceneMigrationSynchronization
+      propertyPath: m_RaycastTarget
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3457302914162975081, guid: c0eb4b36e7e97f24b8ef673c374d8424,
-        type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 2942647327
-      objectReference: {fileID: 0}
-    - target: {fileID: 4267619818096258449, guid: c0eb4b36e7e97f24b8ef673c374d8424,
-        type: 3}
-      propertyPath: overrideIsOwner
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5287381020941622744, guid: c0eb4b36e7e97f24b8ef673c374d8424,
         type: 3}
@@ -4630,19 +4645,9 @@ PrefabInstance:
       objectReference: {fileID: 2127137636}
     - target: {fileID: 5287381020941622744, guid: c0eb4b36e7e97f24b8ef673c374d8424,
         type: 3}
-      propertyPath: instaLoadSceneOnHost
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5287381020941622744, guid: c0eb4b36e7e97f24b8ef673c374d8424,
-        type: 3}
       propertyPath: invisibleScreenCover
       value: 
       objectReference: {fileID: 959629834}
-    - target: {fileID: 5498845739196442587, guid: c0eb4b36e7e97f24b8ef673c374d8424,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6343942968702181189, guid: c0eb4b36e7e97f24b8ef673c374d8424,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4693,15 +4698,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7438262744063012387, guid: c0eb4b36e7e97f24b8ef673c374d8424,
+    - target: {fileID: 6576298396370846200, guid: c0eb4b36e7e97f24b8ef673c374d8424,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: spawnFreezeTime
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8116700478484987294, guid: c0eb4b36e7e97f24b8ef673c374d8424,
+    - target: {fileID: 6922760872126067066, guid: c0eb4b36e7e97f24b8ef673c374d8424,
         type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3215476247
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4720,6 +4725,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7332ffd667763c4ab6a74ead269ca01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &523235461 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4911272339813660807, guid: c0eb4b36e7e97f24b8ef673c374d8424,
+    type: 3}
+  m_PrefabInstance: {fileID: 523235459}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 374a26c8cb7c9b748b74fa8648128925, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeathBehavior
 --- !u!1 &529696483
 GameObject:
   m_ObjectHideFlags: 0

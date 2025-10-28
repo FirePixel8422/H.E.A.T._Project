@@ -6,21 +6,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class GunManager : MonoBehaviour
+public class GunManager : SmartNetworkBehaviour
 {
     public static GunManager Instance { get; private set; }
-    private void Awake()
-    {
-        Instance = this;
-        if (overrideIsOwner)
-        {
-            SetupAttachments(0);
-        }
-        else
-        {
-            SetupAttachments(NetworkManager.Singleton.LocalClientId == 0 ? 0 : 1);
-        }
-    }
+
 
     [Header("Allow this script to be used outside of network environment")]
     [SerializeField] private bool overrideIsOwner;
@@ -37,6 +26,20 @@ public class GunManager : MonoBehaviour
     public int GunCount => baseGuns.Length;
 
     private int currentGunId;
+
+
+    public override void OnNetworkSystemsSetup()
+    {
+        Instance = this;
+        if (overrideIsOwner)
+        {
+            SetupAttachments(0);
+        }
+        else
+        {
+            SetupAttachments(LocalClientGameId);
+        }
+    }
 
 
     [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
@@ -177,12 +180,13 @@ public class GunManager : MonoBehaviour
     public string GetCurrentGunName() => baseGuns[currentGunId].name;
 
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
         int gunCount = baseGuns.Length;
         for (int gunId = 0; gunId < gunCount; gunId++)
         {
             baseGuns[gunId].BaseStats.Dispose();
         }
+        base.OnDestroy();
     }
 }

@@ -26,7 +26,7 @@ namespace FirePixel.Networking
 
 
         [Header("Match Handling")]
-        [SerializeField] private MatchState matchState;
+        public MatchState MatchState { get; private set; }
 
         [SerializeField] private float matchStartDelay;
         [SerializeField] private float matchEndDelay;
@@ -65,7 +65,7 @@ namespace FirePixel.Networking
         [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
         private void OnPlayerDeath_ClientRPC(int diedPlayerGameId)
         {
-            matchState = MatchState.UgradePhase;
+            MatchState = MatchState.UgradePhase;
 
             PlayerDataLibrary.LocalInstance.Input.enabled = false;
             PlayerDataLibrary.LocalInstance.Rigidbody.isKinematic = true;
@@ -75,6 +75,8 @@ namespace FirePixel.Networking
             {
                 UpgradeManager.Instance.CreateUpgradeUI();
             }
+
+            MatchUIHandler.Instance.AddPoint(diedPlayerGameId == 0 ? 1 : 0);
         }
 
         [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
@@ -85,8 +87,6 @@ namespace FirePixel.Networking
         [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
         private void OnEndUpgradePhase_ClientRPC(float serverTime)
         {
-            matchState = MatchState.FightingPhase;
-
             float lagCompensation = NetworkManager.ServerTime.TimeAsFloat - serverTime;
             float respawnDelay = Mathf.Clamp(matchStartDelay - lagCompensation, 0, float.MaxValue);
 
@@ -95,6 +95,9 @@ namespace FirePixel.Networking
 
         private void RespawnLocalPlayer()
         {
+            MatchState = MatchState.FightingPhase;
+            MatchUIHandler.Instance.OnMatchStart();
+
             PlayerManager.Instance.TryRequestLocalPlayerSpawn();
         }
 

@@ -12,7 +12,7 @@ namespace FirePixel.Networking
         [SerializeField] private UpgradeSO[] globalUpgradesList;
         [SerializeField] private UpgradeSO[] upgrades;
 
-        [SerializeField] private GameObject upgradeUIParent;
+        [SerializeField] private DeathBehavior deathBehavior;
         [SerializeField] private UpgradeUISlot[] uiSlots;
 
         [Header("AR, Glock, UMP, AWS")]
@@ -48,7 +48,7 @@ namespace FirePixel.Networking
 
         public void CreateUpgradeUI()
         {
-            upgradeUIParent.SetActive(true);
+            deathBehavior.StartUpgradeMenus();
 
             UpgradeSO[] upgrades = GetRandomUpgrades(GlobalGameData.UpgradeCount);
 
@@ -155,7 +155,7 @@ namespace FirePixel.Networking
         public void TakeUpgrade(int upgradeId)
         {
             // Disable Upgrade Screen
-            upgradeUIParent.SetActive(false);
+            deathBehavior.EndUpgradeMenus();;
 
             // If Upgrade was non stackable, remove it
             if (globalUpgradesList[upgradeId].stackable == false)
