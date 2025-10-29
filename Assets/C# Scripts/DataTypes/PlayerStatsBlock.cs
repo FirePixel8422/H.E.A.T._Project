@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
 
 
 [System.Serializable]
-public class PlayerStatsBlock
+public class PlayerStatsBlock : INetworkSerializable
 {
     [SerializeField] private float maxHealth = 250;
     public float maxHealthMultiplier = 1;
@@ -21,4 +22,20 @@ public class PlayerStatsBlock
 
     public float recoilMultiplier = 1;
     public float spreadMultiplier = 1;
+
+
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+    {
+        serializer.SerializeValue(ref maxHealth);
+        serializer.SerializeValue(ref maxHealthMultiplier);
+        serializer.SerializeValue(ref damageMultiplier);
+        serializer.SerializeValue(ref lifeStealMultiplier);
+        serializer.SerializeValue(ref lifeStealOverflowMultiplier);
+        serializer.SerializeValue(ref agilityMultiplier);
+        serializer.SerializeValue(ref jumpStrengthMultiplier);
+        serializer.SerializeValue(ref heatGenerationMultiplier);
+        serializer.SerializeValue(ref heatDecayMultiplier);
+        serializer.SerializeValue(ref recoilMultiplier);
+        serializer.SerializeValue(ref spreadMultiplier);
+    }
 }

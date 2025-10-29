@@ -43,7 +43,7 @@ public class PlayerDataLibrary : SmartNetworkBehaviour
         if (overrideIsOwner)
         {
             LocalInstance = this;
-            Stats = PlayerManager.Instance.PlayerStats[LocalClientGameId];
+            Stats = PlayerManager.Instance.LocalPlayerStats;
         }
     }
 
@@ -53,6 +53,6 @@ public class PlayerDataLibrary : SmartNetworkBehaviour
         {
             LocalInstance = this;
         }
-        Stats = PlayerManager.Instance.PlayerStats[LocalClientGameId];
+        Stats = PlayerManager.Instance.LocalPlayerStats;
     }
 }

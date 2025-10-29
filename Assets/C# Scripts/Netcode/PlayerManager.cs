@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FirePixel.Networking
 {
-    public class PlayerManager : NetworkBehaviour
+    public class PlayerManager : SmartNetworkBehaviour
     {
         public static PlayerManager Instance {get; private set;}
         private void Awake()
@@ -17,21 +17,48 @@ namespace FirePixel.Networking
         [SerializeField] private float spawnFreezeTime;
 
         [SerializeField] private PlayerStatsBlock defaultPlayerStats;
-        public PlayerStatsBlock[] PlayerStats;
+        private NetworkStruct<PlayerStatsBlock>[] playerStats;
+        public PlayerStatsBlock LocalPlayerStats => playerStats[LocalClientGameId].Value;
 
         private Vector3[] playerSpawnPositions;
         private Quaternion[] playerSpawnRotations;
         private bool spawnPointsActive;
 
 
-        public override void OnNetworkSpawn()
+        public override void OnNetworkSystemsSetup()
         {
             NetworkManager.SceneManager.OnLoadEventCompleted += (_, _, _, _) => MatchManager.Instance.RespawnLocalPlayer();
 
-            PlayerStats = new PlayerStatsBlock[GlobalGameData.MaxPlayers];
+            playerStats = new NetworkStruct<PlayerStatsBlock>[GlobalGameData.MaxPlayers];
 
-            PlayerStats[NetworkManager.LocalClientId == 0 ? 0 : 1] = defaultPlayerStats;
+            playerStats[LocalClientGameId].Value = defaultPlayerStats;
+
+            for (int i = 0; i < GlobalGameData.MaxPlayers; i++)
+            {
+                if (i == LocalClientGameId)
+                {
+                    playerStats[LocalClientGameId].OnValueChanged += (PlayerStatsBlock stats) => SendPlayerStatsChange_ServerRPC(LocalClientGameId, stats);
+                }
+            }
         }
+
+        #region Sync PlayerStatsBlock
+
+        [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
+        private void SendPlayerStatsChange_ServerRPC(int clientGameId, PlayerStatsBlock newValue)
+        {
+            ReceivePlayerStatsChange_ClientRPC(clientGameId, newValue, GameIdRPCTargets.SendToOppositeClient(clientGameId));
+        }
+
+        [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
+        private void ReceivePlayerStatsChange_ClientRPC(int clientGameId, PlayerStatsBlock newValue, GameIdRPCTargets rpcTargets)
+        {
+            if (rpcTargets.IsTarget == false) return;
+
+            playerStats[clientGameId].SilentValue = newValue;
+        }
+
+        #endregion
 
         /// <summary>
         /// Send a request to the server to spawn a player, which it will if there are spawnpoints in the scene

@@ -25,10 +25,6 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
 
             if (IsOwner || PlayerDataLibrary.LocalInstance.overrideIsOwner)
             {
-                DebugLogger.LogError("Stats error", stats == null);
-
-                DebugLogger.Log("Updating health: " + value);
-
                 healthTextObj.text = Mathf.FloorToInt(value).ToString();
                 healthSlider.value = value / MaxHealth;
             }
