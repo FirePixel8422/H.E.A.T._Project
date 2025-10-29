@@ -22,6 +22,7 @@ namespace FirePixel.Networking
         /// </summary>
         public static int LocalClientGameId => ClientManager.LocalClientGameId;
 
+
         /// <summary>
         /// Pointer to <see cref="ClientManager.LocalUserName"/>
         /// </summary>
@@ -32,6 +33,7 @@ namespace FirePixel.Networking
         /// </summary>
         public static string LocalClientGUID => ClientManager.LocalPlayerGUID;
 
+        public int OwnerClientGameId => ClientManager.GetClientGameId(NetworkObject.OwnerClientId);
 
 
 

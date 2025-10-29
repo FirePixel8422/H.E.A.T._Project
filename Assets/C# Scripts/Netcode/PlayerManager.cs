@@ -18,7 +18,7 @@ namespace FirePixel.Networking
 
         [SerializeField] private PlayerStatsBlock defaultPlayerStats;
         private NetworkStruct<PlayerStatsBlock>[] playerStats;
-        public PlayerStatsBlock LocalPlayerStats => playerStats[LocalClientGameId].Value;
+        public PlayerStatsBlock GetPlayerStats(int clientGameId) => playerStats[clientGameId].Value;
 
         private Vector3[] playerSpawnPositions;
         private Quaternion[] playerSpawnRotations;
