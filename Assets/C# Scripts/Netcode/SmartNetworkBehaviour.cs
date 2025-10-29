@@ -10,7 +10,7 @@ namespace FirePixel.Networking
     /// </summary>
     public class SmartNetworkBehaviour : NetworkBehaviour
     {
-        public bool isNetworkSystemInitilized;
+        protected bool isNetworkSystemInitilized;
 
         /// <summary>
         /// Pointer to <see cref="NetworkManager.LocalClientId"/>
@@ -33,6 +33,9 @@ namespace FirePixel.Networking
         /// </summary>
         public static string LocalClientGUID => ClientManager.LocalPlayerGUID;
 
+        /// <summary>
+        /// Turn <see cref="NetworkObject.OwnerClientId"/> into clientGameId with <see cref="ClientManager.GetClientGameId(ulong)"/>
+        /// </summary>
         public int OwnerClientGameId => ClientManager.GetClientGameId(NetworkObject.OwnerClientId);
 
 

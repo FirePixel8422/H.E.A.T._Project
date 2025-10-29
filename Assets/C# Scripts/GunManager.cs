@@ -30,17 +30,26 @@ public class GunManager : SmartNetworkBehaviour
     private int currentGunId;
 
 
+
+    private void Awake()
+    {
+        if (overrideIsOwner)
+        {
+            Instance = this;
+
+            SetupAttachments(0);
+            for (int i = 0; i < GunCount; i++)
+            {
+                UnlockGun(i);
+            }
+        }
+    }
+
     public override void OnNetworkSystemsSetup()
     {
         Instance = this;
-        if (overrideIsOwner)
-        {
-            SetupAttachments(0);
-        }
-        else
-        {
-            SetupAttachments(LocalClientGameId);
-        }
+        SetupAttachments(LocalClientGameId);
+        UnlockGun(0);
     }
 
 
@@ -68,8 +77,6 @@ public class GunManager : SmartNetworkBehaviour
         attachmentIdsList = new ArrayWrapper<int2>[gunCount];
 
         unlockedGuns = new bool[gunCount];
-        UnlockGun(0);
-
 
         for (int i = 0; i < gunCount; i++)
         {

@@ -119,7 +119,7 @@ public class GunHandler : NetworkBehaviour
         ManageUpdateCallbacks(true);
     }
 
-    private void Awake()
+    private void Start()
     {
         if (overrideIsOwner)
         {
@@ -138,7 +138,7 @@ public class GunHandler : NetworkBehaviour
         if (IsOwner)
 #endif
         {
-            if (registeredForUpdates == register || IsSpawned == false) return;
+            if (registeredForUpdates == register || (overrideIsOwner == false && IsSpawned == false)) return;
 
             UpdateScheduler.ManageUpdate(OnUpdate, register);
             UpdateScheduler.ManageFixedUpdate(OnFixedUpdate, register);
@@ -462,7 +462,7 @@ public class GunHandler : NetworkBehaviour
                     GetOnHitAudioData(hitTypeResult, out AudioClip onHitClip, out float pitch);
 
                     // On hitting any smart hitBox, play OnHit SFX
-                    onHitSource.PlayOneShotClipWithPitch(onHitClip, pitch);
+                    onHitSource.PlayOneShotClipWithPitch(onHitClip, pitch, audioStats.volumeMultiplier);
                 }
 
                 hudHandler.AddCrossHairInstability(math.distance(spreadOffset, float2.zero) * 10);
@@ -508,7 +508,7 @@ public class GunHandler : NetworkBehaviour
 
         if (CurrentHeatSink.Overheated)
         {
-            gunOverheatSource.PlayOneShotClipWithPitch(audioStats.overHeatAudioClip, EzRandom.Range(audioStats.overHeatMinMaxPitch), audioStats.volumeMultiplier);
+            gunOverheatSource.PlayOneShotClipWithPitch(audioStats.overHeatAudioClip, EzRandom.Range(audioStats.overHeatMinMaxPitch));
         }
 
         // Call shoot method through the server and all clients, except self > call shoot locally

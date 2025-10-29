@@ -107,7 +107,7 @@ MonoBehaviour:
       inputBufferTime: 0
     audioStats:
       shootAudioClip: {fileID: 0}
-      volumeMultiplier: 0
+      volumeMultiplier: 1
       minMaxPitch:
         min: 0
         max: 0

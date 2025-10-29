@@ -147,7 +147,7 @@ MonoBehaviour:
       inputBufferTime: 0.15
     audioStats:
       shootAudioClip: {fileID: 8300000, guid: 9f45e6a5f5cd816458d7c9359c903f4b, type: 3}
-      volumeMultiplier: 0
+      volumeMultiplier: 1
       minMaxPitch:
         min: 0.6
         max: 0.85

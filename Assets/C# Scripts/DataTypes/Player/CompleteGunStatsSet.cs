@@ -41,9 +41,10 @@ public struct CompleteGunStatsSet
     public static CompleteGunStatsSet Default => new CompleteGunStatsSet
     {
         coreStats = GunCoreStats.Default,
+        audioStats = GunAudioStats.Default,
         shakeStats = GunShakeStats.Default,
         gunADSStats = GunADSStats.Default,
         swayStats = GunSwayStats.Default,
-        heatSinkStats = HeatSinkStats.Default
+        heatSinkStats = HeatSinkStats.Default,
     };
 }

@@ -15,7 +15,7 @@ namespace FirePixel.Networking
         [SerializeField] private DeathBehavior deathBehavior;
         [SerializeField] private UpgradeUISlot[] uiSlots;
 
-        [Header("AR, Glock, UMP, AWS")]
+        [Header("Glock, AR, UMP, AWS")]
         [SerializeField] private ArrayWrapper<UpgradeSO>[] gunAttachmentUpgrades;
 
         [SerializeField] private UpgradeSO[] upgradesLeft;

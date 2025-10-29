@@ -604,7 +604,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8183323876570374502
 Transform:
   m_ObjectHideFlags: 0
@@ -618,6 +618,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2623298254810310628}
   - {fileID: 7949984123326286938}
   - {fileID: 6012974010948853806}
   - {fileID: 8667004036257470329}
@@ -635,8 +636,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2048606269
-  InScenePlacedSourceGlobalObjectIdHash: 4087933105
+  GlobalObjectIdHash: 1965244584
+  InScenePlacedSourceGlobalObjectIdHash: 2048606269
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -841,8 +842,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDataLibrary
   ShowTopMostFoldoutHeaderGroup: 1
   overrideIsOwner: 0
-  stats:
+  Stats:
     maxHealth: 250
+    maxHealthMultiplier: 1
     damageMultiplier: 1
     lifeStealMultiplier: 0
     lifeStealOverflowMultiplier: 0
@@ -880,7 +882,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      valueMultiplier: 0
+      ValueMultiplier: 1
       sampleCount: 0
     bulletSize: 0
     bulletHoleFXSize:
@@ -920,7 +922,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      valueMultiplier: 0
+      ValueMultiplier: 1
       sampleCount: 0
     stabilityLoss: 0
     stabilityRecovery: 0
@@ -929,6 +931,7 @@ MonoBehaviour:
     inputBufferTime: 0
   audioStats:
     shootAudioClip: {fileID: 0}
+    volumeMultiplier: 1
     minMaxPitch:
       min: 0
       max: 0
@@ -958,7 +961,7 @@ MonoBehaviour:
     mainCamTransform: {fileID: 6012974010948853806}
     gunCamera: {fileID: 4245517809260214837}
     baseFOV: 75
-    currentFOV: 0
+    currentFOV: 75
     mainCamMaxTiltAngle: 75
   adsHandler:
     fovMultiplierCurve:
@@ -1004,7 +1007,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      valueMultiplier: 1
+      ValueMultiplier: 1
       sampleCount: 125
     stats:
       zoomMultiplier: 0
@@ -1073,72 +1076,11 @@ MonoBehaviour:
       ignoreYForSwayMove: 0
       offsetSmooth: 12
       swayRecoverSmooth: 15
-      gunYOffset: 0
-      spreadMultplierCurve:
-        curve:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 1
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: 0
-            outSlope: 1
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        valueMultiplier: 1
-        sampleCount: 50
-  gunEmmisionHandler:
-    heatGradient:
-      gradient:
-        serializedVersion: 2
-        key0: {r: 2.363859, g: 3.1711173, b: 3.3056602, a: 1}
-        key1: {r: 7.0339622, g: 5.2152796, b: 1.1546311, a: 1}
-        key2: {r: 15.437255, g: 3.4285324, b: 1.2524554, a: 0}
-        key3: {r: 23.968628, g: 0.8205447, b: 0, a: 0}
-        key4: {r: 33.896763, g: 1.4197598, b: 0, a: 0}
-        key5: {r: 0, g: 0, b: 0, a: 0}
-        key6: {r: 0, g: 0, b: 0, a: 0}
-        key7: {r: 0, g: 0, b: 0, a: 0}
-        ctime0: 0
-        ctime1: 32446
-        ctime2: 46122
-        ctime3: 58982
-        ctime4: 65535
-        ctime5: 0
-        ctime6: 0
-        ctime7: 0
-        atime0: 0
-        atime1: 65535
-        atime2: 0
-        atime3: 0
-        atime4: 0
-        atime5: 0
-        atime6: 0
-        atime7: 0
-        m_Mode: 0
-        m_ColorSpace: 0
-        m_NumColorKeys: 5
-        m_NumAlphaKeys: 2
+      gunOffset: {x: 0, y: 0, z: 0}
   gunShotSource: {fileID: 5837324410720302518}
   gunOverheatSource: {fileID: 6957241378848993016}
   onHitSource: {fileID: 119527403880472137}
   overrideIsOwner: 1
-  gunId: 0
-  playerGameId: 0
 --- !u!114 &6829219136680250846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1168,6 +1110,9 @@ MonoBehaviour:
   groundCheckRadius: 0.05
   mouseSensitivity: 0.1
   overrideIsOwner: 1
+  targetPosition: {x: 0, y: 0, z: 0}
+  targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  remoteLerpRate: 12
 --- !u!114 &809467867142740111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1182,6 +1127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthHandler
   ShowTopMostFoldoutHeaderGroup: 1
   cHealth: 250
+  healthTextObj: {fileID: 0}
+  healthSlider: {fileID: 0}
 --- !u!114 &7984017930997677584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2830,3 +2777,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &8997757539659364098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2623298254810310628}
+  - component: {fileID: 2785922894358868204}
+  m_Layer: 0
+  m_Name: Override MatchManagement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &2623298254810310628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8997757539659364098}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.2, y: -1.51, z: -3.14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8183323876570374502}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2785922894358868204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8997757539659364098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0d409050b64f9408920ae7b792a543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  overrideIsOwner: 1
+  globalAttachmentsList:
+  - {fileID: 11400000, guid: e896a95b555f9c64c96ff5e7296195e6, type: 2}
+  - {fileID: 11400000, guid: 37ee397e79299d64793e92affc8882fd, type: 2}
+  - {fileID: 11400000, guid: 64138a1c4fe22584ebc96341b30e2e2c, type: 2}
+  - {fileID: 11400000, guid: d1d2f771ef3b73c44afd57f2ff7b6bff, type: 2}
+  - {fileID: 11400000, guid: 89fec2f0e91f51a46b6cde1f8aac3af4, type: 2}
+  - {fileID: 11400000, guid: dc46232bce1c67643803311019f69192, type: 2}
+  - {fileID: 11400000, guid: 0333a4d77f8a42342bb080c74727bc9b, type: 2}
+  - {fileID: 11400000, guid: 098532dd9b8970f4885cc75065c32dcb, type: 2}
+  - {fileID: 11400000, guid: db4794ccfefe2e340911bf7dea99fe49, type: 2}
+  - {fileID: 11400000, guid: f3780b66d4178984cbd9b6def7fa8c25, type: 2}
+  - {fileID: 11400000, guid: b69846cd3d93074419473ce7cae08412, type: 2}
+  - {fileID: 11400000, guid: 33572b4c6d294a043b04a8b103c270f5, type: 2}
+  - {fileID: 11400000, guid: 42ff4b6c73b55b249a02cda7e651348e, type: 2}
+  - {fileID: 11400000, guid: 090efb0a797d14b4fae224ae1c5de1b6, type: 2}
+  - {fileID: 11400000, guid: c27ea0521df14d742bdc99aa2190355c, type: 2}
+  - {fileID: 11400000, guid: e1c3943a905043f4bbf2af77d36f3916, type: 2}
+  - {fileID: 11400000, guid: 476f40e0e2eb90849965bfe44ed0e396, type: 2}
+  - {fileID: 11400000, guid: f845bec7cbd5eca45bf2dc51c385f29d, type: 2}
+  - {fileID: 11400000, guid: 8e0bddb69d58ddb4da7d07080c3f92f8, type: 2}
+  - {fileID: 11400000, guid: 5e6e5141fc1ea354597a8cc943b5140f, type: 2}
+  baseGuns:
+  - {fileID: 11400000, guid: 27f968b9b70baf2479d2c0044169a853, type: 2}
+  - {fileID: 11400000, guid: 345d4e08f6ffca9408ae925d7c9c85a0, type: 2}
+  - {fileID: 11400000, guid: efca6e1d6873b4e4ea917692e2fe765c, type: 2}
+  - {fileID: 11400000, guid: 32d506f0be6f2a64c9a137600b5378e7, type: 2}
+  unlockedGuns: 
+  attachmentIdsList: []
+  currentGunStats: []
+  DEBUG_Attachments: []
