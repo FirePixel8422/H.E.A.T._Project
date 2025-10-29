@@ -42,13 +42,13 @@ namespace FirePixel.Networking
         [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
         public void SendPlayerStatsChange_ServerRPC(int clientGameId, PlayerStatsBlock newValue)
         {
-            ReceivePlayerStatsChange_ClientRPC(clientGameId, newValue, GameIdRPCTargets.SendToOppositeClient(clientGameId));
+            ReceivePlayerStatsChange_ClientRPC(clientGameId, newValue);
         }
 
         [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
-        private void ReceivePlayerStatsChange_ClientRPC(int clientGameId, PlayerStatsBlock newValue, GameIdRPCTargets rpcTargets)
+        private void ReceivePlayerStatsChange_ClientRPC(int clientGameId, PlayerStatsBlock newValue)
         {
-            if (rpcTargets.IsTarget == false) return;
+            if (clientGameId == LocalClientGameId) return;
 
             PlayerStats[clientGameId] = newValue;
         }
