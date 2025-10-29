@@ -17,8 +17,8 @@ namespace FirePixel.Networking
         [SerializeField] private float spawnFreezeTime;
 
         [SerializeField] private PlayerStatsBlock defaultPlayerStats;
-        private NetworkStruct<PlayerStatsBlock>[] playerStats;
-        public PlayerStatsBlock GetPlayerStats(int clientGameId) => playerStats[clientGameId].Value;
+        public PlayerStatsBlock[] PlayerStats;
+
 
         private Vector3[] playerSpawnPositions;
         private Quaternion[] playerSpawnRotations;
@@ -29,23 +29,18 @@ namespace FirePixel.Networking
         {
             NetworkManager.SceneManager.OnLoadEventCompleted += (_, _, _, _) => MatchManager.Instance.RespawnLocalPlayer();
 
-            playerStats = new NetworkStruct<PlayerStatsBlock>[GlobalGameData.MaxPlayers];
-
-            playerStats[LocalClientGameId].Value = defaultPlayerStats;
+            PlayerStats = new PlayerStatsBlock[GlobalGameData.MaxPlayers];
 
             for (int i = 0; i < GlobalGameData.MaxPlayers; i++)
             {
-                if (i == LocalClientGameId)
-                {
-                    playerStats[LocalClientGameId].OnValueChanged += (PlayerStatsBlock stats) => SendPlayerStatsChange_ServerRPC(LocalClientGameId, stats);
-                }
+                PlayerStats[i] = defaultPlayerStats;
             }
         }
 
         #region Sync PlayerStatsBlock
 
         [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
-        private void SendPlayerStatsChange_ServerRPC(int clientGameId, PlayerStatsBlock newValue)
+        public void SendPlayerStatsChange_ServerRPC(int clientGameId, PlayerStatsBlock newValue)
         {
             ReceivePlayerStatsChange_ClientRPC(clientGameId, newValue, GameIdRPCTargets.SendToOppositeClient(clientGameId));
         }
@@ -55,7 +50,7 @@ namespace FirePixel.Networking
         {
             if (rpcTargets.IsTarget == false) return;
 
-            playerStats[clientGameId].SilentValue = newValue;
+            PlayerStats[clientGameId] = newValue;
         }
 
         #endregion

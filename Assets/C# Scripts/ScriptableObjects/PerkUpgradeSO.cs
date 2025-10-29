@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using FirePixel.Networking;
+using UnityEngine;
 
 
 
@@ -38,5 +39,7 @@ public class PerkUpgradeSO : UpgradeSO
 
         recoilMultiplier.ApplyToStat(ref playerDataLibrary.Stats.recoilMultiplier);
         spreadMultiplier.ApplyToStat(ref playerDataLibrary.Stats.spreadMultiplier);
+
+        PlayerManager.Instance.SendPlayerStatsChange_ServerRPC(ClientManager.LocalClientGameId, playerDataLibrary.Stats);
     }
 }
