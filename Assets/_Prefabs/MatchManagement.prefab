@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 446557960
+  GlobalObjectIdHash: 2942647327
   InScenePlacedSourceGlobalObjectIdHash: 2942647327
   DeferredDespawnTick: 0
   Ownership: 1
@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  isNetworkSystemInitilized: 0
   playerPrefab: {fileID: 3487219833232609719, guid: 33ae4ad9ad2946a4d92fcec06e7c86be,
     type: 3}
   spawnFreezeTime: 1
@@ -345,6 +346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9779f4ee232534b991089aa12f22c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  matchUI: {fileID: 2930070472349729611}
+  matchSceneName: Luuk Test Scene
   scoreTextObj:
   - {fileID: 3335425139369870258}
   - {fileID: 6302728500417650720}
@@ -1650,6 +1653,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &2930070472349729611 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1454341121487101094, guid: 8657184cfce1bbb43aa41cc565aa1e17,
+    type: 3}
+  m_PrefabInstance: {fileID: 4361569222581493741}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3335425139369870258 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1355204600322563167, guid: 8657184cfce1bbb43aa41cc565aa1e17,
