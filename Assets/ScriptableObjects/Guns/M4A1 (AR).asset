@@ -53,7 +53,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        valueMultiplier: 1
+        ValueMultiplier: 0.05
         sampleCount: 75
       bulletSize: 0.05
       bulletHoleFXSize:
@@ -193,7 +193,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        valueMultiplier: 0.025
+        ValueMultiplier: 1
         sampleCount: 50
       stabilityLoss: 1
       stabilityRecovery: 10
@@ -202,6 +202,7 @@ MonoBehaviour:
       inputBufferTime: 0
     audioStats:
       shootAudioClip: {fileID: 8300000, guid: 5dbc74a65da58144aa0a20190bcd4909, type: 3}
+      volumeMultiplier: 0
       minMaxPitch:
         min: 0.55
         max: 0.7
@@ -316,7 +317,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        valueMultiplier: 1
+        ValueMultiplier: 1
         sampleCount: 75
   baseAttachments:
   - {fileID: 11400000, guid: 37ee397e79299d64793e92affc8882fd, type: 2}

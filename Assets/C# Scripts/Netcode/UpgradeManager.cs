@@ -164,6 +164,34 @@ namespace FirePixel.Networking
             }
             globalUpgradesList[upgradeId].ApplyUpgrade(GunManager.Instance, PlayerDataLibrary.LocalInstance);
 
+
+
+
+
+
+
+
+
+
+
+
+            ///DEBUG
+            ///DEBUG
+            ///DEBUG
+            ///DEBUG
+            ///DEBUG
+            ///DEBUG
+            ///DEBUG
+            ///DEBUG
+            ///DEBUG
+            ///DEBUG
+
+
+
+
+
+            GunManager.Instance.UpdateAttachentDEBUG();
+
             //PlayerDataLibrary.LocalInstance.GunHandler.UpdateGunData();
 
             MatchManager.Instance.OnEndUpgradePhase_ServerRPC();

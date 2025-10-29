@@ -23,6 +23,8 @@ public class GunManager : SmartNetworkBehaviour
     [SerializeField] ArrayWrapper<int2>[] attachmentIdsList;
     [SerializeField] private CompleteGunStatsSet[] currentGunStats;
 
+    [SerializeField] private ArrayWrapper<ArrayWrapper<GunAttachmentSO>>[] DEBUG_Attachments;
+
     public int GunCount => baseGuns.Length;
 
     private int currentGunId;
@@ -189,4 +191,39 @@ public class GunManager : SmartNetworkBehaviour
         }
         base.OnDestroy();
     }
+
+
+    public void UpdateAttachentDEBUG()
+    {
+        int gunCount = GunCount;
+        DEBUG_Attachments = new ArrayWrapper<ArrayWrapper<GunAttachmentSO>>[gunCount];
+
+        for (int gunId = 0; gunId < gunCount; gunId++)
+        {
+            // Initialize level 1
+            DEBUG_Attachments[gunId] = new ArrayWrapper<ArrayWrapper<GunAttachmentSO>>
+            {
+                Value = new ArrayWrapper<GunAttachmentSO>[5]
+            };
+
+            for (int attachmentTypeId = 0; attachmentTypeId < 5; attachmentTypeId++)
+            {
+                // Initialize level 2
+                DEBUG_Attachments[gunId].Value[attachmentTypeId] = new ArrayWrapper<GunAttachmentSO>
+                {
+                    Value = new GunAttachmentSO[2] // two player slots (0/1)
+                };
+
+                for (int playerId = 0; playerId < 2; playerId++)
+                {
+                    int globalAttachmentId = attachmentIdsList[gunId].Value[attachmentTypeId][playerId];
+                    if (globalAttachmentId == -1 || globalAttachmentId >= globalAttachmentsList.Length)
+                        continue;
+
+                    DEBUG_Attachments[gunId].Value[attachmentTypeId].Value[playerId] = globalAttachmentsList[globalAttachmentId];
+                }
+            }
+        }
+    }
+
 }
