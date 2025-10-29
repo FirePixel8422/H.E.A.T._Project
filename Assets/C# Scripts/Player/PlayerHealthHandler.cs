@@ -1,5 +1,4 @@
 ﻿using FirePixel.Networking;
-using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -31,8 +30,39 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
         }
     }
 
-    public void GainLifeStealHealth(float damageDealt, float lifeStealMultiplier, float overFlowMultiplier)
+    private NetworkStateMachine stateMachine;
+    private PlayerHUDHandler hudHandler;
+    private PlayerStatsBlock stats;
+
+
+    private void Awake()
     {
+        stateMachine = GetComponent<NetworkStateMachine>();
+        hudHandler = GetComponent<PlayerHUDHandler>();
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        ResetHealth();
+    }
+
+    public void ResetHealth()
+    {
+        stats = GetComponent<PlayerDataLibrary>().Stats;
+        CurrentHealth = MaxHealth;
+    }
+
+    [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
+    public void GainLifeStealHealth_ServerRPC(float damageDealt, float lifeStealMultiplier, float overFlowMultiplier, int clientGameId)
+    {
+        GainLifeStealHealth_ClientRPC(damageDealt, lifeStealMultiplier, overFlowMultiplier, GameIdRPCTargets.SendToOppositeClient(clientGameId));
+    }
+
+    [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
+    private void GainLifeStealHealth_ClientRPC(float damageDealt, float lifeStealMultiplier, float overFlowMultiplier, GameIdRPCTargets rpcTargets)
+    {
+        if (rpcTargets.IsTarget == false) return;
+
         float missingHealth = MaxHealth - Mathf.Min(CurrentHealth, MaxHealth);
 
         // Base healing amount (clamped to missing health)
@@ -50,38 +80,12 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
         CurrentHealth += lifeStealAmount;
     }
 
-    private NetworkStateMachine stateMachine;
-    private PlayerHUDHandler hudHandler;
-    private PlayerStatsBlock stats;
-
-
-    private void Awake()
-    {
-        stateMachine = GetComponent<NetworkStateMachine>();
-        hudHandler = GetComponent<PlayerHUDHandler>();
-    }
-
-    public override void OnNetworkSpawn()
-    {
-        stats = GetComponent<PlayerDataLibrary>().Stats;
-        if (IsOwner)
-        {
-            ResetHealth();
-        }
-    }
-
-    public void ResetHealth()
-    {
-        stats = GetComponent<PlayerDataLibrary>().Stats;
-        CurrentHealth = MaxHealth;
-    }
-
 
     #region Take Damage, Update Health
 
-    /// <summary>
-    /// Make this player take damage locally and send to other clients. if health hits 0, die and send to other clients.
-    /// </summary>
+        /// <summary>
+        /// Make this player take damage locally and send to other clients. if health hits 0, die and send to other clients.
+        /// </summary>
     public void DealDamage(float damage, bool headShot, Vector3 hitPoint, Vector3 hitDir, out HitTypeResult hitTypeResult)
     {
         bool dead = RecieveDamage(damage);

@@ -48,6 +48,7 @@ namespace FirePixel.Networking
         [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
         private void ReceivePlayerStatsChange_ClientRPC(int clientGameId, PlayerStatsBlock newValue)
         {
+            DebugLogger.Log("STats upgraded for player: " + clientGameId + "Updating its stats on this client? > " + (clientGameId != LocalClientGameId));
             if (clientGameId == LocalClientGameId) return;
 
             PlayerStats[clientGameId] = newValue;

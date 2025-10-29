@@ -452,7 +452,7 @@ public class GunHandler : NetworkBehaviour
                     float damage = coreStats.GetDamageOutput(hit.distance, targetHitBox.IsHeadHitBox);
                     damage *= stats.damageMultiplier;
 
-                    PlayerDataLibrary.LocalInstance.HealthHandler.GainLifeStealHealth(damage, stats.lifeStealMultiplier, stats.lifeStealOverflowMultiplier);
+                    PlayerDataLibrary.LocalInstance.HealthHandler.GainLifeStealHealth_ServerRPC(damage, stats.lifeStealMultiplier, stats.lifeStealOverflowMultiplier, ClientManager.LocalClientGameId);
 
                     targetHitBox.DealDamageToTargetObject(damage, targetHitBox.IsHeadHitBox, hit.point, ray.direction, out HitTypeResult hitTypeResult);
 
