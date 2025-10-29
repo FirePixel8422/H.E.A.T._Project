@@ -13,8 +13,10 @@ public class DeathCollider : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        DebugLogger.LogWarning("touched");
         if (other.transform.TryGetComponent(out SmartHitBox hitBox))
         {
+        DebugLogger.LogWarning("player touched");
             hitBox.DealDamageToTargetObject(int.MaxValue, false, default, default, out _);
         }
     }

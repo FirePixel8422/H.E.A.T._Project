@@ -36,6 +36,7 @@ public struct GunAudioStats
     {
         shootAudioClip = null,
         volumeMultiplier = 1,
+
         minMaxPitch = new MinMaxFloat(0.95f, 1.05f),
         minMaxPitchAtMaxHeat = new MinMaxFloat(0.95f, 1.05f),
 
