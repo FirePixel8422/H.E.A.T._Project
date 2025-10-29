@@ -11,9 +11,9 @@ public class DeathCollider : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.TryGetComponent(out SmartHitBox hitBox))
+        if (other.transform.TryGetComponent(out SmartHitBox hitBox))
         {
             hitBox.DealDamageToTargetObject(int.MaxValue, false, default, default, out _);
         }
