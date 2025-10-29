@@ -44,7 +44,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        ValueMultiplier: 0.05
+        ValueMultiplier: 1
         sampleCount: 75
       bulletSize: 0.05
       bulletHoleFXSize:
@@ -98,7 +98,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        ValueMultiplier: 1
+        ValueMultiplier: 0.05
         sampleCount: 50
       stabilityLoss: 0.5
       stabilityRecovery: 0.5
