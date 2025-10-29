@@ -21,31 +21,44 @@ public class ButtonFunctions : NetworkBehaviour
     public GameObject cinemachinecam;
     public GameObject armoryPlayer;
 
+    [Header("stink fade :/")]
+    public GameObject fade;
+
     #region MainScreen
     public void GoToLobbyButton()
     {
         mainScreens[0].SetActive(false);
         mainScreens[1].SetActive(true);
+
+        fade.SetActive(false);
     }
     public void GoToArmory()
     {
         animator.SetInteger("UI", 1);
 
         StartCoroutine(WaitForArmoryAnim(animationWaitTime[0]));
+
+        fade.SetActive(false);
     }
     public void GoToSettings()
     {
         mainScreens[0].SetActive(false);
         mainScreens[5].SetActive(true);
+
+        fade.SetActive(false);
     }
     public void GoToCredits()
     {
         mainScreens[0].SetActive(false);
         mainScreens[6].SetActive(true);
+
+        fade.SetActive(false);
     }
     public void ExitGame()
     {
         Application.Quit();
+
+        fade.SetActive(false);
     }
     #endregion
 
