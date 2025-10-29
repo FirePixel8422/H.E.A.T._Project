@@ -23,6 +23,11 @@ public class PlayerStatsBlock : INetworkSerializable
     public float recoilMultiplier = 1;
     public float spreadMultiplier = 1;
 
+    public PlayerStatsBlock Clone()
+    {
+        return MemberwiseClone() as PlayerStatsBlock;
+    }
+
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {

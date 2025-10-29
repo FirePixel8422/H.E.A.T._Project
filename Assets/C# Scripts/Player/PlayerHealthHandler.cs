@@ -53,16 +53,14 @@ public class PlayerHealthHandler : NetworkBehaviour, IDamagable
     }
 
     [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
-    public void GainLifeStealHealth_ServerRPC(float damageDealt, float lifeStealMultiplier, float overFlowMultiplier, int clientGameId)
+    public void GainLifeStealHealth_ServerRPC(float damageDealt, float lifeStealMultiplier, float overFlowMultiplier)
     {
-        GainLifeStealHealth_ClientRPC(damageDealt, lifeStealMultiplier, overFlowMultiplier, GameIdRPCTargets.SendToOppositeClient(clientGameId));
+        GainLifeStealHealth_ClientRPC(damageDealt, lifeStealMultiplier, overFlowMultiplier);
     }
 
     [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
-    private void GainLifeStealHealth_ClientRPC(float damageDealt, float lifeStealMultiplier, float overFlowMultiplier, GameIdRPCTargets rpcTargets)
+    private void GainLifeStealHealth_ClientRPC(float damageDealt, float lifeStealMultiplier, float overFlowMultiplier)
     {
-        if (rpcTargets.IsTarget == false) return;
-
         float missingHealth = MaxHealth - Mathf.Min(CurrentHealth, MaxHealth);
 
         // Base healing amount (clamped to missing health)
