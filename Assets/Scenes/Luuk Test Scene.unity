@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0.013
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.073584855, g: 0.073584855, b: 0.073584855, a: 1}
-  m_AmbientEquatorColor: {r: 0.22529674, g: 0.1306539, b: 0.11519887, a: 1}
-  m_AmbientGroundColor: {r: 0.46037722, g: 0.33407208, b: 0.09294407, a: 1}
+  m_AmbientSkyColor: {r: 0.4716981, g: 0.2902965, b: 0.16464928, a: 1}
+  m_AmbientEquatorColor: {r: 0.42767292, g: 0.18444115, b: 0.1439025, a: 1}
+  m_AmbientGroundColor: {r: 0.26415092, g: 0.19301492, b: 0.16364065, a: 1}
   m_AmbientIntensity: 0
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 1, g: 1, b: 1, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 356decb03293f22498cb5565d128c9da, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -15308,7 +15308,6 @@ GameObject:
   m_Component:
   - component: {fileID: 318090451}
   - component: {fileID: 318090450}
-  - component: {fileID: 318090449}
   - component: {fileID: 318090453}
   - component: {fileID: 318090452}
   - component: {fileID: 318090454}
@@ -15319,54 +15318,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!23 &318090449
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 318090447}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &318090450
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -86743,9 +86694,9 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.025324257
-          y: 0.9973971
-          z: -0.06548728
-          w: -0.016396483
+          y: 0.99739724
+          z: -0.06548729
+          w: -0.016396485
     - Position:
         x: -3.0099983
         y: 0
@@ -96389,11 +96340,11 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 0.19607843}
-        key1: {r: 1, g: 1, b: 1, a: 0.2509804}
-        key2: {r: 0, g: 0, b: 0, a: 0.19607843}
-        key3: {r: 0, g: 0, b: 0, a: 0.23137255}
-        key4: {r: 0, g: 0, b: 0, a: 0.07058824}
+        key0: {r: 1, g: 1, b: 1, a: 0.35686275}
+        key1: {r: 1, g: 1, b: 1, a: 0.34117648}
+        key2: {r: 0, g: 0, b: 0, a: 0.35686275}
+        key3: {r: 0, g: 0, b: 0, a: 0.34509805}
+        key4: {r: 0, g: 0, b: 0, a: 0.19607843}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
@@ -96407,7 +96358,7 @@ ParticleSystem:
         ctime7: 0
         atime0: 0
         atime1: 12850
-        atime2: 28913
+        atime2: 29041
         atime3: 45232
         atime4: 65535
         atime5: 0
