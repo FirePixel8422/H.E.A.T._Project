@@ -25,34 +25,34 @@ public class SpawnPointHandler : MonoBehaviour
     {
         if (Instance == null || Instance.spawnPoints.Length < 2)
         {
-            DebugLogger.LogWarning("No or too little SpawnPoints in this fighting scene found, please place a SpawnPointHandler and assign at least 2 spawnPoints IF you want a network player in this scene");
+            DebugLogger.LogWarning("No or too little SpawnPoints in this fighting scene found. Place a SpawnPointHandler and assign at least 2 spawnPoints if you want a network player in this scene.");
             return (false, null, null);
         }
 
-        int spawns = Instance.spawnPoints.Length;
-        Vector3[] positions = new Vector3[spawns];
-        Quaternion[] rotations = new Quaternion[spawns];
+        int totalSpawns = Instance.spawnPoints.Length;
+        int playerLimit = GlobalGameData.MaxPlayers;
+        int count = Mathf.Min(totalSpawns, playerLimit);
 
-        for (int i = 0; i < spawns; i++)
+        Vector3[] positions = new Vector3[count];
+        Quaternion[] rotations = new Quaternion[count];
+
+        for (int i = 0; i < count; i++)
         {
             positions[i] = Instance.spawnPoints[i].position;
             rotations[i] = Instance.spawnPoints[i].rotation;
         }
 
-        // Trim or expand to match player limit
-        Array.Resize(ref positions, GlobalGameData.MaxPlayers);
-        Array.Resize(ref rotations, GlobalGameData.MaxPlayers);
-
-        // Optional: shuffle both arrays with the same random order
-        for (int i = 0; i < positions.Length - 1; i++)
+        // Fisher-Yates shuffle (uniform)
+        for (int i = count - 1; i > 0; i--)
         {
-            int j = UnityEngine.Random.Range(i, Instance.spawnPoints.Length);
+            int j = UnityEngine.Random.Range(0, i + 1);
             (positions[i], positions[j]) = (positions[j], positions[i]);
             (rotations[i], rotations[j]) = (rotations[j], rotations[i]);
         }
 
         return (true, positions, rotations);
     }
+
 
 
     private void OnDrawGizmos()
