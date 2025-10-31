@@ -46,7 +46,7 @@ public class SpawnPointHandler : MonoBehaviour
         // Optional: shuffle both arrays with the same random order
         for (int i = 0; i < positions.Length - 1; i++)
         {
-            int j = UnityEngine.Random.Range(i, positions.Length);
+            int j = UnityEngine.Random.Range(i, Instance.spawnPoints.Length);
             (positions[i], positions[j]) = (positions[j], positions[i]);
             (rotations[i], rotations[j]) = (rotations[j], rotations[i]);
         }

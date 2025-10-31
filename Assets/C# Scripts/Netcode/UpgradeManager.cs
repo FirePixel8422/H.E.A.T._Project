@@ -14,6 +14,7 @@ namespace FirePixel.Networking
 
         [SerializeField] private DeathBehavior deathBehavior;
         [SerializeField] private UpgradeUISlot[] uiSlots;
+        public int UpgradeCount => uiSlots.Length;
 
         [Header("Glock, AR, UMP, AWS")]
         [SerializeField] private ArrayWrapper<UpgradeSO>[] gunAttachmentUpgrades;
@@ -50,7 +51,7 @@ namespace FirePixel.Networking
         {
             deathBehavior.StartUpgradeMenus();
 
-            UpgradeSO[] upgrades = GetRandomUpgrades(GlobalGameData.UpgradeCount);
+            UpgradeSO[] upgrades = GetRandomUpgrades(UpgradeCount);
 
             // Enable and setup up UI slots for found upgrades
             int upgradeCount = upgrades.Length;
@@ -64,7 +65,7 @@ namespace FirePixel.Networking
             }
 
             //If there are too little upgrades, disable unused UI slots
-            for (int i = 0; i < GlobalGameData.UpgradeCount - upgradeCount; i++)
+            for (int i = 0; i < UpgradeCount - upgradeCount; i++)
             {
                 uiSlots[i].SetActive(false);
             }

@@ -10,6 +10,8 @@ public class MatchUIHandler : MonoBehaviour
     public static MatchUIHandler Instance { get; private set; }
 
     [SerializeField] private GameObject matchUI;
+    [SerializeField] private TextMeshProUGUI roundResultTestObj;
+
     [SerializeField] string matchSceneName = "Luke Test Scene";
 
     [SerializeField] private TextMeshProUGUI[] scoreTextObj;
@@ -57,6 +59,7 @@ public class MatchUIHandler : MonoBehaviour
 
     public void AddPoint(int clientGameId)
     {
+        roundResultTestObj.text = ClientManager.LocalClientGameId == clientGameId ? "You Won!" : "You Lost...";
         roundPoints[clientGameId] += 1;
 
         scoreTextObj[clientGameId].text = roundPoints[clientGameId].ToString();
