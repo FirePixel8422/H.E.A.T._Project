@@ -71,8 +71,8 @@ namespace FirePixel.Networking
             autoTransitiosCOs = new Coroutine[animationLayerCount];
 
             idleAnimationHash = Animator.StringToHash(idleAnimation);
-            crouchAnimationHash = Animator.StringToHash(crouchAnimation);
-            walkAnimationHash = Animator.StringToHash(walkAnimation);
+            //crouchAnimationHash = Animator.StringToHash(crouchAnimation);
+            //walkAnimationHash = Animator.StringToHash(walkAnimation);
             sprintAnimationHash = Animator.StringToHash(sprintAnimation);
 
             jumpAnimationHash = Animator.StringToHash(jumpAnimation);
@@ -190,14 +190,6 @@ namespace FirePixel.Networking
             TryTransitionAnimation(jumpAnimationHash, transitionDuration);
 
             AutoTransition(fallAnimationHash, transitionDuration);
-        }
-
-
-        public void ShakeGooglyEyes(float transitionDuration = 0.25f)
-        {
-            TryTransitionAnimation(shakeGooglyEyesAnimationHash, transitionDuration, 1, 1);
-
-            AutoTransition(eyesCuriousAnimationHash, transitionDuration, 1, 1);
         }
 
 
