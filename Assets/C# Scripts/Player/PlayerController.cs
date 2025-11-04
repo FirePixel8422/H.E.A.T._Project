@@ -159,7 +159,7 @@ public class PlayerController : NetworkBehaviour
     {
         mouseInput = ctx.ReadValue<Vector2>();
 
-        float sensitivityMultiplier = mouseSensitivity * camHandler.GetADSSensitivityMultiplier();
+        float sensitivityMultiplier = mouseSensitivity * SettingsBehavior.SensitivityMultiplierHip;
 
         hudHandler.AddCrossHairInstability(Vector2.Distance(mouseInput, Vector2.zero) * sensitivityMultiplier * Time.deltaTime);
 
