@@ -65,7 +65,7 @@ namespace FirePixel.Networking
 
         private void Awake()
         {
-            anim = GetComponent<Animator>();
+            anim = GetComponentInChildren<Animator>();
             ragDollController = GetComponentInChildren<RagDollController>(true);
 
             animationLayerCount = anim.layerCount;
