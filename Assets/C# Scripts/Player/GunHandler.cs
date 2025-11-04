@@ -11,6 +11,7 @@ using UnityEngine.InputSystem;
 public class GunHandler : NetworkBehaviour
 {
     [SerializeField] private Transform gunHolder;
+    [SerializeField] private RenderTexture scopeTexture;
     [SerializeField] private LayerMask playerColliderMask;
 
     private GunRefHolder gunRefHolder;
@@ -252,6 +253,7 @@ public class GunHandler : NetworkBehaviour
         if (gunRefHolder.ScopeCamera != null)
         {
             gunRefHolder.ScopeCamera.fieldOfView = camHandler.BaseFOV * adsHandler.ADSFovMultiplier * (1 - adsHandler.ADSFovMultiplier);
+            gunRefHolder.ScopeCamera.targetTexture = new RenderTexture(scopeTexture);
         }
 
         // adsHandler.OnSwapGun is called too fast on players with overrideIsOwner on in non network scenes
