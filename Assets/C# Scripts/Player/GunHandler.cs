@@ -86,6 +86,7 @@ public class GunHandler : NetworkBehaviour
     public void OnADS(InputAction.CallbackContext ctx)
     {
         adsHandler.OnZoomInput(ctx.performed);
+        stateMachine.ChangeWeaponAnimation(ctx.performed, CurrentGunId);
     }
 
     public void OnMouseMovement(InputAction.CallbackContext ctx)
@@ -248,8 +249,6 @@ public class GunHandler : NetworkBehaviour
             out gunShakeHandler.stats,
             out gunSwayHandler.stats,
             out adsHandler.stats);
-
-        stateMachine.ChangeWeaponAnimation(adsHandler.ZoomedInPercent < 0.5f, CurrentGunId);
 
         gunSwayHandler.OnSwapGun(gunRefHolder.transform, adsHandler);
         gunEmmisionHandler.OnSwapGun(gunRefHolder.EmissionMatInstance);
