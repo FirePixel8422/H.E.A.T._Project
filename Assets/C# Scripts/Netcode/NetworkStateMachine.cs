@@ -17,17 +17,20 @@ namespace FirePixel.Networking
         [Header("Animation Names")]
         [SerializeField] private string idleAnimation = "Idle";
 
-        [SerializeField] private string crouchAnimation = "Crouch";
-        [SerializeField] private string crouchWalkAnimation = "CrouchWalk";
+        [SerializeField] private string crouchAnimationUp = "CrouchUp";
+        [SerializeField] private string crouchAnimationDown = "CrouchDown";
+        [SerializeField] private string[] crouchWalkAnimations = { "L", "R", "F", "D" };
 
-        [SerializeField] private string walkAnimation = "Walk";
+        [SerializeField] private string[] weaponHipAnimations = { "Pistol", "AR", "UMP", "Smimper" };
+        [SerializeField] private string[] weaponAdsAnimations = { "Pistol", "AR", "UMP", "Smimper" };
+
+        [SerializeField] private string[] walkAnimations = { "L", "R", "F", "D" };
+        [SerializeField] private string runAnimation = "Run";
+
         [SerializeField] private string sprintAnimation = "Sprint";
 
         [SerializeField] private string jumpAnimation = "Jump";
         [SerializeField] private string fallAnimation = "Falling";
-
-        [SerializeField] private string shakeGooglyEyesAnimation = "ShakeGooglyEyes";
-        [SerializeField] private string eyesCuriousAnimation = "EyesCurious";
 
 
         private int[] currentAnimationHashes;
@@ -40,9 +43,6 @@ namespace FirePixel.Networking
         
         private int jumpAnimationHash;
         private int fallAnimationHash;
-        
-        private int shakeGooglyEyesAnimationHash;
-        private int eyesCuriousAnimationHash;
         
         #endregion
 
@@ -72,15 +72,11 @@ namespace FirePixel.Networking
 
             idleAnimationHash = Animator.StringToHash(idleAnimation);
             crouchAnimationHash = Animator.StringToHash(crouchAnimation);
-            crouchWalkAnimationHash = Animator.StringToHash(crouchWalkAnimation);
             walkAnimationHash = Animator.StringToHash(walkAnimation);
             sprintAnimationHash = Animator.StringToHash(sprintAnimation);
 
             jumpAnimationHash = Animator.StringToHash(jumpAnimation);
             fallAnimationHash = Animator.StringToHash(fallAnimation);
-
-            shakeGooglyEyesAnimationHash = Animator.StringToHash(shakeGooglyEyesAnimation);
-            eyesCuriousAnimationHash = Animator.StringToHash(eyesCuriousAnimation);
 
             // Get and set the start animation hashes
             for (int i = 0; i < animationLayerCount; i++)
@@ -91,8 +87,6 @@ namespace FirePixel.Networking
                 anim.CrossFadeInFixedTime(currentAnimationHashes[i], 0, i);
             }
         }
-
-
 
 
         #region Change/Transition Animation + Server Sync Functions
@@ -195,7 +189,7 @@ namespace FirePixel.Networking
         {
             TryTransitionAnimation(jumpAnimationHash, transitionDuration);
 
-            AutoTransition(idleAnimationHash, transitionDuration);
+            AutoTransition(fallAnimationHash, transitionDuration);
         }
 
 
