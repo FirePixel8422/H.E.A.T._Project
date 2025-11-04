@@ -998,7 +998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2369081872
+  GlobalObjectIdHash: 2728525203
   InScenePlacedSourceGlobalObjectIdHash: 2369081872
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1648,8 +1648,8 @@ MonoBehaviour:
   - EyesCurious
   - Empty
   idleAnimation: Idle
-  crouchAnimationUp: Crouch.up.001
-  crouchAnimationDown: Crouch.down.001
+  crouchAnimationUp: Crouch_up_001
+  crouchAnimationDown: Crouch_down_001
   crouchWalkAnimations:
   - Crouch.walk.left
   - Crouch.walk.right
@@ -1750,7 +1750,8 @@ AudioSource:
   m_GameObject: {fileID: 3487219833232609719}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1742461515144718483, guid: 923d0923b3d0bd54cae834e03e560fd6,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -1847,7 +1848,8 @@ AudioSource:
   m_GameObject: {fileID: 3487219833232609719}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1742461515144718483, guid: 923d0923b3d0bd54cae834e03e560fd6,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: c4339737ead7903449080f7c209302ea, type: 3}
   m_PlayOnAwake: 0
@@ -1944,7 +1946,8 @@ AudioSource:
   m_GameObject: {fileID: 3487219833232609719}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1742461515144718483, guid: 923d0923b3d0bd54cae834e03e560fd6,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: c4339737ead7903449080f7c209302ea, type: 3}
   m_PlayOnAwake: 0
