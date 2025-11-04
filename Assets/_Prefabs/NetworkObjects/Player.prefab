@@ -1493,6 +1493,7 @@ MonoBehaviour:
       offsetSmooth: 12
       swayRecoverSmooth: 15
       gunOffset: {x: 0, y: 0, z: 0}
+  stateMachine: {fileID: 0}
   gunShotSource: {fileID: 5837324410720302518}
   gunOverheatSource: {fileID: 6957241378848993016}
   onHitSource: {fileID: 3482466836178550512}
@@ -1650,10 +1651,10 @@ MonoBehaviour:
   crouchAnimationUp: Crouch.up.001
   crouchAnimationDown: Crouch.down.001
   crouchWalkAnimations:
-  - Walk.left.001
-  - Walk.right
-  - Walk.001
-  - Walk.back
+  - Crouch.walk.left
+  - Crouch.walk.right
+  - Crouch.walk.001
+  - Crouch.walk.back
   weaponHipAnimations:
   - Pistol.Basepose
   - M4A1.BasicPose
@@ -1665,10 +1666,10 @@ MonoBehaviour:
   - SMG.Basepose.2
   - Sniper.BasePose.2
   walkAnimations:
-  - L
-  - R
-  - F
-  - D
+  - Walk.left.001
+  - Walk.right
+  - Walk.001
+  - Walk.back
   runAnimation: Run
   jumpAnimation: Jump
   fallAnimation: Fall
