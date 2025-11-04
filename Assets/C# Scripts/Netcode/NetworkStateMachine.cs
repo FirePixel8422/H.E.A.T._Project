@@ -239,7 +239,7 @@ namespace FirePixel.Networking
 
         public void ChangeWeaponAnimation(bool hipFire, int weaponId, float transitionDuration = 0.25f)
         {
-            TryTransitionAnimation(hipFire ? weaponHipAnimationHashes[weaponId] : weaponAdsAnimationHashes[weaponId], transitionDuration, isGunAnimator: true);
+            TryTransitionAnimation(hipFire ? weaponHipAnimationHashes[weaponId] : weaponAdsAnimationHashes[weaponId], transitionDuration, layer: 1, isGunAnimator: true);
         }
 
 
