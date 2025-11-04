@@ -270,7 +270,7 @@ public class GunHandler : NetworkBehaviour
 
             RenderTexture rTexture = new RenderTexture(scopeTexture);
             gunRefHolder.ScopeCamera.targetTexture = rTexture;
-            gunRefHolder.GetComponentInChildren<Renderer>().material.mainTexture = rTexture;
+            gunRefHolder.GetComponentInChildren<Renderer>().material.SetTexture("_BaseMap", rTexture);
         }
 
         // adsHandler.OnSwapGun is called too fast on players with overrideIsOwner on in non network scenes
