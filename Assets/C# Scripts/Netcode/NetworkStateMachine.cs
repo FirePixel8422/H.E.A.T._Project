@@ -239,15 +239,15 @@ namespace FirePixel.Networking
 
         public void ChangeWeaponAnimation(bool hipFire, int weaponId, float transitionDuration = 0.25f)
         {
-            AutoTransition(hipFire ? weaponHipAnimationHashes[weaponId] : weaponAdsAnimationHashes[weaponId], transitionDuration);
+            TryTransitionAnimation(hipFire ? weaponHipAnimationHashes[weaponId] : weaponAdsAnimationHashes[weaponId], transitionDuration, isGunAnimator: true);
         }
 
 
         public void Jump(float transitionDuration = 0.25f)
         {
             TryTransitionAnimation(jumpAnimationHash, transitionDuration);
-            
-            StartCoroutine(AutoTransitionCoroutine(fallAnimationHash, transitionDuration));
+
+            AutoTransition(fallAnimationHash, transitionDuration);
         }
 
 

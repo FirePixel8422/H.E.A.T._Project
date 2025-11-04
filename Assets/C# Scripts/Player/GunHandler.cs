@@ -37,6 +37,7 @@ public class GunHandler : NetworkBehaviour
     [SerializeField] private GunShakeHandler gunShakeHandler;
     [SerializeField] private GunSwayHandler gunSwayHandler;
     [SerializeField] private GunEmmisionHandler gunEmmisionHandler;
+    [SerializeField] private NetworkStateMachine stateMachine;
 
     public GunHeatSink CurrentHeatSink => heatSinkHandler[CurrentGunId];
 
@@ -246,6 +247,8 @@ public class GunHandler : NetworkBehaviour
             out gunShakeHandler.stats,
             out gunSwayHandler.stats,
             out adsHandler.stats);
+
+        stateMachine.ChangeWeaponAnimation(adsHandler.ZoomedInPercent < 0.5f, CurrentGunId);
 
         gunSwayHandler.OnSwapGun(gunRefHolder.transform, adsHandler);
         gunEmmisionHandler.OnSwapGun(gunRefHolder.EmissionMatInstance);

@@ -19,10 +19,6 @@ public class CameraHandler
     [SerializeField] private float currentFOV;
 
 
-    private float sensitivityMultiplier = 1;
-
-
-
     [SerializeField] private float mainCamMaxTiltAngle = 90;
 
     /// <summary>
@@ -56,7 +52,7 @@ public class CameraHandler
         float baseHalf = baseFOV * 0.5f * Mathf.Deg2Rad;
         float zoomHalf = currentFOV * 0.5f * Mathf.Deg2Rad;
 
-        return math.tan(zoomHalf) / math.tan(baseHalf) * sensitivityMultiplier;
+        return math.tan(zoomHalf) / math.tan(baseHalf) * SettingsBehavior.SensitivityMultiplierADS;
     }
 
     public void SetFOV(float fov)
@@ -73,8 +69,6 @@ public class CameraHandler
 
         mainCamera.fieldOfView = currentFOV;
         gunCamera.fieldOfView = currentFOV;
-
-        this.sensitivityMultiplier = sensitivityMultiplier;
     }
 
     /// <summary>
