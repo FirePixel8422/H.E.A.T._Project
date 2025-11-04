@@ -181,7 +181,7 @@ namespace FirePixel.Networking
         {
             if (rpcTargets.IsTarget == false) return;
 
-            TransitionAnimation(animationHash, transitionDuration, speed, layer);
+            TransitionAnimation(animationHash, transitionDuration, speed, layer, isGunAnimator);
         }
 
         #endregion
@@ -246,8 +246,8 @@ namespace FirePixel.Networking
         public void Jump(float transitionDuration = 0.25f)
         {
             TryTransitionAnimation(jumpAnimationHash, transitionDuration);
-
-            AutoTransition(fallAnimationHash, transitionDuration);
+            
+            StartCoroutine(AutoTransitionCoroutine(fallAnimationHash, transitionDuration));
         }
 
 
