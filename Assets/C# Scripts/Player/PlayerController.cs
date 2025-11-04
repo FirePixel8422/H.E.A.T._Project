@@ -23,6 +23,7 @@ public class PlayerController : NetworkBehaviour
     [Header("What directions is played allowed to sprint at and how fast")]
     [SerializeField] private SprintDirection sprintDirection = SprintDirection.All;
     [SerializeField] private float airSprintMultiplier = 1;
+    [SerializeField] private AudioSource footStepsSource;
 
     /// <summary>
     /// Converts user friendly <see cref="sprintDirection"/> enum to a float value for dot product checks.
@@ -128,18 +129,37 @@ public class PlayerController : NetworkBehaviour
         moveDir = ctx.ReadValue<Vector2>();
 
         stateMachine.UpdateMovementState(IsMoving, crouchInput, IsSprinting, GetMoveDirectionId(), 0.1f);
+        InvokeSoundCallback(crouchInput, sprintInput);
     }
     public void OnCrouch(InputAction.CallbackContext ctx)
     {
         crouchInput = ctx.ReadValueAsButton();
 
         stateMachine.UpdateMovementState(IsMoving, crouchInput, IsSprinting, GetMoveDirectionId(), 0.15f);
+        //InvokeSoundCallback();
     }
     public void OnSprint(InputAction.CallbackContext ctx)
     {
         sprintInput = ctx.ReadValueAsButton();
 
         stateMachine.UpdateMovementState(IsMoving, crouchInput, IsSprinting, GetMoveDirectionId(), 0.15f);
+        //InvokeSoundCallback();
+    }
+
+    private void InvokeSoundCallback(bool crouchInput, bool sprintInput)
+    {
+        if (crouchInput)
+        {
+           // ?.Invoke();
+        }
+        else if (sprintInput)
+        {
+            //SoundCallbackManager.Instance.OnSprint?.Invoke();
+        }
+        else
+        {
+            //SoundCallbackManager.Instance.OnWalk?.Invoke();
+        }
     }
 
     public void OnJump(InputAction.CallbackContext ctx)

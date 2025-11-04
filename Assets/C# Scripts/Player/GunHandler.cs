@@ -87,6 +87,16 @@ public class GunHandler : NetworkBehaviour
     {
         adsHandler.OnZoomInput(ctx.performed);
         stateMachine.ChangeWeaponAnimation(ctx.performed, CurrentGunId);
+
+        if (ctx.performed)
+        {
+            SoundCallbackManager.Instance.AdsAudioSystem.PlayRandom();
+
+        }
+        else
+        {
+            SoundCallbackManager.Instance.HipAudioSystem.PlayRandom();
+        }
     }
 
     public void OnMouseMovement(InputAction.CallbackContext ctx)
@@ -252,6 +262,7 @@ public class GunHandler : NetworkBehaviour
 
         gunSwayHandler.OnSwapGun(gunRefHolder.transform, adsHandler);
         gunEmmisionHandler.OnSwapGun(gunRefHolder.EmissionMatInstance);
+        SoundCallbackManager.Instance.WeaponEquipAudioSystem.PlayRandom();
 
         if (gunRefHolder.ScopeCamera != null)
         {
