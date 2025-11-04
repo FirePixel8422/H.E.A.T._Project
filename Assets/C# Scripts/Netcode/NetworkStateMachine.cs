@@ -191,7 +191,7 @@ namespace FirePixel.Networking
 
         public void UpdateMovementState(bool moving, bool crouching, bool sprinting, int moveDirectionId, float transitionDuration = 0.25f)
         {
-            if (dead || IsJumping) return;
+            if (dead) return;
 
             if (moving)
             {
@@ -239,15 +239,29 @@ namespace FirePixel.Networking
 
         public void ChangeWeaponAnimation(bool hipFire, int weaponId, float transitionDuration = 0.25f)
         {
-            TryTransitionAnimation(hipFire ? weaponHipAnimationHashes[weaponId] : weaponAdsAnimationHashes[weaponId], transitionDuration, layer: 1, isGunAnimator: true);
+            TryTransitionAnimation(hipFire ? weaponHipAnimationHashes[weaponId] : weaponAdsAnimationHashes[weaponId], transitionDuration, layer: 1);
         }
 
 
         public void Jump(float transitionDuration = 0.25f)
         {
             TryTransitionAnimation(jumpAnimationHash, transitionDuration);
+            
+            StartCoroutine(AutoFall(fallAnimationHash, transitionDuration));
+        }
 
-            AutoTransition(fallAnimationHash, transitionDuration);
+        private IEnumerator AutoFall(float transitionDuration, float speed = 1, int layer = 0)
+        {
+            yield return null; // Wait 1 frame so animator updates to the new state
+
+            AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(layer);
+            float remainingTime = (1f - state.normalizedTime) * state.length;
+
+            yield return new WaitForSeconds(remainingTime);
+
+            TryTransitionAnimation(fallAnimationHash, transitionDuration, speed, layer);
+
+            AutoTransition(walkAnimationHashes[0], transitionDuration);
         }
 
 

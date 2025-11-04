@@ -5,6 +5,7 @@
 public class GunRefHolder : MonoBehaviour
 {
     public Camera ScopeCamera;
+    public Renderer ScopeRenderer;
 
 
     [SerializeField] private Transform muzzleFlashPoint;
