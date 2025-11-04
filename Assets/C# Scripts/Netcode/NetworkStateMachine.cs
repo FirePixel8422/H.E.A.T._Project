@@ -27,8 +27,6 @@ namespace FirePixel.Networking
         [SerializeField] private string[] walkAnimations = { "L", "R", "F", "D" };
         [SerializeField] private string runAnimation = "Run";
 
-        [SerializeField] private string sprintAnimation = "Sprint";
-
         [SerializeField] private string jumpAnimation = "Jump";
         [SerializeField] private string fallAnimation = "Falling";
 
@@ -36,14 +34,19 @@ namespace FirePixel.Networking
         private int[] currentAnimationHashes;
 
         private int idleAnimationHash;
-        private int crouchAnimationHash;
-        private int crouchWalkAnimationHash;
-        private int walkAnimationHash;
-        private int sprintAnimationHash;
-        
+
+        private int crouchAnimationDownHash;
+        private int[] crouchWalkAnimationHashes;
+
+        private int[] weaponHipAnimationHashes;
+        private int[] weaponAdsAnimationHashes;
+
+        private int[] walkAnimationHashes;
+        private int runAnimationHash;
+
         private int jumpAnimationHash;
         private int fallAnimationHash;
-        
+
         #endregion
 
 
@@ -67,14 +70,29 @@ namespace FirePixel.Networking
 
             animationLayerCount = anim.layerCount;
 
-            currentAnimationHashes = new int[animationLayerCount];
-            autoTransitiosCOs = new Coroutine[animationLayerCount];
+            // Start Animations
+            currentAnimationHashes = new int[currentAnimation.Length];
+            for (int i = 0; i < currentAnimation.Length; i++)
+            {
+                currentAnimationHashes[i] = Animator.StringToHash(currentAnimation[i]);
+            }
 
+            // Idle
             idleAnimationHash = Animator.StringToHash(idleAnimation);
-            //crouchAnimationHash = Animator.StringToHash(crouchAnimation);
-            //walkAnimationHash = Animator.StringToHash(walkAnimation);
-            sprintAnimationHash = Animator.StringToHash(sprintAnimation);
 
+            // Crouch
+            crouchAnimationDownHash = Animator.StringToHash(crouchAnimationDown);
+            crouchWalkAnimationHashes = HashArray(crouchWalkAnimations);
+
+            // Weapons
+            weaponHipAnimationHashes = HashArray(weaponHipAnimations);
+            weaponAdsAnimationHashes = HashArray(weaponAdsAnimations);
+
+            // Movement
+            walkAnimationHashes = HashArray(walkAnimations);
+            runAnimationHash = Animator.StringToHash(runAnimation);
+
+            // Air
             jumpAnimationHash = Animator.StringToHash(jumpAnimation);
             fallAnimationHash = Animator.StringToHash(fallAnimation);
 
@@ -86,6 +104,15 @@ namespace FirePixel.Networking
                 anim.speed = 1;
                 anim.CrossFadeInFixedTime(currentAnimationHashes[i], 0, i);
             }
+        }
+        private int[] HashArray(string[] names)
+        {
+            int[] hashes = new int[names.Length];
+            for (int i = 0; i < names.Length; i++)
+            {
+                hashes[i] = Animator.StringToHash(names[i]);
+            }
+            return hashes;
         }
 
 
@@ -137,18 +164,18 @@ namespace FirePixel.Networking
 
         #region Movement State Functions
 
-        public void UpdateMovementState(bool moving, bool crouching, bool sprinting, float transitionDuration = 0.25f)
+        public void UpdateMovementState(bool moving, bool crouching, bool sprinting, int moveDirectionId, float transitionDuration = 0.25f)
         {
             if (dead || IsJumping) return;
 
             if (moving)
             {
                 if (crouching)
-                    CrouchWalk(transitionDuration);
+                    CrouchWalk(moveDirectionId, transitionDuration);
                 else if (sprinting)
                     Sprint(transitionDuration);
                 else
-                    Walk(transitionDuration);
+                    Walk(moveDirectionId, transitionDuration);
             }
             else
             {
@@ -163,26 +190,32 @@ namespace FirePixel.Networking
         {
             TryTransitionAnimation(idleAnimationHash, transitionDuration);
         }
-            
+
         private void Crouch(float transitionDuration = 0.25f)
         {
-            TryTransitionAnimation(crouchAnimationHash, transitionDuration);
+            TryTransitionAnimation(crouchAnimationDownHash, transitionDuration);
         }
-        private void CrouchWalk(float transitionDuration = 0.25f)
+        private void CrouchWalk(int moveDirectionId, float transitionDuration = 0.25f)
         {
-            TryTransitionAnimation(crouchWalkAnimationHash, transitionDuration);
+            TryTransitionAnimation(crouchWalkAnimationHashes[moveDirectionId], transitionDuration);
         }
 
-        private void Walk(float transitionDuration = 0.25f)
+        private void Walk(int moveDirectionId, float transitionDuration = 0.25f)
         {
-            TryTransitionAnimation(walkAnimationHash, transitionDuration);
+            TryTransitionAnimation(walkAnimationHashes[moveDirectionId], transitionDuration);
         }
         private void Sprint(float transitionDuration = 0.25f)
         {
-            TryTransitionAnimation(sprintAnimationHash, transitionDuration);
+            TryTransitionAnimation(runAnimationHash, transitionDuration);
         }
 
         #endregion
+
+
+        public void ChangeWeaponAnimation(bool hipFire, int weaponId, float transitionDuration = 0.25f)
+        {
+            AutoTransition(hipFire ? weaponHipAnimationHashes[weaponId] : weaponAdsAnimationHashes[weaponId], transitionDuration);
+        }
 
 
         public void Jump(float transitionDuration = 0.25f)

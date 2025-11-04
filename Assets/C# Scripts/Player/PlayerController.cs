@@ -127,19 +127,19 @@ public class PlayerController : NetworkBehaviour
     {
         moveDir = ctx.ReadValue<Vector2>();
 
-        stateMachine.UpdateMovementState(IsMoving, crouchInput, IsSprinting);
+        stateMachine.UpdateMovementState(IsMoving, crouchInput, IsSprinting, GetMoveDirectionId(), 0.1f);
     }
     public void OnCrouch(InputAction.CallbackContext ctx)
     {
         crouchInput = ctx.ReadValueAsButton();
 
-        stateMachine.UpdateMovementState(IsMoving, crouchInput, IsSprinting, 0.15f);
+        stateMachine.UpdateMovementState(IsMoving, crouchInput, IsSprinting, GetMoveDirectionId(), 0.15f);
     }
     public void OnSprint(InputAction.CallbackContext ctx)
     {
         sprintInput = ctx.ReadValueAsButton();
 
-        stateMachine.UpdateMovementState(IsMoving, crouchInput, IsSprinting, 0.15f);
+        stateMachine.UpdateMovementState(IsMoving, crouchInput, IsSprinting, GetMoveDirectionId(), 0.15f);
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
@@ -166,6 +166,28 @@ public class PlayerController : NetworkBehaviour
         // Actual rotation
         camHandler.MainCamLocalEulerPitch += -mouseInput.y * sensitivityMultiplier;
         transform.Rotate(Vector3.up, mouseInput.x * sensitivityMultiplier);
+    }
+
+    private int GetMoveDirectionId()
+    {
+        if (moveDir.x == 0 && moveDir.y == 0)
+        {
+            return 2;
+        }
+
+        // Returns: 0 = Left, 1 = Right, 2 = Forward, 3 = Down
+        float absX = math.abs(moveDir.x);
+        float absY = math.abs(moveDir.y);
+
+        // Forward/Down dominate when diagonal
+        if (absY >= absX)
+        {
+            return moveDir.y > 0f ? 2 : 3;
+        }
+        else
+        {
+            return moveDir.x > 0f ? 1 : 0;
+        }
     }
 
     #endregion
