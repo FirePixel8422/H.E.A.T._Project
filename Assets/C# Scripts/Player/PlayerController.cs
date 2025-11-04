@@ -74,6 +74,9 @@ public class PlayerController : NetworkBehaviour
     #endregion
 
 
+    [Header("Look Settings:")]
+    [SerializeField] private Transform spineTransform;
+
     [Header("Normal Sensitivity (Non ADS)")]
     [SerializeField] private float mouseSensitivity = 1;
 
@@ -163,9 +166,6 @@ public class PlayerController : NetworkBehaviour
         // Actual rotation
         camHandler.MainCamLocalEulerPitch += -mouseInput.y * sensitivityMultiplier;
         transform.Rotate(Vector3.up, mouseInput.x * sensitivityMultiplier);
-
-        // Debug/troll
-        stateMachine.ShakeGooglyEyes();
     }
 
     #endregion
@@ -365,6 +365,8 @@ public class PlayerController : NetworkBehaviour
         targetPosition = pos;
         targetRotation = Quaternion.Euler(0f, yaw, 0f);
         camHandler.MainCamLocalEulerPitch = pitch;
+
+        spineTransform.localRotation = Quaternion.Euler(pitch, 0, 0);
     }
 
 #endregion
