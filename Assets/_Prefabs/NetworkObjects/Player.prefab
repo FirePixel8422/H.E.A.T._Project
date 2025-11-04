@@ -1647,23 +1647,23 @@ MonoBehaviour:
   - EyesCurious
   - Empty
   idleAnimation: Idle
-  crouchAnimationUp: CrouchUp
-  crouchAnimationDown: CrouchDown
+  crouchAnimationUp: Crouch.up.001
+  crouchAnimationDown: Crouch.down.001
   crouchWalkAnimations:
-  - L
-  - R
-  - F
-  - D
+  - Walk.left.001
+  - Walk.right
+  - Walk.001
+  - Walk.back
   weaponHipAnimations:
-  - Pistol
-  - AR
-  - UMP
-  - Smimper
+  - Pistol.Basepose
+  - M4A1.BasicPose
+  - SMG.Basepose
+  - Sniper.BasePose
   weaponAdsAnimations:
-  - Pistol
-  - AR
-  - UMP
-  - Smimper
+  - Pistol.Basepose.2
+  - M4A1.BasicPose.2
+  - SMG.Basepose.2
+  - Sniper.BasePose.2
   walkAnimations:
   - L
   - R
