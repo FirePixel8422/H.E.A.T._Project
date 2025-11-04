@@ -159,6 +159,7 @@ public class GunHandler : NetworkBehaviour
 
         hudHandler = GetComponent<PlayerHUDHandler>();
         anim = GetComponent<Animator>();
+        stateMachine = GetComponent<NetworkStateMachine>();
 
         recoilHandler.Init(camHandler, playerController);
         adsHandler.Init(anim, camHandler, hudHandler);
