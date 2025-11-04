@@ -157,7 +157,7 @@ public class GunHandler : NetworkBehaviour
         playerController.Init(stats, camHandler, gunSwayHandler, adsHandler);
 
         hudHandler = GetComponent<PlayerHUDHandler>();
-        anim = GetComponentInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>(true);
 
         recoilHandler.Init(camHandler, playerController);
         adsHandler.Init(anim, camHandler, hudHandler);
