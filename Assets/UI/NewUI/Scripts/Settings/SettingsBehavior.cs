@@ -2,35 +2,33 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
-
 public class SettingsBehavior : MonoBehaviour
 {
     public static float SensitivityMultiplierHip;
     public static float SensitivityMultiplierADS;
 
-    public AudioMixer mainAudioMixer;
+    [SerializeField] private AudioMixer mainAudioMixer;
 
-    float savedVolumeMaster;
-    float savedVolumeAmbient;
-    float savedVolumeMusic;
-    float savedVolumeSFX;
+    private float savedVolumeMaster;
+    private float savedVolumeAmbient;
+    private float savedVolumeMusic;
+    private float savedVolumeSFX;
 
-    public Slider masterSlider;
-    public Slider ambientSlider;
-    public Slider musicSlider;
-    public Slider sfxSlider;
-    public Slider sensitivitySlider;
-    public Slider adssensitvitySlider;
+    [SerializeField] private Slider masterSlider;
+    [SerializeField] private Slider ambientSlider;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+    [SerializeField] private Slider sensitivitySlider;
+    [SerializeField] private Slider adssensitvitySlider;
 
-    public TMP_Text masterNumber;
-    public TMP_Text ambientNumber;
-    public TMP_Text musicNumber;
-    public TMP_Text sfxNumber;
-    public TMP_Text sensitivityNumber;
-    public TMP_Text adssensitivityNumber;
+    [SerializeField] private TMP_Text masterNumber;
+    [SerializeField] private TMP_Text ambientNumber;
+    [SerializeField] private TMP_Text musicNumber;
+    [SerializeField] private TMP_Text sfxNumber;
+    [SerializeField] private TMP_Text sensitivityNumber;
+    [SerializeField] private TMP_Text adssensitivityNumber;
 
-    public void Start()
+    private void Start()
     {
         savedVolumeMaster = PlayerPrefs.GetFloat("MasterVolume", Mathf.Log10(0.75f) * 20); // default 75%
         mainAudioMixer.SetFloat("MasterMixer", savedVolumeMaster);
