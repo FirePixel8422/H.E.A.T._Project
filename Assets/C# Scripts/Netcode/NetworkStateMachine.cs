@@ -50,7 +50,22 @@ namespace FirePixel.Networking
         #endregion
 
 
-        private Animator anim;
+        [SerializeField] private Animator[] anims;
+        [SerializeField] private Animator gunAnimator;
+        
+        public Animator Anim
+        {
+            get
+            {
+                if (anim != null)
+                {
+                    return anim;
+                }
+                return anims[IsOwner ? 0 : 1];
+            }
+        }
+        [SerializeField] private Animator anim;
+
         private RagDollController ragDollController;
 
         private int animationLayerCount;
@@ -63,12 +78,14 @@ namespace FirePixel.Networking
 
 
 
-        private void Awake()
+        public override void OnNetworkSpawn()
         {
-            anim = GetComponentInChildren<Animator>();
+            anim = anims[IsOwner ? 0 : 1];
+
             ragDollController = GetComponentInChildren<RagDollController>(true);
 
             animationLayerCount = anim.layerCount;
+            autoTransitiosCOs = new Coroutine[animationLayerCount];
 
             // Start Animations
             currentAnimationHashes = new int[currentAnimation.Length];
@@ -119,40 +136,48 @@ namespace FirePixel.Networking
         #region Change/Transition Animation + Server Sync Functions
 
         /// <returns>true if the animation has changed, false otherwise</returns>
-        private bool TryTransitionAnimation(int animationHash, float transitionDuration = 0.25f, float speed = 1, int layer = 0)
+        private bool TryTransitionAnimation(int animationHash, float transitionDuration = 0.25f, float speed = 1, int layer = 0, bool isGunAnimator = false)
         {
             //if the new animation is the same as current, return false
             if (currentAnimationHashes[layer] == animationHash) return false;
 
             //DebugLogger.Log($"Transitioning to animation: {animationHash} with duration: {transitionDuration}, speed: {speed}, layer: {layer}");
 
-            SyncAnimation_ServerRPC(ClientManager.LocalClientGameId, animationHash, transitionDuration, speed, layer);
+            SyncAnimation_ServerRPC(ClientManager.LocalClientGameId, animationHash, transitionDuration, speed, layer, isGunAnimator);
 
-            TransitionAnimation(animationHash, transitionDuration, speed, layer);
+            TransitionAnimation(animationHash, transitionDuration, speed, layer, isGunAnimator);
 
             return true;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void TransitionAnimation(int animationHash, float transitionDuration, float speed, int layer)
+        private void TransitionAnimation(int animationHash, float transitionDuration, float speed, int layer, bool isGunAnimator = false)
         {
-            currentAnimationHashes[layer] = animationHash;
+            if (isGunAnimator)
+            {
+                gunAnimator.speed = speed;
+                gunAnimator.CrossFadeInFixedTime(animationHash, transitionDuration, layer);
+            }
+            else
+            {
+                currentAnimationHashes[layer] = animationHash;
 
-            anim.speed = speed;
-            anim.CrossFadeInFixedTime(animationHash, transitionDuration, layer);
+                anim.speed = speed;
+                anim.CrossFadeInFixedTime(animationHash, transitionDuration, layer);
+            }
         }
 
         /// <summary>
         /// Sent Animation Data trough server, back to all clients except sender.
         /// </summary>
         [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
-        private void SyncAnimation_ServerRPC(int fromClientGameId, int animationHash, float transitionDuration, float speed = 1, int layer = 0)
+        private void SyncAnimation_ServerRPC(int fromClientGameId, int animationHash, float transitionDuration, float speed = 1, int layer = 0, bool isGunAnimator = false)
         {
-            SyncAnimation_ClientRPC(animationHash, transitionDuration, speed, layer, GameIdRPCTargets.SendToOppositeClient(fromClientGameId));
+            SyncAnimation_ClientRPC(animationHash, transitionDuration, speed, layer, isGunAnimator, GameIdRPCTargets.SendToOppositeClient(fromClientGameId));
         }
 
         [ClientRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]
-        private void SyncAnimation_ClientRPC(int animationHash, float transitionDuration, float speed = 1, int layer = 0, GameIdRPCTargets rpcTargets = default)
+        private void SyncAnimation_ClientRPC(int animationHash, float transitionDuration, float speed = 1, int layer = 0, bool isGunAnimator = false, GameIdRPCTargets rpcTargets = default)
         {
             if (rpcTargets.IsTarget == false) return;
 

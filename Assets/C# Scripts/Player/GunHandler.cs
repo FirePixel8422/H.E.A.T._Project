@@ -17,7 +17,7 @@ public class GunHandler : NetworkBehaviour
     private GunRefHolder gunRefHolder;
     private PlayerController playerController;
     private PlayerHUDHandler hudHandler;
-    private Animator anim;
+    [SerializeField] private Animator anim;
 
     [Header("Data Driven Gun Parts")]
     [SerializeField] private GunCoreStats coreStats = GunCoreStats.Default;
@@ -157,7 +157,7 @@ public class GunHandler : NetworkBehaviour
         playerController.Init(stats, camHandler, gunSwayHandler, adsHandler);
 
         hudHandler = GetComponent<PlayerHUDHandler>();
-        anim = GetComponentInChildren<Animator>(true);
+        anim = GetComponent<Animator>();
 
         recoilHandler.Init(camHandler, playerController);
         adsHandler.Init(anim, camHandler, hudHandler);

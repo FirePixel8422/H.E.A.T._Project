@@ -23,7 +23,6 @@ namespace FirePixel.Networking
             {
                 affectedObjects[i].Execute(IsOwner);
             }
-
             Destroy(this);
         }
 
