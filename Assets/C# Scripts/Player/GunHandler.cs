@@ -272,23 +272,7 @@ public class GunHandler : NetworkBehaviour
         if (playerGameId == ClientManager.LocalClientGameId && gunRefHolder.ScopeCamera != null)
         {
             Camera camera = gunRefHolder.ScopeCamera;
-            camera.fieldOfView = camHandler.BaseFOV * adsHandler.ADSFovMultiplier * (1 - adsHandler.ADSFovMultiplier);
-
-            if (camera.targetTexture != null)
-            {
-                RenderTexture.active = camera.targetTexture;
-                GL.Clear(true, true, Color.clear);
-                RenderTexture.active = null;
-            }
-
-            RenderTexture rTexture = Instantiate(scopeTexture);
-            rTexture.Create();
-            camera.targetTexture = rTexture;
-
-            Renderer rend = gunRefHolder.GetComponentInChildren<Renderer>();
-            Material mat = rend.material; // force unique material instance
-
-            mat.SetTexture("_BaseColorMap", rTexture);
+            camera.fieldOfView = camHandler.BaseFOV * adsHandler.ADSFovMultiplier;
         }
 
         // adsHandler.OnSwapGun is called too fast on players with overrideIsOwner on in non network scenes

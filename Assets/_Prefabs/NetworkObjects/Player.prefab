@@ -1650,6 +1650,7 @@ MonoBehaviour:
   currentAnimation:
   - Crouch_walk_001
   - Pistol_Basepose
+  - Empty
   idleAnimation: Crouch_walk_001
   crouchAnimationUp: Crouch_up_001
   crouchAnimationDown: Crouch_down_001
@@ -5240,10 +5241,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.002687403
-  m_Height: 0.011215054
+  m_Radius: 0.0020857956
+  m_Height: 0.009891606
   m_Direction: 2
-  m_Center: {x: 0.000008120536, y: 8.797668e-18, z: 0.0056075775}
+  m_Center: {x: 0.000008120536, y: -1.9382867e-17, z: 0.004945854}
 --- !u!114 &7135442455667019946
 MonoBehaviour:
   m_ObjectHideFlags: 0

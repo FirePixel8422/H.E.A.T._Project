@@ -17,7 +17,6 @@ public class MatchUIHandler : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI[] scoreTextObj;
     private int[] roundPoints;
-    private int[] gamePoints;
 
     [SerializeField] private TextMeshProUGUI roundTimeTextObj;
 
@@ -33,7 +32,6 @@ public class MatchUIHandler : MonoBehaviour
         Instance = this;
 
         roundPoints = new int[GlobalGameData.MaxPlayers];
-        gamePoints = new int[GlobalGameData.MaxPlayers];
     }
 
     private void OnEnable() => UpdateScheduler.RegisterUpdate(OnUpdate);
@@ -73,26 +71,23 @@ public class MatchUIHandler : MonoBehaviour
         roundResultTestObj.text = localClientWon ? "Round Won!" : "Round Lost...";
         roundPoints[winnerClientGameId] += 1;
 
-        if (roundPoints[winnerClientGameId] == 3)
+        if (roundPoints[winnerClientGameId] == 7)
         {
-            roundPoints[0] = 0;
-            roundPoints[1] = 0;
+            roundResultTestObj.text = "Player: " + winnerClientGameId + " Won!";
+            Invoke(nameof(Leave), 3);
 
-            gamePoints[winnerClientGameId] += 1;
-
-            if (gamePoints[winnerClientGameId] == 3)
+            for (int i = 0; i < GlobalGameData.MaxPlayers; i++)
             {
-                roundResultTestObj.text = "Player: " + winnerClientGameId + " Won!";
-                Invoke(nameof(Leave), 3);
-                
-                return;
+                string text = roundPoints[i].ToString();
+
+                scoreTextObj[i].text = text;
             }
+
+            return;
         }
         for (int i = 0; i < GlobalGameData.MaxPlayers; i++)
         {
             string text = roundPoints[i].ToString();
-
-            text = gamePoints[i].ToString() + "/" + text;
 
             scoreTextObj[i].text = text;
         }
