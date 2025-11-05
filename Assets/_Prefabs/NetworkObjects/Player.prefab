@@ -1648,10 +1648,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   currentAnimation:
-  - Crouch_walk_001
+  - Walk_001
   - Pistol_Basepose
   - Empty
-  idleAnimation: Crouch_walk_001
+  idleAnimation: Walk_001
   crouchAnimationUp: Crouch_up_001
   crouchAnimationDown: Crouch_down_001
   crouchWalkAnimations:

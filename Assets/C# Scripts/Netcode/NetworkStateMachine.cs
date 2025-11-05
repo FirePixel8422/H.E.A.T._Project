@@ -261,7 +261,7 @@ namespace FirePixel.Networking
 
             TryTransitionAnimation(fallAnimationHash, transitionDuration, speed, layer);
 
-            AutoTransition(walkAnimationHashes[0], transitionDuration);
+            AutoTransition(idleAnimationHash, transitionDuration);
         }
 
 
