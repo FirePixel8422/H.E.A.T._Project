@@ -73,10 +73,10 @@ namespace FirePixel.Networking
 
             if (ClientManager.LocalClientGameId == diedPlayerGameId)
             {
-                UpgradeManager.Instance.CreateUpgradeUI();
+                UpgradeManager.Instance.CreateUpgrads();
             }
 
-            MatchUIHandler.Instance.AddPoint(diedPlayerGameId == 0 ? 1 : 0);
+            MatchUIHandler.Instance.UpdateMatchState(diedPlayerGameId == 0 ? 1 : 0);
         }
 
         [ServerRpc(RequireOwnership = false, Delivery = RpcDelivery.Reliable)]

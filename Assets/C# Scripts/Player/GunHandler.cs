@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 
 public class GunHandler : NetworkBehaviour
 {
-    [SerializeField] private Transform gunHolder;
+    [SerializeField] private Transform[] gunHolders;
     [SerializeField] private RenderTexture scopeTexture;
     [SerializeField] private LayerMask playerColliderMask;
 
@@ -186,7 +186,10 @@ public class GunHandler : NetworkBehaviour
         if (IsOwner)
         {
 #endif
-            gunHolder.gameObject.layer = GlobalGameData.GunLayerId;
+            for (int i = 0; i < GlobalGameData.MaxPlayers; i++)
+            {
+                gunHolders[i].gameObject.layer = GlobalGameData.GunLayerId;
+            }
 
             SwapGun(0);
 
@@ -252,7 +255,9 @@ public class GunHandler : NetworkBehaviour
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private void SetupNewGunData(int gunId, int playerGameId)
     {
-        GunManager.Instance.SwapGun(gunHolder, gunId, playerGameId,
+        int gunHolderId = playerGameId == ClientManager.LocalClientGameId ? 0 : 1;
+
+        GunManager.Instance.SwapGun(gunHolders[gunHolderId], gunId, playerGameId,
             ref gunRefHolder,
             out coreStats,
             out audioStats,
@@ -264,13 +269,26 @@ public class GunHandler : NetworkBehaviour
         gunEmmisionHandler.OnSwapGun(gunRefHolder.EmissionMatInstance);
         SoundCallbackManager.Instance.WeaponEquipAudioSystem.PlayRandom();
 
-        if (gunRefHolder.ScopeCamera != null)
+        if (playerGameId == ClientManager.LocalClientGameId && gunRefHolder.ScopeCamera != null)
         {
-            gunRefHolder.ScopeCamera.fieldOfView = camHandler.BaseFOV * adsHandler.ADSFovMultiplier * (1 - adsHandler.ADSFovMultiplier);
+            Camera camera = gunRefHolder.ScopeCamera;
+            camera.fieldOfView = camHandler.BaseFOV * adsHandler.ADSFovMultiplier * (1 - adsHandler.ADSFovMultiplier);
 
-            RenderTexture rTexture = new RenderTexture(scopeTexture);
-            gunRefHolder.ScopeCamera.targetTexture = rTexture;
-            gunRefHolder.GetComponentInChildren<Renderer>().material.SetTexture("_BaseMap", rTexture);
+            if (camera.targetTexture != null)
+            {
+                RenderTexture.active = camera.targetTexture;
+                GL.Clear(true, true, Color.clear);
+                RenderTexture.active = null;
+            }
+
+            RenderTexture rTexture = Instantiate(scopeTexture);
+            rTexture.Create();
+            camera.targetTexture = rTexture;
+
+            Renderer rend = gunRefHolder.GetComponentInChildren<Renderer>();
+            Material mat = rend.material; // force unique material instance
+
+            mat.SetTexture("_BaseColorMap", rTexture);
         }
 
         // adsHandler.OnSwapGun is called too fast on players with overrideIsOwner on in non network scenes

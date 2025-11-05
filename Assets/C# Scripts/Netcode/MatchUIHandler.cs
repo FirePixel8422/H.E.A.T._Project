@@ -1,4 +1,5 @@
 using FirePixel.Networking;
+using System.Collections;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -18,6 +19,9 @@ public class MatchUIHandler : MonoBehaviour
     private int[] roundPoints;
 
     [SerializeField] private TextMeshProUGUI roundTimeTextObj;
+
+    [SerializeField] private Animator anim;
+    [SerializeField] private GameObject upgradeCards;
 
     private float roundStartTime;
 
@@ -56,18 +60,38 @@ public class MatchUIHandler : MonoBehaviour
         int seconds = time % 60;
         return $"{minutes:D2}:{seconds:D2}";
     }
-
-    public void AddPoint(int clientGameId)
-    {
-        roundResultTestObj.text = ClientManager.LocalClientGameId == clientGameId ? "You Won!" : "You Lost...";
-        roundPoints[clientGameId] += 1;
-
-        scoreTextObj[clientGameId].text = roundPoints[clientGameId].ToString();
-    }
-
     public void OnMatchStart()
     {
         roundStartTime = NetworkManager.Singleton.ServerTime.TimeAsFloat;
+    }
+
+    public void UpdateMatchState(int winnerClientGameId)
+    {
+        bool localClientWon = ClientManager.LocalClientGameId == winnerClientGameId;
+        roundResultTestObj.text = localClientWon ? "You Won!" : "You Lost...";
+        roundPoints[winnerClientGameId] += 1;
+
+        scoreTextObj[winnerClientGameId].text = roundPoints[winnerClientGameId].ToString();
+
+        // Win/Loss animation
+        anim.SetInteger("Death", 1);
+        Invoke(nameof(SetUpgradeUIActive), 5f);
+    }
+    private void SetUpgradeUIActive()
+    {
+        upgradeCards.SetActive(true);
+    }
+
+    public void EndUpgradeMenus()
+    {
+        StartCoroutine(FadeOutUpgrades());
+    }
+    private IEnumerator FadeOutUpgrades()
+    {
+        anim.SetInteger("Death", 2);
+
+        yield return new WaitForSeconds(1);
+        upgradeCards.SetActive(false);
     }
 
 

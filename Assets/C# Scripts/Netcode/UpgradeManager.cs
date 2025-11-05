@@ -12,7 +12,6 @@ namespace FirePixel.Networking
         [SerializeField] private UpgradeSO[] globalUpgradesList;
         [SerializeField] private UpgradeSO[] upgrades;
 
-        [SerializeField] private DeathBehavior deathBehavior;
         [SerializeField] private UpgradeUISlot[] uiSlots;
         public int UpgradeCount => uiSlots.Length;
 
@@ -47,10 +46,8 @@ namespace FirePixel.Networking
             }
         }
 
-        public void CreateUpgradeUI()
+        public void CreateUpgrads()
         {
-            deathBehavior.StartUpgradeMenus();
-
             UpgradeSO[] upgrades = GetRandomUpgrades(UpgradeCount);
 
             // Enable and setup up UI slots for found upgrades
@@ -156,7 +153,7 @@ namespace FirePixel.Networking
         public void TakeUpgrade(int upgradeId)
         {
             // Disable Upgrade Screen
-            deathBehavior.EndUpgradeMenus();;
+            MatchUIHandler.Instance.EndUpgradeMenus();
 
             // If Upgrade was non stackable, remove it
             if (globalUpgradesList[upgradeId].stackable == false)
