@@ -9,7 +9,7 @@ public class IngameMenuBehavior : MonoBehaviour
     public GameObject[] ingameMenuScreens;
     public GameObject globalVolume;
     private bool menuIsOpen;
-    public static Action OnMenuToggled { get; set; }
+    public static Action<bool> OnMenuToggled { get; set; }
 
 
     public void OnOpenOrClose(InputAction.CallbackContext ctx)
@@ -33,7 +33,7 @@ public class IngameMenuBehavior : MonoBehaviour
                 ingameMenuScreens[1].SetActive(false);
                 globalVolume.SetActive(false);
             }
-            OnMenuToggled?.Invoke();
+            OnMenuToggled?.Invoke(menuIsOpen);
         }
     }
     public void ResumeGame()
