@@ -8,6 +8,8 @@ namespace FirePixel.Networking
 {
     public class NetworkStateMachine : NetworkBehaviour
     {
+        [SerializeField] private bool overrideIsOwner;
+
         #region Animation Data
 
         [Header("Start Animation")]
@@ -77,6 +79,14 @@ namespace FirePixel.Networking
 
 
 
+
+        private void Start()
+        {
+            if (overrideIsOwner)
+            {
+                OnNetworkSpawn();
+            }
+        }
 
         public override void OnNetworkSpawn()
         {

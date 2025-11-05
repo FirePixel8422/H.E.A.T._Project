@@ -6,7 +6,7 @@ namespace FirePixel.Networking
 {
     public class PlayerManager : SmartNetworkBehaviour
     {
-        public static PlayerManager Instance {get; private set;}
+        public static PlayerManager Instance { get; private set; }
         private void Awake()
         {
             Instance = this;

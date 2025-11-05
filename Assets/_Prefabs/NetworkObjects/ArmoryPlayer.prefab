@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1965244584
+  GlobalObjectIdHash: 2048606269
   InScenePlacedSourceGlobalObjectIdHash: 2048606269
   DeferredDespawnTick: 0
   Ownership: 1
@@ -823,6 +823,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: cc7856c5-ffa1-41c5-b552-74e92825d07b
     m_ActionName: 'Gameplay/HotBar4[/Keyboard/4]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a1d66dcc-8c4a-4fe1-9244-a9ea7aefabb3
+    m_ActionName: 'Gameplay/OnESC[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -841,7 +845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDataLibrary
   ShowTopMostFoldoutHeaderGroup: 1
-  overrideIsOwner: 0
+  overrideIsOwner: 1
   Stats:
     maxHealth: 250
     maxHealthMultiplier: 1
@@ -867,10 +871,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  gunHolder: {fileID: 2654517494388891251}
+  gunHolders:
+  - {fileID: 724888127564520829}
+  - {fileID: 724888127564520829}
+  scopeTexture: {fileID: 8400000, guid: af8915075b5631c488aa036532595f45, type: 2}
   playerColliderMask:
     serializedVersion: 2
     m_Bits: 887
+  anim: {fileID: 0}
   coreStats:
     damage: 0
     headShotMultiplier: 0
@@ -1077,6 +1085,7 @@ MonoBehaviour:
       offsetSmooth: 12
       swayRecoverSmooth: 15
       gunOffset: {x: 0, y: 0, z: 0}
+  stateMachine: {fileID: 0}
   gunShotSource: {fileID: 5837324410720302518}
   gunOverheatSource: {fileID: 6957241378848993016}
   onHitSource: {fileID: 119527403880472137}
@@ -1101,6 +1110,10 @@ MonoBehaviour:
   midAirSteerPower: 25
   sprintDirection: 2
   airSprintMultiplier: 1
+  footStepsAudioSystem: {fileID: 0}
+  crouchingFootSteps: []
+  walkingFootSteps: []
+  sprintingFootSteps: []
   groundCheck: {fileID: 7949984123326286938}
   groundMask:
     serializedVersion: 2
@@ -1108,6 +1121,7 @@ MonoBehaviour:
   jumpForce: 4.5
   fallGravityMultiplier: 5
   groundCheckRadius: 0.05
+  spineTransform: {fileID: 0}
   mouseSensitivity: 0.1
   overrideIsOwner: 1
   targetPosition: {x: 0, y: 0, z: 0}
@@ -1225,19 +1239,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  overrideIsOwner: 1
   currentAnimation:
-  - Idle
-  - EyesCurious
+  - Walk_001
+  - Pistol_Basepose
   - Empty
-  idleAnimation: Idle
-  crouchAnimation: Crouching
-  crouchWalkAnimation: CrouchWalking
-  walkAnimation: Walking
-  sprintAnimation: Sprinting
+  idleAnimation: Walk_001
+  crouchAnimationUp: Crouch_up_001
+  crouchAnimationDown: Crouch_down_001
+  crouchWalkAnimations:
+  - Crouch_walk_left
+  - Crouch_walk_right
+  - Crouch_walk_001
+  - Crouch_walk_back
+  weaponHipAnimations:
+  - Pistol_Basepose_2
+  - M4A1_BasicPose_2
+  - SMG_Basepose_2
+  - Sniper_BasePose_2
+  weaponAdsAnimations:
+  - Pistol_Basepose
+  - M4A1_BasicPose
+  - SMG_Basepose
+  - Sniper_BasePose
+  walkAnimations:
+  - Walk_left_001
+  - Walk_right
+  - Walk_001
+  - Walk_back
+  runAnimation: Run
   jumpAnimation: Jump
   fallAnimation: Fall
-  shakeGooglyEyesAnimation: ShakeGooglyEyes
-  eyesCuriousAnimation: EyesCurious
+  anims:
+  - {fileID: 5199238681142820621}
+  - {fileID: 5199238681142820621}
+  gunAnimator: {fileID: 5199238681142820621}
+  anim: {fileID: 5199238681142820621}
   dead: 0
 --- !u!95 &5199238681142820621
 Animator:

@@ -21,6 +21,8 @@ MonoBehaviour:
   m_OverrideGlobalSceneList: 1
   m_Scenes:
   - m_enabled: 1
+    m_path: Assets/Scenes/Robert/SplashScreen.unity
+  - m_enabled: 1
     m_path: Assets/Scenes/Setup Screen.unity
   - m_enabled: 1
     m_path: Assets/Scenes/Robert/MainMenu.unity

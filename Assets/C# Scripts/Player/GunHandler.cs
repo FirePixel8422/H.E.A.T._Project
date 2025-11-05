@@ -271,7 +271,7 @@ public class GunHandler : NetworkBehaviour
 
         if (playerGameId == ClientManager.LocalClientGameId && gunRefHolder.ScopeCamera != null)
         {
-            gunRefHolder.ScopeCamera.fieldOfView = camHandler.BaseFOV * adsHandler.ADSFovMultiplier;
+            gunRefHolder.ScopeCamera.fieldOfView = camHandler.BaseFOV * adsHandler.ADSFovMultiplier * 0.5f;
         }
 
         // adsHandler.OnSwapGun is called too fast on players with overrideIsOwner on in non network scenes

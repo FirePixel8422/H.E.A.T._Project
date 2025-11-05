@@ -1,7 +1,6 @@
 using FirePixel.Networking;
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 
 public class IngameMenuBehavior : MonoBehaviour
@@ -12,29 +11,39 @@ public class IngameMenuBehavior : MonoBehaviour
     public static Action<bool> OnMenuToggled { get; set; }
 
 
-    public void OnOpenOrClose(InputAction.CallbackContext ctx)
+
+    private void OnEnable() => UpdateScheduler.RegisterUpdate(OnUpdate);
+    private void OnDisable() => UpdateScheduler.UnRegisterUpdate(OnUpdate);
+    private void OnUpdate()
     {
-        if (ctx.performed)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!menuIsOpen)
-            {
-                Cursor.lockState = CursorLockMode.None;
-
-                menuIsOpen = true;
-
-                ingameMenuScreens[0].SetActive(true);
-                globalVolume.SetActive(true);
-            }
-            else
-            {
-                menuIsOpen = false;
-
-                ingameMenuScreens[0].SetActive(false);
-                ingameMenuScreens[1].SetActive(false);
-                globalVolume.SetActive(false);
-            }
-            OnMenuToggled?.Invoke(menuIsOpen);
+            OnOpenOrClose();
         }
+    }
+
+
+    public void OnOpenOrClose()
+    {
+        if (!menuIsOpen)
+        {
+            Cursor.lockState = CursorLockMode.None;
+
+            menuIsOpen = true;
+
+            ingameMenuScreens[0].SetActive(true);
+            globalVolume.SetActive(true);
+        }
+        else
+        {
+            menuIsOpen = false;
+            Cursor.lockState = CursorLockMode.Locked;
+
+            ingameMenuScreens[0].SetActive(false);
+            ingameMenuScreens[1].SetActive(false);
+            globalVolume.SetActive(false);
+        }
+        OnMenuToggled?.Invoke(menuIsOpen);
     }
     public void ResumeGame()
     {

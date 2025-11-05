@@ -43,7 +43,7 @@ public class PlayerDataLibrary : SmartNetworkBehaviour
         if (overrideIsOwner)
         {
             LocalInstance = this;
-            Stats = PlayerManager.Instance.PlayerStats[OwnerClientGameId];
+            Stats = this.FindObjectOfType<PlayerManager>().PlayerStats[0];
         }
 
         IngameMenuBehavior.OnMenuToggled += ToggleInput;
