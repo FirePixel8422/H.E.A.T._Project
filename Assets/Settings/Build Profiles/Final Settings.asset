@@ -29,7 +29,7 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Scenes/Luuk Test Scene.unity
   m_ScriptingDefines:
-  - Enable_Debug_Logging
+  - Enable_Debug_Logging_DISABLED
   m_PlayerSettingsYaml:
     m_Settings: []
   references:

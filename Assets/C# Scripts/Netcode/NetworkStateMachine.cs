@@ -85,7 +85,7 @@ namespace FirePixel.Networking
             ragDollController = GetComponentInChildren<RagDollController>(true);
 
             animationLayerCount = anim.layerCount;
-            autoTransitiosCOs = new Coroutine[animationLayerCount];
+            autoTransitiosCOs = new Coroutine[3];
 
             // Start Animations
             currentAnimationHashes = new int[currentAnimation.Length];
