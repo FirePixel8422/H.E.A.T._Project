@@ -3640,7 +3640,7 @@ MonoBehaviour:
       - m_Target: {fileID: 8854648006388992950}
         m_TargetAssemblyTypeName: IngameMenuBehavior, Assembly-CSharp
         m_MethodName: OnOpenOrClose
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4063,6 +4063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  overrideIsOwner: 0
   currentAnimation:
   - Walk_001
   - Pistol_Basepose
@@ -5674,9 +5675,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a38d8340029dada4b810326f9ee6f8ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IngameMenuBehavior
-  ingameMenuScreens:
-  - {fileID: 201179756416564348}
-  - {fileID: 6153030810978515230}
+  mainMenuScreen: {fileID: 201179756416564348}
+  settingsMenuScreen: {fileID: 6153030810978515230}
   globalVolume: {fileID: 5283932127880349359}
 --- !u!114 &1180714874578307198
 MonoBehaviour:
