@@ -214,11 +214,11 @@ MonoBehaviour:
       overHeatMinMaxPitch:
         min: 0.9
         max: 1.1
-      onHitAudioClip: {fileID: 8300000, guid: 330f576ffcc8d94479441b2d2f42c8be, type: 3}
+      onHitAudioClip: {fileID: 8300000, guid: 8b7e48ffedc8a5f4eadc0f8af1cefe58, type: 3}
       onHitMinMaxPitch:
         min: 3
         max: 3.5
-      onCritAudioClip: {fileID: 8300000, guid: 330f576ffcc8d94479441b2d2f42c8be, type: 3}
+      onCritAudioClip: {fileID: 8300000, guid: bbd9fb9a943609b4bb697f6059609528, type: 3}
       onCritMinMaxPitch:
         min: 1
         max: 1.1
