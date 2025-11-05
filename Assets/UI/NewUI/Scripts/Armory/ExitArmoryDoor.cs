@@ -17,6 +17,9 @@ public class ExitArmoryDoor : MonoBehaviour
     public GameObject exitCinemachineCam;
     public GameObject cinemachineCam;
     public GameObject armoryPlayer;
+
+    [Header("Nobe certified ;D")]
+    public AudioClip climp;
     private void Update()
     {
         if (!pressedButton)
@@ -31,7 +34,7 @@ public class ExitArmoryDoor : MonoBehaviour
                     mainCamera.SetActive(true);
                     exitCinemachineCam.SetActive(true);
                     StartCoroutine(WaitForAnim(waitForAnimTime));
-
+                    AudioCrossfader.Instance.SwitchAudio(climp, true);
                     animator.SetInteger("UI", 2);
 
                     Cursor.lockState = CursorLockMode.None;

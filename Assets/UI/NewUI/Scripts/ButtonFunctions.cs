@@ -24,6 +24,9 @@ public class ButtonFunctions : NetworkBehaviour
     [Header("stink fade :/")]
     public GameObject fade;
 
+    [Header("Audio")]
+    public AudioClip armoryMusic;
+
     #region MainScreen
     public void GoToLobbyButton()
     {
@@ -130,6 +133,8 @@ public class ButtonFunctions : NetworkBehaviour
 
         mainCamera.SetActive(false);
         armoryPlayer.SetActive(true);
+
+        AudioCrossfader.Instance.SwitchAudio(armoryMusic);
 
         Cursor.lockState = CursorLockMode.Locked;
     }
