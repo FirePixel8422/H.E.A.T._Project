@@ -17,6 +17,7 @@ public class MatchUIHandler : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI[] scoreTextObj;
     private int[] roundPoints;
+    private int[] gamePoints;
 
     [SerializeField] private TextMeshProUGUI roundTimeTextObj;
 
@@ -32,6 +33,7 @@ public class MatchUIHandler : MonoBehaviour
         Instance = this;
 
         roundPoints = new int[GlobalGameData.MaxPlayers];
+        gamePoints = new int[GlobalGameData.MaxPlayers];
     }
 
     private void OnEnable() => UpdateScheduler.RegisterUpdate(OnUpdate);
@@ -68,14 +70,43 @@ public class MatchUIHandler : MonoBehaviour
     public void UpdateMatchState(int winnerClientGameId)
     {
         bool localClientWon = ClientManager.LocalClientGameId == winnerClientGameId;
-        roundResultTestObj.text = localClientWon ? "You Won!" : "You Lost...";
+        roundResultTestObj.text = localClientWon ? "Round Won!" : "Round Lost...";
         roundPoints[winnerClientGameId] += 1;
 
-        scoreTextObj[winnerClientGameId].text = roundPoints[winnerClientGameId].ToString();
+        if (roundPoints[winnerClientGameId] == 3)
+        {
+            roundPoints[0] = 0;
+            roundPoints[1] = 0;
+
+            gamePoints[winnerClientGameId] += 1;
+
+            if (gamePoints[winnerClientGameId] == 3)
+            {
+                roundResultTestObj.text = "Player: " + winnerClientGameId + " Won!";
+                Invoke(nameof(Leave), 3);
+                
+                return;
+            }
+        }
+        for (int i = 0; i < GlobalGameData.MaxPlayers; i++)
+        {
+            string text = roundPoints[i].ToString();
+
+            text = gamePoints[i].ToString() + "/" + text;
+
+            scoreTextObj[i].text = text;
+        }
 
         // Win/Loss animation
         anim.SetInteger("Death", 1);
-        Invoke(nameof(SetUpgradeUIActive), 5f);
+        if (winnerClientGameId != ClientManager.LocalClientGameId)
+        {
+            Invoke(nameof(SetUpgradeUIActive), 5f);
+        }
+    }
+    private void Leave()
+    {
+        ClientManager.Instance.DisconnectClient_ServerRPC(ClientManager.LocalClientGameId);
     }
     private void SetUpgradeUIActive()
     {

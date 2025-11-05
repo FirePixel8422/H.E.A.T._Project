@@ -1986,6 +1986,7 @@ GameObject:
   m_Component:
   - component: {fileID: 38936221}
   - component: {fileID: 38936220}
+  - component: {fileID: 38936222}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: Untagged
@@ -2025,6 +2026,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &38936222
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38936219}
+  m_Enabled: 1
 --- !u!4 &40736055 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4789634251099623991, guid: 92aeb2aafc84ea3438273074ed221496,
@@ -87024,9 +87033,9 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.025324257
-          y: 0.9973971
-          z: -0.06548728
-          w: -0.016396483
+          y: 0.99739724
+          z: -0.06548729
+          w: -0.016396485
     - Position:
         x: -3.0099983
         y: 0
