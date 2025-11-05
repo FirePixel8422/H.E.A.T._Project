@@ -24,7 +24,7 @@ public class PlayerDataLibrary : SmartNetworkBehaviour
     public RagDollController RagDollController { get; private set; }
 
     public Rigidbody Rigidbody { get; private set; }
-
+    //comment
 
     private void Awake()
     {
@@ -45,6 +45,13 @@ public class PlayerDataLibrary : SmartNetworkBehaviour
             LocalInstance = this;
             Stats = PlayerManager.Instance.PlayerStats[OwnerClientGameId];
         }
+
+        IngameMenuBehavior.OnMenuToggled += ToggleInput;
+    }
+
+    private void ToggleInput(bool state)
+    {
+        Input.enabled = !state;
     }
 
     public override void OnNetworkSystemsSetup()
@@ -54,5 +61,10 @@ public class PlayerDataLibrary : SmartNetworkBehaviour
             LocalInstance = this;
         }
         Stats = PlayerManager.Instance.PlayerStats[OwnerClientGameId];
+    }
+
+    public override void OnDestroy()
+    {
+        IngameMenuBehavior.OnMenuToggled -= ToggleInput;
     }
 }
